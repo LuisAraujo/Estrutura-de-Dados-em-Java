@@ -1,13 +1,13 @@
-#EStrutura de Dados I - Baseada em Testes
+#Estrutura de Dados I
 
-Esse repositório contém alguns testes unitários para guiar os alunos no desenvolvimento das estruturas de dados, estudadas em sala. 
+Esse repositório contém as implementações das estruturas criadas em sala  e resoluções de
+algumas questões das listas.
 
-## COMO USAR?
 
-Você deve baixar a classe de teste respectiva, abrir no seu Projeto (na IDE) e executar o método *main* da classe baixada como principal.
-O teste irá ser realizado e emitido um erro (caso a estrutura não funcione corretamente). Cada erro possui um possível problema 
-e dica para que ele seja resolvido. O objetivo dessa abordagem é promover um feedback mais rápido aos estudantes, ajudando nos estudos.
+## Testes
 
+Em breve, irei disponibilizar os teste na plataforma     [URI Online](https://www.urionlinejudge.com.br/judge/pt)
+    
 ## Pilha com Vetor
 - Testes
 ## Fila com Vetor
