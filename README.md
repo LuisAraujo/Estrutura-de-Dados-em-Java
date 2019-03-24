@@ -1,14 +1,14 @@
 # Estrutura de Dados I
 
-Esse repositório contém as implementações das estruturas criadas em sala  e resoluções de algumas questões das listas. Neste arquivo é possível ler e ter uma breve noção de Estrutura de Dados.
+Esse repositório contém as implementações das estruturas criadas em sala  e resoluções de algumas questões das listas. Neste arquivo principal é possível ler e ter uma breve noção de Estrutura de Dados.
 
 [*Esse documento está em construção, deixe-me saber se há algum erro: luisaraujo.ifba@gmail.com*]
 
 # 1 - Estrutura de Dados
 
-O que é uma estrutura de dados? Como o próprio nome diz é uma forma de organizar informações. Ou seja, passamos de um patamar que usávamos tipos primitivos como Inteiro, Character e outros para tipos mais complexos, como Pilha, Fila, Árvore e outros.
+O que é uma estrutura de dados? Como o próprio nome diz, é uma forma de organizar informações. Ou seja, passamos de um patamar que usávamos tipos primitivos como Inteiro, Character e outros para tipos mais complexos, como Pilha, Fila, Árvore e outros. Sim, esses tipos complexos utilizam tipos primários, mas em suma estamos interessados agora nessas mais complexos.
 
-Essa disciplina tem como objetivo apresentar estruturas já consolidadas da área de computação que buscam resolver diversos problemas. É importante ressaltar que uma Estrutura de Dados é formada por Dados (organizado segundo alguma lógica) e operações permitidas, vinculadas a essas dados.
+Essa disciplina tem como objetivo apresentar estruturas já consolidadas da área de computação que buscam resolver diversos problemas. É importante ressaltar que uma Estrutura de Dados é formada por Dados (organizados segundo alguma lógica) e operações permitidas, vinculadas a essas dados.
 
 > Estrutura de Dados envolve dados organizados de alguma forma e operações vinculadas aos dados que garantem que os mesmos permaneçam com a mesma organização após inserções e deleções.
 
@@ -18,18 +18,18 @@ Alguns estruturas são utilizadas como forma de facilitar o armazenamento de inf
 
 Modelagem Computacional é um área da Computação que visa, modelar computacionalmente alguns cenários ou problemas. Basicamente, buscamos transpor elementos do mundo real para o computador e para isso precisamos usar a "abstração". Logicamente que não iremos modelar algo da natureza em sua perfeição, e muitas vezes não precisamos. Assim, muitas vezes modelamos apenas os elementos essenciais, arte proveniente da abstração: pode de focar em elementos principais, ignorando elementos eventuais ou menos importante (para um contexto específico).
 
-Desse modo, podemos criar classe - quando falamos em POO - com seus métodos que simulem um determinado elemento a ser modelador. Por exemplo: Carro possui uma marca, placa, modelo, ano de fabricação, motor e pode acelerar, frear, virar à esquerda e direita e por ai vai. 
+Desse modo, podemos criar classe - quando falamos em POO - com seus métodos que simulem um determinado elemento a ser modelado. Por exemplo: Carro possui uma marca, placa, modelo, ano de fabricação, motor e pode acelerar, frear, virar à esquerda e direita e por ai vai. 
 
 Em estrutura de dados faremos constantemente esse exercício, modelaremos elementos do mundo real, eliminando suas características eventuais, focando apenas nos elementos principais. Isso ocorre com Pilhas, Filas, Árvore entre outras estruturas. 
 
 
-#2 - Pilha
+# 2 - Pilha
 
 A primeira estrutura de dados que vamos ver é a Pilha. A pilha é uma estrutura bastante simples que tem a seguinte característica: 
 
-> Um elemento entra sempre no topo e, ao remover um elemento só podemos remover o elemento do topo. 
+> Um elemento entra sempre no topo. Ao remover um elemento só podemos remover o elemento do topo. 
 
-Essa característica significa dizer que não podemos remover qualquer elementos desejado, é necessário obedecer esta ordem. Pense em uma pilha de pratos de louça que a nossa mãe tanto ama, já pensou em remover um prato que está no meio da pilha e por essa decisão deixar cair os pratos de cima? Não quero nem imaginar o problemão.
+Essa característica significa dizer que não podemos remover qualquer elementos desejado, é necessário obedecer esta ordem. Pense em uma pilha de pratos de louça que a nossa mãe tanto ama. Já pensou em remover um prato que está no meio da pilha e por essa decisão deixar cair os pratos de cima? Não queremos nem imaginar o problemão em?
 
 Logicamente que o mais pudente é retirar os pratos de cima e colocar em algum outo lugar, até que possamos - com segurança - pegar o prato desejado. Então, vamos criar um algoritmo simples para isso:
 
@@ -98,7 +98,7 @@ Você certamente já percebeu que eu precisaria verificar, posição por posiç�
 		fila[i] = "Prato C";
 
 
-Nossa!!! Mas isso é muito custoso, não acha? Pense em uma Fila de  1 milhão de dados, quando tivermos ao menos 50% da Pilha com dados. Teremos 500 mil comparações, no final teremos 1 milhão de comparações apenas para inserir um único elemento.
+Nossa!!! Mas isso é muito custoso, não acha? Pense em uma Fila de  1 milhão de dados. Quando tivermos ao menos 50% da Pilha com dados, teremos 500 mil comparações. No final, teremos 1 milhão de comparações apenas para inserir um único elemento. **Nossa!!**.
 
 **Usando um Topo**
 
@@ -196,18 +196,18 @@ Agora você está pronto para consultar o código da Pilha.java que implementamo
 public class PilhaV<T> {
 
 	/**
-	 * Array da Pilha 
-	 */
+	* Array da Pilha 
+	*/
 	private T[] arrayPilha;
 	/**
-	 * Atributo para armazenar o indice do topo da pilha
-	 */
-    private int topo;
-    
-    /**
-     * Contrutor da Pilha
-     * @param max Tamanho da pilha
-     */
+	* Atributo para armazenar o indice do topo da pilha
+	*/
+	private int topo;
+	
+	/**
+	* Contrutor da Pilha
+	* @param max Tamanho da pilha
+	*/
 	public PilhaV(int max){
 		//instanciando um vetor genérico (cria um vetor do tipo Objetc e faz o cast (conversão) para o tipo T
 		arrayPilha = (T[]) new Object[max];
@@ -215,52 +215,49 @@ public class PilhaV<T> {
 	}
 	
 	/**
-	 * Insere um elemento se a pilha não estiver cheia
-	 * @param elemento Elemento a ser inserido na pilha
-	 * @return retora true se a operação foi bem sucedida
-	 */
+	* Insere um elemento se a pilha não estiver cheia
+	* @param elemento Elemento a ser inserido na pilha
+	* @return retora true se a operação foi bem sucedida
+	*/
 	public boolean inserir(T elemento) {		
-
 		if(!this.estaCheia()) {
-			topo++;
-			arrayPilha[topo] = elemento;
-			return true;
-		}
-	    
-		return false;
+		topo++;
+		arrayPilha[topo] = elemento;
+		return true;
 	}
-
-	/**
-	 * Remove um elemento da pilha, se ela não esiver vazia
-	 * @return retorna o elemento se a operação foi bem sucedida
-	 */
-	public T remover() {		
-		
-		
-		if(!this.estaVazia()) {			
-			return arrayPilha[topo--];
-			
-		}
-		
-		return null;
-
-	}
-
-	/**
-	 * Verifica se a pilha está vazia
-	 * @return retorna true se a pilha estiver vazia
-	 */
-	public boolean estaVazia() {		
-	    return topo == -1;
+	
+	return false;
 	}
 	
 	/**
-	 * Verifica se a pilha está cheia
-	 * @return retorna true se a pilha estiver cheia
-	 */
+	* Remove um elemento da pilha, se ela não esiver vazia
+	* @return retorna o elemento se a operação foi bem sucedida
+	*/
+	public T remover() {		
+	
+	
+	if(!this.estaVazia()) {			
+		return arrayPilha[topo--];
+	}
+	
+	return null;
+	
+	}
+	
+	/**
+	* Verifica se a pilha está vazia
+	* @return retorna true se a pilha estiver vazia
+	*/
+	public boolean estaVazia() {		
+		return topo == -1;
+	}
+	
+	/**
+	* Verifica se a pilha está cheia
+	* @return retorna true se a pilha estiver cheia
+	*/
 	public boolean estaCheia() {		
-	    return topo == arrayPilha.length-1;
-
+		return topo == arrayPilha.length-1;
 	}
 }
 ```
@@ -270,4 +267,4 @@ Link aqui: [PilhaV.java](https://github.com/LuisAraujo/Disciplina-Estrutura-de-D
 
 
 
-#3 - Fila
+# 3 - Fila
