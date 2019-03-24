@@ -16,8 +16,9 @@ public class Q1_d {
 		while(p.inserir(numero++)) {}
 				
 		int i = 100;
-		//se o i tem que ser o segundo elemento a partir do topo, eu tenho que remover
-		//três elementos
+		
+		//se o i tem que ser o enésimo elemento a partir do topo, eu tenho que remover
+		//n elementos
 		
 		//removendo o topo e n elementos a partir dele (e salvando)
 		for(int j=0; j<=n; j++ ) {
