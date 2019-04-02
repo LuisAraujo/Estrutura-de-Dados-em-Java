@@ -480,7 +480,7 @@ Alguns exemplos aqui são didáticos, no sentido de que você entenda o problema
 
 Agora você está pronto para consultar o código da Fila.java que implementamos.
 	
-	```java 
+	``` java 
 	public class FilaV<T>{
 		private T[] arrayFila;
 		private int inicio;
