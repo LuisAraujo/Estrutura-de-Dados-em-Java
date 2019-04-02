@@ -429,7 +429,7 @@ Como dizia Raul Seixas: "eu sou o início o fim e o meio". Logicamente que ele n
 
 Na fila isso não seria muito bom. Vamos pensar em uma fila com capacidade para 8 elementos e inicialmente com 4 elementos:
 
-	    inicio                                         fim 
+	    inicio                                        fim 
 		|                                          |
 		v                                          v
 		    
@@ -438,7 +438,7 @@ Na fila isso não seria muito bom. Vamos pensar em uma fila com capacidade para 
 
 Ao remover os elementos teríamos:
 
- 				inicio    fim 
+ 				inicio   fim 
 				|        |
 				v        v
 		    
@@ -446,9 +446,9 @@ Ao remover os elementos teríamos:
 
 Adicionando mais 4 elementos teríamos
 
-						inicio    										    fim 
-						  |                                                  |
-						  v                                                  v
+			 inicio    										    fim 
+			  |                                                  |
+			  v                                                  v
 		    
 	[null, null, null, "Pessoa D", "Pessoa E", "Pessoa F", "Pessoa G", "Pessoa H"]
 
@@ -456,9 +456,9 @@ Adicionando mais 4 elementos teríamos
 Ok, até ai nada de novo. Mas o que aconteceria se eu removesse 4 elementos?
 
 
-									inicio   fim 
-						  			|       |
-						  			v       v
+				   inicio   fim 
+					 |       |
+				     v       v
 		    
 	[null, null, null, null, null, null, null, "Pessoa H"]
 
