@@ -188,64 +188,66 @@ Como já falamos sobre Herança, podemos então definir a Classe Object. Basicam
 Object é uma super classe, logo podemos tratar todas as classes como Objects. O problema é que precisamos saber os seus tipos, quando formos utilizar os atributos e métodos. Então, nem sempre isso é uma vantagem. 
 
 
-	```java
+```java
+
+public class EstruturaQualquer (){
+
+	Object[] vetor;
+
+	public EstruturaQualquer(int tamanho){
+		vetor = new Object[tamanho];
+	} 
 	
-	public class EstruturaQualquer (){
-	
-		Object[] vetor;
-	
-		public EstruturaQualquer(int tamanho){
-			vetor = new Object[tamanho];
-		} 
-		
-		public void getItem(int i, Object valor){
-			vetor[i] = valor;
-		}
-		public Object getItem(int i){
-			retunr vetor[i];
-		}
-	
+	public void getItem(int i, Object valor){
+		vetor[i] = valor;
 	}
+	public Object getItem(int i){
+		retunr vetor[i];
+	}
+
+}
+```
 	   
 Agora vamos utilizar essa estrutura. Como ela foi implementada com Object, podemos inserir todos tipo de objeto, pois todos são filhos de Object.
 
-	```java
-	
-		public static void main(Strings[] args){
-	
-			EstruturaQualquer est1 = new EstruturaQualquer(10);
-			est1.setItem(0, "Teste");
-			est1.setItem(1, "Teste 2");
+```java
 
-			EstruturaQualquer est2 = new EstruturaQualquer(10);
-			est2.setItem(0, new Gerente() );
-			est2.setItem(1, new Gerente() );
+	public static void main(Strings[] args){
 
-	
-	}
-	   
-	```
+		EstruturaQualquer est1 = new EstruturaQualquer(10);
+		est1.setItem(0, "Teste");
+		est1.setItem(1, "Teste 2");
+
+		EstruturaQualquer est2 = new EstruturaQualquer(10);
+		est2.setItem(0, new Gerente() );
+		est2.setItem(1, new Gerente() );
+
+
+}
+   
+```
 
 Mas do que se trata isso? Bem, estamos tentando esboçar uma forma de implementar nossas estrutura apenas uma vez de modo que ela sirva para uma ampla gama de contextos. O uso do Object funciona, criamos apenas uma estrutura e podemos inserir vários tipos, mas isso possui uma dificuldade: precisamos sempre fazer o *cast* para usar métodos específicos.
 
 
 ```java
-	
-		public static void main(Strings[] args){
-	
-			[...]
 
-			EstruturaQualquer est2 = new EstruturaQualquer(10);
-			est2.setItem(0, new Gerente() );
-			est2.setItem(1, new Gerente() );
+	public static void main(Strings[] args){
 
-			double sal = est2.getItem(0).getSalario(); //isso possui um erro
+		[...]
 
-	
-	}
-	   
-	```
+		EstruturaQualquer est2 = new EstruturaQualquer(10);
+		est2.setItem(0, new Gerente() );
+		est2.setItem(1, new Gerente() );
+
+		double sal = est2.getItem(0).getSalario(); //isso possui um erro
+
+
+}
+```
+
 Então vamos lá:
+
 
 ```java
 	
@@ -263,7 +265,7 @@ Então vamos lá:
 	
 	}
 	   
-	```
+```
 
 Agora que já entendemos a limitação, vamos ao próximo tópico.
 
@@ -274,24 +276,25 @@ Classes Genéricas são muito boas para o que estamos querendo fazer. É comum q
 Basicamente Classes Genéricas postergam a definição do tipo de dados. Assim, ao invés de definirmos na implementação (Classe) o tipo a ser utilizado, vamos definir no instanciamento do objeto. As classes Genérias recebem um termo (T) que será substituída em tempo de execução, pelo tipo passado por parâmetro. Certamente você já utilizou algo similar como ArrayList, mas não sabia o motivo. 
 
 
-	```java
+```java
+
+public class EstruturaQualquer<T>(){
+
+	T[] vetor;
+
+	public EstruturaQualquer(int tamanho){
+		vetor = (T[]) new Object[tamanho];
+	} 
 	
-	public class EstruturaQualquer<T>(){
-	
-		T[] vetor;
-	
-		public EstruturaQualquer(int tamanho){
-			vetor = (T[]) new Object[tamanho];
-		} 
-		
-		public void getItem(int i, T valor){
-			vetor[i] = valor;
-		}
-		public T getItem(int i){
-			retunr vetor[i];
-		}
-	
+	public void getItem(int i, T valor){
+		vetor[i] = valor;
 	}
+	public T getItem(int i){
+		retunr vetor[i];
+	}
+
+}
+```
 	   
 Pare um pouco, observe esse código e compare com a implementação da subseção anterior sobre Object. O que mudou?
 
@@ -301,42 +304,42 @@ Certamente você percebeu que as referências do Object sumiram (menos a de inst
 Ao usar essa estrutura, vamos dizer no instanciamento o tipo que desejamos:
 
 
-	```java
-	
-		public static void main(Strings[] args){
-	
-			EstruturaQualquer<String> est1 = new EstruturaQualquer<String>(10);
-			est1.setItem(0, "Teste");
-			est1.setItem(1, "Teste 2");
+```java
 
-			EstruturaQualquer<Gerente> est2 = new EstruturaQualquer<Gerente>(10);
-			est2.setItem(0, new Gerente() );
-			est2.setItem(1, new Gerente() );
+	public static void main(Strings[] args){
 
-	
-	}
-	   
-	```
+		EstruturaQualquer<String> est1 = new EstruturaQualquer<String>(10);
+		est1.setItem(0, "Teste");
+		est1.setItem(1, "Teste 2");
+
+		EstruturaQualquer<Gerente> est2 = new EstruturaQualquer<Gerente>(10);
+		est2.setItem(0, new Gerente() );
+		est2.setItem(1, new Gerente() );
+
+
+}
+   
+```
 
 Vamos ao exemplo do uso de métodos específicos:
 
 	
-	```java
-	
-		public static void main(Strings[] args){
-	
-			[...]
-	
-			EstruturaQualquer<Gerente> est2 = new EstruturaQualquer<Gerente>(10);
-			est2.setItem(0, new Gerente() );
-			est2.setItem(1, new Gerente() );
-	
-			double sal = est2.getItem(0).getSalario(); //isso NÃO possui erro
-	
-	
-	}
-	  
-	```
+```java
+
+	public static void main(Strings[] args){
+
+		[...]
+
+		EstruturaQualquer<Gerente> est2 = new EstruturaQualquer<Gerente>(10);
+		est2.setItem(0, new Gerente() );
+		est2.setItem(1, new Gerente() );
+
+		double sal = est2.getItem(0).getSalario(); //isso NÃO possui erro
+
+
+}
+  
+```
 
 Pronto, chegamos ao nosso objetivo. Por se tratar de um assunto novo e abstrato, é recomendado que você implemente os exemplos com Object e Classes Genéricas para internalizar os conceitos. Vamos utilizar esse tipo de codificação para as estruturas a seguir: Pilha, Fila, Listas e Árvores.
 
