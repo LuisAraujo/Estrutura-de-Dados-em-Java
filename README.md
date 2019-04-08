@@ -34,42 +34,64 @@ Em Estrutura de Dados, faremos constantemente esse exercício, modelaremos eleme
 
 ### 1.2 - Revisão POO com Java
 
-Uma condição essencial para criar estruturas de dados, no modelo que vamos apresentar é sabendo os conceitos de POO e Java. Então, vamos relembrar.
+Uma condição essencial para criar estruturas de dados, no modelo que vamos apresentar, é saber os conceitos de POO e Java. Caso esse não seja o seu caso, recomendamos parar a leitura e fazer um curso ou ler materiais específicos sobre POO. 
+
+Então, assumindo que você já conhece POO, vamos relembrar.
 
 **Classe**
 
-Classes são elementos no qual podemos implementar modelos, tal como uma forma de bolo. Com classes podemos definir como serão os nossos objetos, então ela é como uma especie de gabarito. Através das classes podemos definir os atributos e métodos dos objetos.
+Classes são elementos no qual podemos implementar modelos, tal como uma forma de bolo que usaremos para fazer vários bolos: chocolate, cenoura e outros. Não importa os ingredientes utilizados, a forma sempre será a mesma. 
 
-Em Java, uma classe de nome *AlgumaClasse*, com dois atributos, um inteiro chamado número e uma string chamada nome:
+Com classes podemos definir como serão os nossos objetos. Fazendo outra analogia, classes são como gabarito. Através das classes podemos definir os atributos e métodos dos objetos.
 
+Vamos ver um exemplo em Java. A seguir temos uma classe de nome *AlgumaClasse*, com dois atributos: um do tipo inteiro, chamado número, e outro do tipo string, chamado nome:
 
 ```java
 public class AlgumaClasse{
 
      int numero;
 	 String nome;
-
 }
 
 ```
 
 **Objetos**
 
-Objetos são copias das Classes, dizemos ainda que quando instanciamos um objeto, estamos consolidando a classe. Ou seja, estamos de fato utilizando a classe como modelo para criar um objeto. Esse objeto terá os atributos e métodos estipulados na Classe. Mas é importante saber que, dois objetos da mesma classe podem ter comportamentos diferentes, dado o seu estado (os valores nos atributos).
+Objetos são copias das Classes, dizemos ainda que quando instanciamos um objeto, estamos consolidando a classe. Ou seja, estamos de fato utilizando a classe como modelo para criar um objeto. Esse objeto terá os atributos e métodos estipulados na Classe. Mas é importante saber que: *dois objetos da mesma classe podem ter comportamentos diferentes, dado o seu estado* (os valores nos atributos). Como o exemplo do bolo, chocolate e cenoura foram implementados com ingredientes diferentes, mas ainda são bolos. 
 
-Em Java, um objeto é criado da seguintes forma, declara-se um local para armazená-lo (como uma variável) estipulando o seu tipo (AlgumaClasse) e depois o seu nome. Do lado direto da igualdade, temos o operador new acompanhado do nome da classe e de parênteses:
+Em Java, um objeto é criado da seguintes forma, declara-se um local para armazená-lo (como uma variável) estipulando o seu tipo (AlgumaClasse) e depois o seu nome. Do lado direto da igualdade, temos o operador *new* acompanhado do nome da Classe e de parênteses:
 
 ```java
 public static void main(){
-
 	AlgumaClasse ac = new AlgumaClasse();
 }
 
 ```
 
+Como disse antes, elas podem ter valores diferentes (estado). Vejamos:
+
+
+
+```java
+public static void main(){
+	AlgumaClasse ac = new AlgumaClasse();
+	ac.numero = 10;
+	ac.nome = "AC 1";
+
+	AlgumaClasse ac2 = new AlgumaClasse();
+	ac.numero = 20;
+	ac.nome = "AC 2";
+
+}
+
+```
+
+Assim, ac e ac2 são objetos diferentes que possuem seus próprios valores. Mas, ainda assim, são objetos de AlgumaClasse.
+
+
 **Construtor**
 
-Mas o que faz o *new*? Bem, ele chamado o construtor da classe para que seja instanciado o objeto (o objeto é colocado dentro da variável *ac*). Esse construtor é um método diferenciado, pois ele não possui retorno. Isso não quer dizer que ele é um *void*, apenas não especificamos nenhum retorno para o Construtor. O java saberá que ele é um construtor, pois não colocamos o tipo de retorno (*void, Integer, String ...*). Vejamos a diferença entre um método *getNumero* e o Construtor.
+Mas o que faz o *new*? Bem, ele 'chama' o construtor da classe para que seja instanciado o objeto (o objeto é colocado dentro da variável *ac*). Esse construtor é um método diferenciado, pois ele não possui retorno. Isso não quer dizer que ele é um *void*, ele literalmente não possui retorno. O Java saberá que ele é um construtor, pois não colocamos o tipo de retorno (*void, Integer, String ...*). Vejamos a diferença entre os métodos *setNumero*, *getNumero* e o Construtor.
 
 ```java
 public class AlgumaClasse{
@@ -81,20 +103,23 @@ public class AlgumaClasse{
 	}
 
 	public int getNumero(){
-
+		return this.numero;
 	}
-	
+
+	public void setNumero(int numero){
+		this.numero = numero
+	}	
 
 ```
 
 
 **Atributos**
 
-Atributos são variáveis (que podem ser primitivas ou objetos) que são inerentes ao Objeto. Ou seja, são estipuladas no modelo (a Classe). No exemplo anterior, já vimos o uso de atributos, com nome e número. Os métodos são o estado do objeto que podem influenciar as ações (os métodos).
+Atributos são variáveis (primitivas ou objetos) que são inerentes ao Objeto instanciado. Ou seja, os atributos são estipulados no modelo (a Classe). No exemplo anterior, já vimos o uso de atributos (*nome e número*). Os valores nos atributos definem o estado do objeto, que podem influenciar as suas ações (os métodos).
 
 **Métodos**
 
-Como vimos, os métodos são as ações dos objetos. O que isso significa, significa que são eles os responsáveis por executar as operações, como obter um valor ou inserir um valor. Vimos um exemplos do Método com getNúmeros. 
+Como vimos, os métodos são as ações dos objetos. O que isso significa? Significa que são eles os responsáveis por executar as operações, como obter um valor ou inserir um valor. Vimos um exemplos do Método (*getNúmeros*). 
 
 Métodos podem retornar um tipo ou não (void). Vejamos dois exemplos:
 
@@ -103,7 +128,7 @@ public class AlgumaClasse{
 
     [...] //trecho inibido
 
-	public void inserirNumero(numero numero){
+	public void setNumero(int numero){
 		this.numero = numero
 	}
 
@@ -113,13 +138,13 @@ public class AlgumaClasse{
 
 ```
 
-
 **Herança**
 
 Herança é uma forma de compartilhar atributos e métodos, de modo a eliminar a duplicidade de código. Assim, o processo de Herança consiste em agrupar atributos e métodos gerais em uma classe, que chamamos de Pai e reaproveitá-los nos Filhos.
 
 Em Java, a Herança é implementada com a palavra-chave *extends*. Todos os atributos e métodos públicos (public) e protegidos (protected) serão herdados pelos filhos. Vejamos:
 
+A classe Pai:
 
 ```java
 public class ClassePai{
@@ -132,6 +157,7 @@ public class ClassePai{
 
 ```
 
+A classe Filha:
 
 ```java
 public class ClasseFilha extends ClassePai{
@@ -153,33 +179,166 @@ Através da Herança podemos utilizar o Polimofirmos para agregar dados de vári
 
 ### 1.3 - Tipos Abstratos em Java
 
+Já que relembramos os conceitos básicos de POO, buscaremos agora entender como implementar algo que funcione para uma variedade de tipos, eliminando a necessidade de implementar várias estrutura (uma para cada tipo). Afinal nosso objetivo é criar estruturas que possam ser utilizadas em vários contextos.
+
 **Classe Object**
 
-Como já falamos em Herança, podemos definir a Classe Object nesses termos. Basicamente, todos as Classes java são filhas de Object, mesmo sem o uso de *extends*. Ou seja, nativamente, todas as classes são filhas de Object. 
+Como já falamos sobre Herança, podemos então definir a Classe Object. Basicamente, todos as Classes em Java são filhas de Object, mesmo sem o uso de *extends*. Ou seja, nativamente, todas as classes são filhas de Object. 
 
-Object é uma super classe, logo podemos tratar todas as classes como Objects. O problema é que precisamos saber os seus tipos, quanto formos utilizar os atributos e métodos. Então, nesse sempre isso é uma vantagem. 
+Object é uma super classe, logo podemos tratar todas as classes como Objects. O problema é que precisamos saber os seus tipos, quando formos utilizar os atributos e métodos. Então, nem sempre isso é uma vantagem. 
+
+
+	```java
+	
+	public class EstruturaQualquer (){
+	
+		Object[] vetor;
+	
+		public EstruturaQualquer(int tamanho){
+			vetor = new Object[tamanho];
+		} 
+		
+		public void getItem(int i, Object valor){
+			vetor[i] = valor;
+		}
+		public Object getItem(int i){
+			retunr vetor[i];
+		}
+	
+	}
+	   
+Agora vamos utilizar essa estrutura. Como ela foi implementada com Object, podemos inserir todos tipo de objeto, pois todos são filhos de Object.
+
+	```java
+	
+		public static void main(Strings[] args){
+	
+			EstruturaQualquer est1 = new EstruturaQualquer(10);
+			est1.setItem(0, "Teste");
+			est1.setItem(1, "Teste 2");
+
+			EstruturaQualquer est2 = new EstruturaQualquer(10);
+			est2.setItem(0, new Gerente() );
+			est2.setItem(1, new Gerente() );
+
+	
+	}
+	   
+	```
+
+Mas do que se trata isso? Bem, estamos tentando esboçar uma forma de implementar nossas estrutura apenas uma vez de modo que ela sirva para uma ampla gama de contextos. O uso do Object funciona, criamos apenas uma estrutura e podemos inserir vários tipos, mas isso possui uma dificuldade: precisamos sempre fazer o *cast* para usar métodos específicos.
+
 
 ```java
+	
+		public static void main(Strings[] args){
+	
+			[...]
 
-public static void main(Strings[] args){
+			EstruturaQualquer est2 = new EstruturaQualquer(10);
+			est2.setItem(0, new Gerente() );
+			est2.setItem(1, new Gerente() );
 
-	Object[] vetor = new Object[10];
-	vetor[0]  = new Operador();
-	vetor[1]  = new Operador();
-	vetor[2]  = new Gerente();
-	vetor[3]  = new Gerente();
-	vetor[4]  = new Supervisor();
-	vetor[5]  = new Supervisor();'
+			double sal = est2.getItem(0).getSalario(); //isso possui um erro
 
-}
-   
-```
+	
+	}
+	   
+	```
+Então vamos lá:
 
-Mas do que se trata isso? Bem, aqui estamos tentando esboçar uma forma de implementar nossas estrutura apenas uma vez e que ela sirva para uma ampla gama de contextos. 
+```java
+	
+		public static void main(Strings[] args){
+	
+			[...]
+
+			EstruturaQualquer est2 = new EstruturaQualqyer(10);
+			est2.setItem(0, new Gerente() );
+			est2.setItem(1, new Gerente() );
+
+			Gerente g = (Gerente) est2.getItem(0).getSalario(); //cast
+			double sal = g.getSalario();
+
+	
+	}
+	   
+	```
+
+Agora que já entendemos a limitação, vamos ao próximo tópico.
 
 **Classes Genéricas**
 
-Classes Genéricas são muito boas para o que estamos querendo fazer. É comum que aqui você fique um pouco perdido, mas reafirmando a ideia: queremos criar estruturas que sejam implementadas um única vez e que sirva para String, Inteiro, Classes criadas por nós e outras. 
+Classes Genéricas são muito boas para o que estamos querendo fazer. É comum que aqui você fique um pouco confuso, mas tenha uma coisa em mente: queremos criar estruturas que sejam implementadas um única vez e que sirva para String, Inteiro, Classes criadas por nós e outras. 
+
+Basicamente Classes Genéricas postergam a definição do tipo de dados. Assim, ao invés de definirmos na implementação (Classe) o tipo a ser utilizado, vamos definir no instanciamento do objeto. As classes Genérias recebem um termo (T) que será substituída em tempo de execução, pelo tipo passado por parâmetro. Certamente você já utilizou algo similar como ArrayList, mas não sabia o motivo. 
+
+
+	```java
+	
+	public class EstruturaQualquer<T>(){
+	
+		T[] vetor;
+	
+		public EstruturaQualquer(int tamanho){
+			vetor = (T[]) new Object[tamanho];
+		} 
+		
+		public void getItem(int i, T valor){
+			vetor[i] = valor;
+		}
+		public T getItem(int i){
+			retunr vetor[i];
+		}
+	
+	}
+	   
+Pare um pouco, observe esse código e compare com a implementação da subseção anterior sobre Object. O que mudou?
+
+
+Certamente você percebeu que as referências do Object sumiram (menos a de instanciar o vetor, pois em Java não podemos criar diretamente um vetor genérico: *new T[tamanho]*. 
+
+Ao usar essa estrutura, vamos dizer no instanciamento o tipo que desejamos:
+
+
+	```java
+	
+		public static void main(Strings[] args){
+	
+			EstruturaQualquer<String> est1 = new EstruturaQualquer<String>(10);
+			est1.setItem(0, "Teste");
+			est1.setItem(1, "Teste 2");
+
+			EstruturaQualquer<Gerente> est2 = new EstruturaQualquer<Gerente>(10);
+			est2.setItem(0, new Gerente() );
+			est2.setItem(1, new Gerente() );
+
+	
+	}
+	   
+	```
+
+Vamos ao exemplo do uso de métodos específicos:
+
+	
+	```java
+	
+		public static void main(Strings[] args){
+	
+			[...]
+	
+			EstruturaQualquer<Gerente> est2 = new EstruturaQualquer<Gerente>(10);
+			est2.setItem(0, new Gerente() );
+			est2.setItem(1, new Gerente() );
+	
+			double sal = est2.getItem(0).getSalario(); //isso NÃO possui erro
+	
+	
+	}
+	  
+	```
+
+Pronto, chegamos ao nosso objetivo. Por se tratar de um assunto novo e abstrato, é recomendado que você implemente os exemplos com Object e Classes Genéricas para internalizar os conceitos. Vamos utilizar esse tipo de codificação para as estruturas a seguir: Pilha, Fila, Listas e Árvores.
 
 
 # 2 - Pilha
