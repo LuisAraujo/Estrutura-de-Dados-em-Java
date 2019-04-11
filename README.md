@@ -1,5 +1,6 @@
 # Estrutura de Dados I
 
+
 Esse texto tem por objetivo apoiar o processo de ensino-aprendizagem de Estrutura de Dados. O texto tem como base os códigos no repositório. Não há restrições para a ordem da leitura, mas - se você for um estudante que ainda não conhecem os tópicos apresentados - recomenda-se ler um capítulo e partir para a implementação na seção *overview*. 
 
 **Licença**: O material está disponível sob licença: **Creative Commons BY**
