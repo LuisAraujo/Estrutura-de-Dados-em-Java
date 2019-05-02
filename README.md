@@ -892,19 +892,156 @@ A Lista está mais próxima de um Vetor do que das estruturas que fizemos até a
 
 **Saindo de Vetor e indo para lista**
 
+Bem, já que listas poder substituir vetores, podemos então modificar os nossos códigos de Pilha e Fila para Listas. Por isso, no início estávamos falando em Pilhas e Filas baseadas em vetores. Mas antes disso, vamos entender como as Listas funcionam.
 
 ### 4.1 - A Lista
 
 **O Nó**
 
-[TEXTO]
+Um nó segundo o [Dicionário Online de Português](https://www.dicio.com.br/no-2/) é: *Enlaçamento de fios, de linhas, de cordas, de cordões, fazendo com que suas extremidades passem uma pela outra, amarrando-as*.
+
+Essa definição não é muito boa para o nosso caso, mas o própio dicionário diz, em outra definição: *Vínculo; ligação estreita entre pessoas por afeição ou parentesco*. Bem, agora sim, isso pode ser útil aqui. 
+
+Nós de uma Lista são vínculos, pense que uma lista é um conjuntos de arestas e que essas arestas estão conectadas, pelos Nós. Além de conectar duas arestas, os Nós possuem propriedades (valores que podemos alocar neles). Na verdade, o Nó é o elementos principal da nossa lista. 
+
+Os Nós então, se ligam a outros Nós, através das arestas, que aqui chamaremos de próximo, afinal um Nó A está ligado ao próximo Nó, o B. 
+
+Pensando assim, em uma possível classe chamada Nó, teríamos duas propriedades ou atributos importantes: o valor que ele armazena (que pode ser de qualquer tipo, desde um inteiro até um objeto de uma Classe criada por nós) e a referência para o próximo nó. Em C, essa referência são os ponteiros, mas aqui em Java os objetos são como ponteiros, eles apontam para um local na memória no qual ele está armazenado. Experimente criar dois objetos e imprimi-los com *System.out.print*.
+
+Então se objetos são ponteiros ou referências, só precisamos colocá-los nesse atributo no Nó e pronto. Vamos ver como isso ficaria:
+    ```java
+    public class No<T> {
+    	private T valor;
+    	private No proximo;	
+    } 
+	``` 
+
+Voltaremos para o Nó depois, mas por hora assuma que essa é a cara dele. Antes disso, que tal criarmos o construtor? Bem, o ideal é passar esse valor por parâmetro e deixar o próximo como nulo, até que ele seja modificado. 
+
+	```java
+    public class No<T> {
+    	private T valor;
+    	private No proximo;	
+
+		public No(T valor) {
+			this.valor = valor;
+			proximo = null;
+		}
+    } 
+	``` 
 
 **A lista, uma cadeia de Nós**
 
-[TEXTO]
+Okay, agora temos um nós, se juntarmos os nós, eles formará uma lista. Por exemplo:
+
+
+	```java
+	No a = new No(4);
+	No b = new No(5);
+	//esse método coloca o parâmetro b - do tipo Nó - em próximo, do objeto a
+	a.setProximo(b);
+	``` 
+Mas como queremos criar um projeto em POO, o ideal seria ter uma classe que armazenasse os nós e que tivesse os métodos como inserir, remover e buscar Nó, não é? 
+
+Se um conjunto de Nó é uma Lista, podemos chamar essa classe que guardará os Nó de Lista, é semanticamente bom! Mas o que teria essa lista? Todos os nós criados? Teríamos várias variáveis para os nós? Ou quem sabe um vetor de nós? Mas tudo isso não iria limitar o número de nós? Sim! 
+
+Vamos lá, se um Nó é ligado sempre ao próximo nó, não há, na lista, um Nó "solto no ar", ou seja, que não esteja ligado à outro nó (com exceção do primeiro nó a ser inserido na lista). Então, isso quer dizer que, se eu tenho a referência do primeiro nó eu posso chegar a todos os nós da lista? Sim, isso mesmo e é justamente por isso que não precisamos de um vetor de nós, precisamos apenas do primeiro. 
+
+Mas porque não o segundo ou o último? Bem, o primeiro é o único nó na lista que tem acesso à todos, pois ele tem como próximo o segundo e assim por diante. O segundo nó não tem acesso ao primeiro, só ao próximo, o terceiro. O mesmo ocorre para o último, ele nem próximo possui (continua como nulo).
+  	
+	```java
+	public class Lista<T> {
+		private No<T> primeiro;
+	}
+	```
 
 ### 4.2 -Inserindo na Lista
 
-### 4.3 -Removendo da Lista
+Como já foi dito, uma lista está mais para um vetor e em um vetor nós podemos inserir na posição 0, na posição lenght-1 ou em qualquer outra posição entre essas duas. Na lista é possível inserir na posição 0, aqui chamamos isso de inserir no inicio da lista. Podemo inserir no final, ou seja length-1, ou em outras posição qualquer, como por exemplo inserir em ordem. Vamos ver essas possibilidades
 
-### 4.4 -Buscando na Lista
+#### 4.2.1 - Inserindo no inicio
+
+Inserir no inicio é simples, basta apenas:
+
+- Cria um novo nó
+- Dizer que o seu próximo é o que esta agora como primeiro
+- Dizer que ele agora é o novo primeiro
+
+Mas como seria isso? Vejamos em Java:
+
+
+ 
+#### 4.2.1 - Inserindo no final
+
+Inserir no final é simples também, basta apenas:
+
+- Cria um novo nó
+- Andar até o último nó
+- Dizer que o próximo desse último nó é o novo nó
+
+Em Java seria:
+
+
+#### 4.2.1 - Inserindo de forma ordenada
+
+Inserir de forma ordenada é a mais complexa, mais ainda assim não é nenhum Dragão Branco de Olhos Azuis.
+
+
+- Cria um novo nó
+- Andar até encontrar um nó maior que ele
+- Dizer que o próximo do nó nó é este nó de valor maior
+- Dizer que o (atenção) o próximo nó do nó anterior a este de valor maior é o novo nó (*Ok, leia novamente!*)
+
+### 4.3 -Buscando na Lista
+
+Podemo buscar um nó na lista pelo seu valor ou pelo seu índice. Vamos ver buscar antes de remover, pois ele irá nos ajudar à remover um Nó. 
+
+#### 4.3.1 - Buscando um nó pelo seu valor
+
+#### 4.3.1 - Buscando um nó pelo índice
+
+
+### 4.4 -Removendo da Lista
+
+Remover um nó é similar à inserção e à busca, podemos remover no inicio, no final ou remover um nó específico baseado em valor ou índice dele. 
+
+#### 4.4.1 - Removendo um nó no início
+
+#### 4.4.1 - Removendo um nó no final
+
+#### 4.4.1 - Removendo um nó pelo seu valor
+
+#### 4.4.1 - Removendo um nó pelo índice
+
+
+## 5 - Lista Duplamente Encadeada
+
+
+## 6 - Lista Circular
+
+
+### 7 - Árvores
+
+### 7.1 - Árvore Binária
+
+#### 7.1.1 - Nó
+
+#### 7.1.2 - Inserção
+
+#### 7.1.3 - Busca
+
+#### 7.1.4 - Remoção
+
+#### 7.1.5 - Percurso
+
+### 7.2 - Árvore AVL
+
+#### 7.2.2 - Questões sobre Balanceamento
+
+#### 7.2.2 - Nó
+
+#### 7.2.3 - Inserção
+
+#### 7.2.4 - Remoção
+
+#### 7.2.5 - Percurso
