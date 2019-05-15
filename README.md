@@ -906,9 +906,12 @@ Nós de uma Lista são vínculos, pense que uma lista é um conjuntos de arestas
 
 Os Nós então, se ligam a outros Nós, através das arestas, que aqui chamaremos de próximo, afinal um Nó A está ligado ao próximo Nó, o B. 
 
-Pensando assim, em uma possível classe chamada Nó, teríamos duas propriedades ou atributos importantes: o valor que ele armazena (que pode ser de qualquer tipo, desde um inteiro até um objeto de uma Classe criada por nós) e a referência para o próximo nó. Em C, essa referência são os ponteiros, mas aqui em Java os objetos são como ponteiros, eles apontam para um local na memória no qual ele está armazenado. Experimente criar dois objetos e imprimi-los com *System.out.print*.
+Pensando assim, em uma possível classe chamada Nó, teríamos duas propriedades ou atributos importantes: **o valor que ele armazena** (que pode ser de qualquer tipo, desde um inteiro até um objeto de uma Classe criada por nós) e a** referência para o próximo nó**. 
 
-Então se objetos são ponteiros ou referências, só precisamos colocá-los nesse atributo no Nó e pronto. Vamos ver como isso ficaria:
+Em C, essa referência são os ponteiros, mas aqui em Java os objetos são como ponteiros, eles apontam para um local na memória no qual ele está armazenado. Experimente criar dois objetos e imprimi-los com *System.out.print*.
+
+Então, se os objetos são ponteiros (ou referências), só precisamos colocá-los neste atributo (próximo) e tudo está conectado. Vamos ver como isso ficaria:
+
     ```java
     public class No<T> {
     	private T valor;
@@ -932,7 +935,7 @@ Voltaremos para o Nó depois, mas por hora assuma que essa é a cara dele. Antes
 
 **A lista, uma cadeia de Nós**
 
-Okay, agora temos um nós, se juntarmos os nós, eles formará uma lista. Por exemplo:
+Okay, agora temos um nó, se juntarmos os nós, eles formaram uma lista. Por exemplo:
 
 
 	```java
@@ -943,11 +946,22 @@ Okay, agora temos um nós, se juntarmos os nós, eles formará uma lista. Por ex
 	``` 
 Mas como queremos criar um projeto em POO, o ideal seria ter uma classe que armazenasse os nós e que tivesse os métodos como inserir, remover e buscar Nó, não é? 
 
-Se um conjunto de Nó é uma Lista, podemos chamar essa classe que guardará os Nó de Lista, é semanticamente bom! Mas o que teria essa lista? Todos os nós criados? Teríamos várias variáveis para os nós? Ou quem sabe um vetor de nós? Mas tudo isso não iria limitar o número de nós? Sim! 
+Se um conjunto de Nó é uma Lista, podemos chamar essa classe, que guardará os Nó, de Lista. Isso é semanticamente bom! Mas o que teria nesta Lista? 
 
-Vamos lá, se um Nó é ligado sempre ao próximo nó, não há, na lista, um Nó "solto no ar", ou seja, que não esteja ligado à outro nó (com exceção do primeiro nó a ser inserido na lista). Então, isso quer dizer que, se eu tenho a referência do primeiro nó eu posso chegar a todos os nós da lista? Sim, isso mesmo e é justamente por isso que não precisamos de um vetor de nós, precisamos apenas do primeiro. 
 
-Mas porque não o segundo ou o último? Bem, o primeiro é o único nó na lista que tem acesso à todos, pois ele tem como próximo o segundo e assim por diante. O segundo nó não tem acesso ao primeiro, só ao próximo, o terceiro. O mesmo ocorre para o último, ele nem próximo possui (continua como nulo).
+
+1. - Todos os nós criados? 
+1. - Teríamos várias variáveis para os nós? 
+1. - Um vetor de nós? 
+
+Opa! Mas tudo isso não iria limitar o número de nós? A resposta é: Sim! 
+
+Vamos lá, se um Nó é ligado sempre ao próximo nó, não há, na lista, um Nó "solto no ar", ou seja, que não esteja ligado a outro nó (com exceção do primeiro nó a ser inserido na lista). 
+
+
+> Então, isso quer dizer que, se eu tenho a referência do primeiro nó eu posso chegar a todos os nós da lista? Sim, isso mesmo e é justamente por isso que não precisamos de um vetor de nós, precisamos apenas do primeiro. 
+
+Mas por qual motivo não guardo o segundo, terceiro ou o último Nó? Bem, o primeiro é o único nó na lista que tem acesso a todos, pois ele tem como próximo o segundo e assim por diante. O segundo nó não tem acesso ao primeiro, só ao próximo, o terceiro e assim por diante. O mesmo ocorre para o último, ele nem próximo possui (continua como nulo), senão ele não seria o último.
   	
 	```java
 	public class Lista<T> {
@@ -957,8 +971,14 @@ Mas porque não o segundo ou o último? Bem, o primeiro é o único nó na lista
 
 ### 4.2 -Inserindo na Lista
 
-Como já foi dito, uma lista está mais para um vetor e em um vetor nós podemos inserir na posição 0, na posição lenght-1 ou em qualquer outra posição entre essas duas. Na lista é possível inserir na posição 0, aqui chamamos isso de inserir no inicio da lista. Podemo inserir no final, ou seja length-1, ou em outras posição qualquer, como por exemplo inserir em ordem. Vamos ver essas possibilidades
+Como já foi dito, uma lista está mais para um vetor do que para uma Pilha ou Fila.  Pense bem: Em um vetor nós podemos inserir na posição 0, na posição lenght-1 ou em qualquer outra posição, certo? A lista tem o mesmo comportamento, nela é possível inserir na posição 0, aqui chamamos isso de inserir no início da lista. Podemos inserir no final (idem à length-1), ou em qualquer outras posição qualquer. Vamos ver essas possibilidades, nesta Seção.
 
+Existem muitos tipos de lista, *e.g.,* simplesmente encadeada, circular, duplamente encadeada entre outras variações. O que temos que ter em mente é que estamos querendo eliminar duas coisas: desperdício de espaço e redimencionamento, problemas do vetor. 
+
+Temos que lembrar também que, se uma lista está mais para uma nova forma de armazenar cadeias de elementos, podemos, com ela, criar uma Pilha e uma Fila (como fizemos com o vetor). Sim, basta apenas utilizar os métodos de inserir e remover de modo que as regas sejam respeitada: FIFO e LIFO. 
+
+Inicialmente vamos ver operações de uma lista simples ou simplesmente encadeada. 
+ 
 #### 4.2.1 - Inserindo no inicio
 
 Inserir no inicio é simples, basta apenas:
@@ -969,7 +989,14 @@ Inserir no inicio é simples, basta apenas:
 
 Mas como seria isso? Vejamos em Java:
 
+´´´java
+    public void inserirNoInicio(T  valor) {
+    		No<T> novo_no = new No<T>(valor);
+			novo_no.proximo = primeiro;
+			primeiro = novo_no
+	}
 
+´´´
  
 #### 4.2.1 - Inserindo no final
 
@@ -981,16 +1008,167 @@ Inserir no final é simples também, basta apenas:
 
 Em Java seria:
 
+´´´java
+    public void inserirNoFinal(T  valor) {
+    		No<T> novo_no = new No<T>(valor);
+			No auxiliar = primeiro;
+			while(auxiliar.proximo != null) {
+				auxiliar = auxiliar.proximo;
+			}
+			auxiliar.proximo = novo_no.proximo
+	}
+
+
 
 #### 4.2.1 - Inserindo de forma ordenada
 
-Inserir de forma ordenada é a mais complexa, mais ainda assim não é nenhum Dragão Branco de Olhos Azuis.
+Inserir de forma ordenada é a mais complexa, mais ainda assim não é nenhum Dragão Branco de Olhos Azuis. Temos que verificar alguns pontos:
 
+
+
+1. Se vamos inserir no início (caso o meu valor inserido seja menor que o valor do primeiro nó)
+2. Se vamos inserir no final (caso o meu valor inserido seja maior que todos os nós na lista)
+3. Se vamos inserir no meio (caso o meu valor seja um valor entre dois nós da lista)
 
 - Cria um novo nó
 - Andar até encontrar um nó maior que ele
-- Dizer que o próximo do nó nó é este nó de valor maior
+- Dizer que o próximo do nó é este nó de valor maior
 - Dizer que o (atenção) o próximo nó do nó anterior a este de valor maior é o novo nó (*Ok, leia novamente!*)
+
+
+	public void inserirNoMeio(T  valor) {
+		No<T> novo_no = new No<T>(valor);
+	
+		No<T> auxiliar = primeiro;
+		 
+		
+		while((auxiliar != null) && ( auxiliar.obterValor().compareTo(novo_no.obterValor() )) == -1  )
+		{
+ 
+			auxiliar = auxiliar.obterProximo();
+		}
+
+	 
+		auxiliar.proximo(novo_no);
+			 
+	
+	}
+
+
+Mas calma! E se a lista estiver vazia? O while não executará e ocorrerá um erro em "auxiliar.proximo", pois ele é nulo. Vamos Ajustar? Que tal criar uma verificação para isso?
+
+
+	public void inserirNoMeio(T  valor) {
+		No<T> novo_no = new No<T>(valor);
+	
+		No<T> auxiliar = primeiro;
+		 
+		
+		while((auxiliar != null) && ( auxiliar.obterValor().compareTo(novo_no.obterValor() )) == -1  )
+		{
+ 
+			auxiliar = auxiliar.obterProximo();
+		}
+
+	 	if(this.primeiro == null) { 
+			this.primeiro = novo_no;
+		else
+			auxiliar.proximo(novo_no);
+			 
+	
+	}
+
+Ok, revolvemos isso. Agora pense que o nó a ser inserido é maior que todos os nós, teríamos que inserir no final. Neste caso, ocorreria em erro, pelo mesmo motivo anterior. Então, que tal ter outro auxiliar (auxiliar2), que vem um nó antes do auxiliar? Assim poderíamos dizer que o próximo do auxiliar2 seria o nosso novo nó e isso não teria nenhum erro.
+
+ 	public void inserirNoMeio(T  valor) {
+		No<T> novo_no = new No<T>(valor);
+	
+		No<T> auxiliar = primeiro;
+		No<T> auxiliar2 = null;
+		
+		while((auxiliar != null) && ( auxiliar.obterValor().compareTo(novo_no.obterValor() )) == -1  )
+		{
+ 			auxiliar2 = auxiliar;
+			auxiliar = auxiliar.proximo();
+		}
+
+	 	if(this.primeiro == null) { 
+			this.primeiro = novo_no;
+		else{
+			novo_no.proximo = null;
+			auxiliar2.proximo = novo_no;
+		}
+			 
+	
+	}
+
+
+Ótimo, como novo_no é o último, o próximo dele pode ser null. Agora vamos imaginar que a lista possui nós e o meu nó é menor que o primeiro nó. Por exemplo, em  uma lista: 2,3,5 e 6 (em ordem) eu desejo inseri o 1. O nosso loop iria parar na primeira comparação, pois "auxiliar.obterValor().compareTo(novo_no.obterValor() )" retornaria 1. Isso nos levaria a entrar no else e ai encontramos o problema, pois novo_no.proximo não poderia ser null. Ele deveria ser, na verdade primeiro. 
+
+	public void inserirNoMeio(T  valor) {
+		No<T> novo_no = new No<T>(valor);
+	
+		No<T> auxiliar = primeiro;
+		No<T> auxiliar2 = null;
+		
+		while((auxiliar != null) && ( auxiliar.obterValor().compareTo(novo_no.obterValor() )) == -1  )
+		{
+ 			auxiliar2 = auxiliar;
+			auxiliar = auxiliar.proximo();
+		}
+
+	 	if(this.primeiro == null) { 
+			this.primeiro = novo_no;
+		else{
+			novo_no.proximo = this.primeiro
+			auxiliar2.proximo = novo_no;
+		}
+			 
+	
+	}
+
+
+Okay, já estamos finalizando, calma!!! Agora pense na última ocasião, onde a minha lista possui nós e eu quero inserir no meio de dois nós. Por exemplo, inseri o 4 (entre o 3 e o 5). Neste caso, auxiliar estaria em 5 e auxiliar2 em 3. Logicamente que o próximo do auxiliar2 será novo_no e o próximo de novo_no será 5.
+Isso não seria possível com "novo_no.proximo = this.primeiro". Mas pensando bem, no caso de ele ser inserido no início, o auxiliar seria primeiro ainda (pois dizemos inicialmente que auxiliar = primeiro. Então posso trocar   "novo_no.proximo = this.primeiro" para  "novo_no.proximo = auxiliar" e isso funcionaria nos dois caso: inserir antes de todos e no meio de dois nós. 
+
+O problema é que, caso o auxiliar seja o primeiro nó, auxiliar 2 será null e isso ocasionaria um erro. Além disso, se queremos inseri no incio, o ponteio do primeiro deverá ser atualizado. Então vamos adicionar esse trecho:
+
+	[...]
+	else if(auxiliar == this.primeiro) {		
+			novo_no.inserirProximo(this.primeiro);
+			this.primeiro = novo_no;
+	}
+	[...]
+ 
+
+Vamos lá:
+
+	public void inserirNoMeio(T  valor) {
+		No<T> novo_no = new No<T>(valor);
+	
+		No<T> auxiliar = primeiro;
+		No<T> auxiliar2 = null;
+		
+		while((auxiliar != null) && ( auxiliar.obterValor().compareTo(novo_no.obterValor() )) == -1  )
+		{
+ 			auxiliar2 = auxiliar;
+			auxiliar = auxiliar.proximo();
+		}
+
+	 	if(this.primeiro == null) { 
+			this.primeiro = novo_no;
+		}else if(auxiliar == this.primeiro) {	
+			novo_no.proximo = this.primeiro;
+			this.primeiro = novo_no;
+		}else{
+			novo_no.proximo = auxiliar; 
+			auxiliar2.proximo = novo_no;
+		}
+			 
+	
+	}
+
+Pronto!
 
 ### 4.3 -Buscando na Lista
 
@@ -998,8 +1176,55 @@ Podemo buscar um nó na lista pelo seu valor ou pelo seu índice. Vamos ver busc
 
 #### 4.3.1 - Buscando um nó pelo seu valor
 
+Para buscar é simples, devemos apenas executar o loop com um auxiliar percorrendo a lista até que o valor seja encontrado ou até chegar ao final da lista:
+
+	public No<T> buscar(T valor) {
+		 
+		No<T> auxiliar = primeiro;
+		 
+		while((auxiliar != null) && (auxiliar.obterValor().compareTo( valor )) != 0  )
+		{
+			auxiliar = auxiliar.proximo;
+		}
+		
+		return auxiliar;
+	}
+
 #### 4.3.1 - Buscando um nó pelo índice
 
+Podemos modificar um pouco esse método e buscar com índice
+
+	public No<T> buscarPorIndice(int indice) {
+		 
+		No<T> auxiliar = primeiro;
+		int contador = 0; 
+		while((auxiliar != null) && (contador < indice))
+		{
+			auxiliar = auxiliar.proximo;
+			contator++;
+		}
+		
+		return auxiliar;
+	}
+
+Sim, é muito simples! 
+
+
+#### 4.3.1 - Outras formas de Busca
+
+Assim com a Pilha e Fila, podemos implementar métodos de busca que acessem o primeiro item:
+
+	return this.primeiro
+
+ou o final:
+
+		auxiliar = this.primeiro
+		while((auxiliar.proximo != null))
+		{
+			auxiliar = auxiliar.proximo;
+		}
+
+		return auxilia;
 
 ### 4.4 -Removendo da Lista
 
@@ -1007,22 +1232,271 @@ Remover um nó é similar à inserção e à busca, podemos remover no inicio, n
 
 #### 4.4.1 - Removendo um nó no início
 
+Bem, se estamos removendo do início é sinal que o segundo nó será o nosso novo início. O segundo nó é o próximo do primeiro, certo? Então que tal fazermos isso:
+
+	public No<T> removerInicio() {
+		 
+		No<T> auxiliar = primeiro;
+		primeiro = primeiro.próximo;
+		auxiliar.proximo = null;
+		return auxiliar;
+	}
+
+
 #### 4.4.1 - Removendo um nó no final
+
+Remover no final significa que o penúltimo nó será o novo último. Para ser considerado um último nó, na lista, este nó deve ter o seu próximo igual à null (não possui próximo). Então, vamos até o penúltimo nó e dizer que o próximo dele é null. Mas como fazemos isso? Assim:
+
+	public No<T> removerFinal() {
+		 
+		No<T> auxiliar = primeiro;
+		No<T> auxiliar2 = null;
+
+		while((auxiliar.proximo != null))
+		{
+			auxiliar2 = auxiliar;
+			auxiliar = auxiliar.proximo;
+		}
+
+		auxiliar2.proximo = null;
+
+		return auxiliar;
+	}
+
 
 #### 4.4.1 - Removendo um nó pelo seu valor
 
+Já sabemos buscar pelo valor do Nó! Temos apenas que considerar algumas coisas referentes ao modo de deleção (inicio, meio ou final), assim como na inserção.
+
+
+	public void removerPorValor(T valor) {
+		No<T> novo_no = new No<T>(valor);
+	
+		No<T> auxiliar = primeiro;
+		No<T> auxiliar2 = null;
+		
+		while((auxiliar != null) && (auxiliar.obterValor().compareTo( valor )) != 0  )
+		{
+			auxiliar2 = auxiliar;
+			auxiliar = auxiliar.proximo;
+		}
+
+	
+		if(auxiliar == null){
+			System.out.println("Valor não existe na lista");
+		}else if(auxiliar == this.primeiro) {	
+			this.primeiro = auxiliar.próximo;
+			return primeiro;
+		}else{
+			auxiliar2.proximo = auxiliar.próximo;
+		}
+	}
+
 #### 4.4.1 - Removendo um nó pelo índice
 
+O códio para remover pelo índice é similar à remoção como valor, adicionando o contato, como na busca por índice.
+
+
+	public void removerPorValor(int indice) {
+		No<T> novo_no = new No<T>(valor);
+	
+		No<T> auxiliar = primeiro;
+		No<T> auxiliar2 = null;
+		
+		int contador = 0; 
+		while((auxiliar != null) && (contador < indice))
+		{
+			auxiliar = auxiliar.proximo;
+			contator++;
+		}
+
+	
+		if(auxiliar == null){
+			System.out.println("Valor não existe na lista");
+		}else if(auxiliar == this.primeiro) {	
+			this.primeiro = auxiliar.próximo;
+			return primeiro;
+		}else{
+			auxiliar2.proximo = auxiliar.próximo;
+		}
+			 
+	
+	}
 
 ## 5 - Lista Duplamente Encadeada
+
+A Lista duplamente encadeada, diferentemente das simplesmente possui dois links, uma para o próximo nó e outro para o nó anterior. Mas para que? Já resolvemos os problemas do vetor! Bem, imagine que resolvemos um problema (dois na verdade), mas ainda assim queremos melhorar nosso algoritmo. 
+
+Vamos pensar um pouco: temos uma lista como 1.000 Nós (1,2,3,4... 1000). Desejamos buscar o item número 30, logo varemos 30 interações (nó a nó). Agora queremos buscar 0 29, e novamente faremos mais 29 interações, partindo do início. Agora se em uma lista eu pudesse sair do 30 e voltar para o 29, só teríamos 1 interação. Legal, não é? 
+
+A essa altura você deve está se perguntando: mais uma lista para aprender?! Não necessariamente, podemos apenas modificar o código da simplesmente encadeada. Vejamos pela estrutura:
+
+ 	```java
+    public class No<T> {
+    	private T valor;
+    	private No proximo;	
+		private No anterior;
+	
+		public No(T valor) {
+			this.valor = valor;
+			proximo = null;
+			anterior = null;
+		}
+    } 
+	``` 
+
+#### 5.1 - Inserindo na Lista Duplamente
+
+Os código são similares a simplesmente, como já dito. Basta prestar atenção no novo atributo, o anterior.
+
+
+
+#### 5.1.1 - Inserindo no inicio
+
+Nada muda aqui! 
+
+	´´´java
+    public void inserirNoInicio(T  valor) {
+    		No<T> novo_no = new No<T>(valor);
+			novo_no.proximo = primeiro;
+			primeiro = novo_no
+	}
+
+	´´´
+ 
+#### 5.1.2 - Inserindo no final
+
+Quase nada muda aqui! Apenas o link do nó anterior do novo_no
+
+	´´´java
+    public void inserirNoFinal(T  valor) {
+    		No<T> novo_no = new No<T>(valor);
+			No auxiliar = primeiro;
+			while(auxiliar.proximo != null) {
+				auxiliar = auxiliar.proximo;
+			}
+			auxiliar.proximo = novo_no.proximo;
+			novo_no.anterior = auxiliar;
+	}
+
+
+### 5.1.3 - Inserindo de forma ordenada
+
+Vejamos o código da simplemente:
+
+
+	public void inserirNoMeio(T  valor) {
+		No<T> novo_no = new No<T>(valor);
+	
+		No<T> auxiliar = primeiro;
+		No<T> auxiliar2 = null;
+		
+		while((auxiliar != null) && ( auxiliar.obterValor().compareTo(novo_no.obterValor() )) == -1  )
+		{
+ 			auxiliar2 = auxiliar;
+			auxiliar = auxiliar.proximo();
+		}
+
+	 	if(this.primeiro == null) { 
+			this.primeiro = novo_no;
+		}else if(auxiliar == this.primeiro) {	
+			this.primeiro.anterior = novo_no
+			novo_no.proximo = this.primeiro;			
+			this.primeiro = novo_no;
+		}else{
+			novo_no.proximo = auxiliar;
+			auxiliar.anterior = novo_no; 
+			auxiliar2.proximo = novo_no;
+			novo_no.anterior = auxilia2;
+		}
+	}
+
+
+Ok! Mas, olhando bem, não precisamos mais desse auxiliar2, pois agora podemos acessar auxiliar.anterior!
+
+	public void inserirNoMeio(T  valor) {
+		No<T> novo_no = new No<T>(valor);
+	
+		No<T> auxiliar = primeiro;
+		
+		while((auxiliar != null) && ( auxiliar.obterValor().compareTo(novo_no.obterValor() )) == -1  )
+		{
+			auxiliar = auxiliar.proximo();
+		}
+
+	 	if(this.primeiro == null) { 
+			this.primeiro = novo_no;
+		}else if(auxiliar == this.primeiro) {	
+			this.primeiro.anterior = novo_no
+			novo_no.proximo = this.primeiro;			
+			this.primeiro = novo_no;
+		}else{
+			novo_no.proximo = auxiliar;
+			auxiliar.anterior = novo_no; 
+			auxiliar.anterior.proximo = novo_no;
+			novo_no.anterior = auxilia.anterior;
+		}
+	}
+
+#### 5.2 - Buscando na Lista Duplamente
+#### 5.2.1 - Buscando no início
+#### 5.2.2 - Buscando no final
+#### 5.2.3 - Buscando por valor
+#### 5.2.4 - Buscando por índice
+
+
+#### 5.3 - Removendo na Lista Duplamente
+#### 5.3.1 - Removendo no início
+#### 5.3.2 - Removendo no final
+#### 5.3.3 - Removendo por valor
+#### 5.3.4 - Removendo por índice
 
 
 ## 6 - Lista Circular
 
+A Listas Duplamente supera o problema de voltar ao início reduzindo o número de interações para achar nós próximos. Lembra do caso de busca o nó de valor 30 e depois o 29? Estendendo esse problema, imagine que queremos buscar o nó de valor 999, inicialmente faremos 999 interações. Agora queremos busca o nó de valor 10, teríamos que fazer 989 interações para voltar. Não seria interessante segui até o final e ter um "portal" que nos leve ao incio? Assim faríamos 11 interações (1000, 1, 2, 3 ... 10). 
+
+Lista circular possui esse portal. Elas são similares à duplamente encadeada. Ela possui o mesmo tipo de nó e apenas algumas modificações nas operações. O princípio básico aqui é que o primeiro nó é ligado ao último e o último é ligado ao primeiro. Assim poderíamos andar até o final e chegar o início novamente.
+
+#### 6.1 - Inserindo na Lista Duplamente
+
+Vamos ver os métodos de inserção, neta seção.
+
+#### 6.1.1 - Inserindo no início
+#### 6.1.2 - Inserindo no final
+#### 6.1.3 - Inserindo de forma ordenada
+
+#### 6.2 - Buscando na Lista Duplamente
+
+Como os métodos de buscar são similares, vamos fazer outra abordagem aqui que serve para a circular. Vamos criar um atributo chamado último nó que guardará o último nó buscado e vamos fazer a busca a partir dele.
+
+#### 6.2.1 - Buscando Nós sem andar muito
+
+
+
+#### 6.3 - Removendo na Lista Duplamente
+
+Para remover, precisamos considerar o novo link. Vejamos os códigos.
+
+#### 6.3.1 - Removendo no início
+#### 6.3.2 - Removendo no final
+#### 6.3.3 - Removendo por valor
+#### 6.3.4 - Removendo por índice
+
 
 ### 7 - Árvores
 
+Árvores! Nessa **altura** você deve ter si perguntado: o que árvores tem haver como códigos? **Folhas**? **Raiz**? Ganhos? Sim, tudo isso. A ideia da estrutura da dados Árvore é similar a uma árvore, presente na natureza. Embora a representação seja de cabeça para baixo (e embora árvores não tenha cabeça), elas possuem uma raiz (primeiro nó), folhas (nós sem filhos), altura e muito mais.
+
+Cada nó em uma árvore possui nós vinculados à eles que chamados de filho (próximo e anterior aqui são substituídos por outas nomenclaturas).
+
 ### 7.1 - Árvore Binária
+
+Aqui temos os mesmos Nós que a lista, muito similar à da duplamente encadeada modificando apenas o próximo para direito e o anterior para o esquerdo. Essas duas referências dos nós são, na verdade, filhos do nó que as contém. Por exemplo: Um nó B pode ter dois filhos: A e C, um à esquerda e outro à direta. Esse é o principal conceito de Árvore Binária: **cada nó possui no máximo dois nós**. Mas um Nó pode ter apenas 1 ou nenhum nó (não passando de dois).
+
+Outro elemento importante da árvore binária é que, **ao inserir filhos, deve-se verificar se ele é maior ou menor que o pai. Se for menor, deverá ser um filho à esquerda e se for maior um filho à direita**. Caso o nó já possua dois filhos, devemos andar pelos nós até encontrar um nó sem filhos, onde possamos alocá-lo.  
+
+Árvore Binária é muito utilizada me buscas, pois reduz bastante a busca, em alguns cados. Um lista simplesmente encadeada, no pior caso realiza n operações para a busca, uma árvore, no melhor caso realiza *log2 n* interações.
 
 #### 7.1.1 - Nó
 
@@ -1035,6 +1509,8 @@ Remover um nó é similar à inserção e à busca, podemos remover no inicio, n
 #### 7.1.5 - Percurso
 
 ### 7.2 - Árvore AVL
+
+Existem um grande problema em árvores binárias. Dado o método de inserção, se inseríamos elementos em ordem: 1, 2, 3, 4 ... n. Isso se tornaria uma lista, pois os nós seriam sempre inseridos à direta do no mais à direita.
 
 #### 7.2.2 - Questões sobre Balanceamento
 
