@@ -1768,14 +1768,18 @@ Caso não tenha entendido, pense um pouco olhando essa imagem com a comparação
 #### 6.2.1 - Buscando Nós sem andar muito
 
 Inicialmente vamos criar flags para saber se devemos andar para frente ou para trás:
+
 	´´´java
+
 		if( (prior) || (!next))
 			this.obterNoAnterior();
 		else if( (next) || (!prior)) 
 			this.obterNoProximo();
+
 	´´´
 
 Quem decidirá a direção são dois fatores: o valor que eu busco em comparação com o nó atual e a posição que estamos na lista, nessa abordagem temos mais um atributo chamado *qtdNo* que guarda a quantidade de nós que teremos na lista. Logicamente que os métodos de inserção e remoção precisam ser atualizados para esse controle. 
+
 
 	´´´java
 		boolean prior = true;
@@ -1800,7 +1804,7 @@ Quem decidirá a direção são dois fatores: o valor que eu busco em comparaç�
 			return noAtual;
 		}
 			
-		´´´
+	´´´
 
 O código completo é a junção dos dois trechos apresentados, com a adição de alguns elementos que visam verificar a parada *stop* e caminhar na lista. 
 
@@ -1815,6 +1819,7 @@ Para remover, precisamos considerar o novo link entre o primeiro e o último nó
 Observe que estamos utilizando a versão como o contador do qtdNo, você pode fazer isso em outros métodos. 
 
 	´´´java
+
 	public void remover(T valor) {
 		
 		No n= buscarOtim(valor);
@@ -1837,12 +1842,14 @@ Observe que estamos utilizando a versão como o contador do qtdNo, você pode fa
 		}
 		
 	}
+
 	´´´
 #### 6.3.4 - Removendo por índice
 
 Aqui podemos utilizar a mesma busca por índice que a lista duplamente.
 
 	´´´java
+
 	public void remover(T valor) {
 		
 		No n= buscarPorIndice(valor);
@@ -1863,6 +1870,7 @@ Aqui podemos utilizar a mesma busca por índice que a lista duplamente.
 			}	
 		}	
 	}
+
 	´´´
 
 ### 7 - Árvores
