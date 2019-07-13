@@ -1,7 +1,7 @@
 # Estrutura de Dados I
 
 
-Esse texto tem por objetivo apoiar o processo de ensino-aprendizagem de Estrutura de Dados. O texto tem como base os códigos no repositório. Não há restrições para a ordem da leitura, mas - se você for um estudante que ainda não conhecem os tópicos apresentados - recomenda-se ler um capítulo e partir para a implementação na seção *overview*. 
+Esse texto tem por objetivo apoiar o processo de ensino-aprendizagem de Estrutura de Dados. O texto tem como base os códigos no repositório. Não há restrições para a ordem da leitura, mas - se você for um estudante que ainda não conhece os tópicos apresentados - recomenda-se ler um capítulo por vez e partir para a implementação na seção *overview*. 
 
 **Licença**: O material está disponível sob licença: **Creative Commons BY**
 
@@ -10,6 +10,17 @@ Esse texto tem por objetivo apoiar o processo de ensino-aprendizagem de Estrutur
 **Requisitos**: conhecer o Paradigma Orientado a Objeto (POO) e Linguagem em Java. 
 
 **Obs:** *Esse documento está em construção, deixe-me saber se há algum erro: luisaraujo.ifba@gmail.com*
+
+# Sumário
+
+1. Capítulo 1 - [Estrutura de Dados](https://github.com/LuisAraujo/Disciplina-Estrutura-de-Dados#1---estrutura-de-dados)
+1. Capítulo 2 - [Pilha](https://github.com/LuisAraujo/Disciplina-Estrutura-de-Dados#2---pilha)
+1. Capítulo 3 - [Fila](https://github.com/LuisAraujo/Disciplina-Estrutura-de-Dados#3---fila)
+1. Capítulo 4 - [Lista Simplesmente Encadeada](https://github.com/LuisAraujo/Disciplina-Estrutura-de-Dados#4---listas-simplesmente-encadeada)
+1. Capítulo 5 - [Lista Duplamente Encadeada](https://github.com/LuisAraujo/Disciplina-Estrutura-de-Dados#5---lista-duplamente-encadeada)
+1. Capítulo 6 - [Lista Circular](https://github.com/LuisAraujo/Disciplina-Estrutura-de-Dados#6---lista-circular)
+1. Capítulo 7 - [Árvores](https://github.com/LuisAraujo/Disciplina-Estrutura-de-Dados#7---%C3%A1rvores)
+
 
 # 1 - Estrutura de Dados
 
