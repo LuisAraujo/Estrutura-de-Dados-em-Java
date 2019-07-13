@@ -1491,10 +1491,10 @@ Com base nisso, podemos abordar o problema de uma outra forma: imagine que você
 
 ```java
 
-	public class Lista<T> {
-		private No<T> primeiro;
-		private No<T> noatual;
-	}
+public class Lista<T> {
+	private No<T> primeiro;
+	private No<T> noatual;
+}
 
 ```
  
@@ -1503,41 +1503,41 @@ A cada busca, nós atualizamos esse ultimobuscado.
 
 ```java
 
-	public No<T> buscar(T valor) {
-	 
-	No<T> auxiliar = primeiro;
-	 
-	while( auxiliar.proximo != null )
-	{
-		auxiliar = auxiliar.proximo;
-	}
-	if(auxiliar != null)
-		ultimobuscado = auxiliar;
+public No<T> buscar(T valor) {
+ 
+No<T> auxiliar = primeiro;
+ 
+while( auxiliar.proximo != null )
+{
+	auxiliar = auxiliar.proximo;
+}
+if(auxiliar != null)
+	ultimobuscado = auxiliar;
 
-	return auxiliar;
+return auxiliar;
 }
 ```
 
 Ok, mas isso não melhorou em nada a nossa busca, pelo contrário, eu tenho agora uma operação de comparação e outra de atribuição. Bem, para isso precisamos fazer a seguinte abordagem: dado o último nó buscado, verificamos se o valor é maior ou menor que ele, se for maior, vamos para o próximo, se for menor vamos para o anterior. 
 
-	´´´java
-	public No<T> buscarPorValor(T valor) {
+```java
+public No<T> buscarPorValor(T valor) {
+	
 		
-			
-		if(no_atual== null)
-			no_atual = primeiro;
-		
-		while((no_atual != null) && (no_atual.obterValor().compareTo( valor )) != 0  )
-		{
-			if (no_atual.obterValor().compareTo(valor)==-1)
-                no_atual = no_atual.obterProximo();
-            else 
-                no_atual=no_atual.obterAnterior();	
-		}
-		
-		return no_atual;
+	if(no_atual== null)
+		no_atual = primeiro;
+	
+	while((no_atual != null) && (no_atual.obterValor().compareTo( valor )) != 0  )
+	{
+		if (no_atual.obterValor().compareTo(valor)==-1)
+            no_atual = no_atual.obterProximo();
+        else 
+            no_atual=no_atual.obterAnterior();	
 	}
-	´´´
+	
+	return no_atual;
+}	
+```
 
 Que bacana, não é? Teste a quantidade de comparações necessárias para se buscar um valor, em uma sequência aleatória e logo verá que esse método é muito melhor que o da lista simples que inicia no inicio e varria toda a lista. Você pode usar o método *buscarCount* na Lista Duplamente. O pior caso dessa busca é igual à busca simples percorreremos n nós. Mas, na média, vamos percorrer apenas n/2. 
 
@@ -1546,49 +1546,50 @@ Que bacana, não é? Teste a quantidade de comparações necessárias para se bu
 A busca pelo índice é similar. Mudamos apenas o valor pelo índice. 
 
 
-	```java
-	public class Lista<T> {
-		private No<T> primeiro;
-		private No<T> noatual;
-		private Int index;
-	}
-	```
+```java
+public class Lista<T> {
+	private No<T> primeiro;
+	private No<T> noatual;
+	private Int index;
+}
+```
 
 
 Agora estamos comparando um valor inteiro. Caso o índice seja menor fazemos um loop com incremento, caso contrário como decremento. 
 
-	´´´java
-	public No<T> buscarPorIndice(int indexbusca) {
-		int i;
-		
-		if(no_atual == null){
-			no_atual = primeiro;
-			index = 0;
-		}
-		
-		if (no_atual.obterValor().compareTo(valor)==-1){
-                
-				for(i = index; i < indexbusca; i++){
-					if(no_atual == null)
-						return null;
-
-					no_atual = no_atual.obterProximo();
-				}	
-				
-
-        } else {
-                for(i = index; i > indexbusca; i--){
-					if(no_atual == null)
-						return null;
-
-					no_atual = no_atual.obterProximo();
-				}		
-		}
-
-		index = i;
-		return no_atual;
+```java
+public No<T> buscarPorIndice(int indexbusca) {
+	int i;
+	
+	if(no_atual == null){
+		no_atual = primeiro;
+		index = 0;
 	}
-	´´´
+	
+	if (no_atual.obterValor().compareTo(valor)==-1){
+            
+			for(i = index; i < indexbusca; i++){
+				if(no_atual == null)
+					return null;
+
+				no_atual = no_atual.obterProximo();
+			}	
+			
+
+    } else {
+            for(i = index; i > indexbusca; i--){
+				if(no_atual == null)
+					return null;
+
+				no_atual = no_atual.obterProximo();
+			}		
+	}
+
+	index = i;
+	return no_atual;
+}
+```
+
 É importante ainda sempre verificar se o nó é nulo, pois o índice pode ser maior que o tamanho da lista ou em caso do índice ser negativo.
 
 #### 5.3 - Removendo na Lista Duplamente
@@ -1599,97 +1600,97 @@ A remoção na lista duplamente é como a lista simples, no entanto temos que te
 
 Nós já conhecemos esse método, precisamos apenas adicionar o primeiro.anterior = null, por dois motivos: o primeiro nó não possui anterior a ele e eliminar a referência do nó removido da nossa lista;
 
-	´´´java
-	public No<T> removerInicio() {
-		 
-		No<T> auxiliar = primeiro;
-		primeiro = primeiro.próximo;
-		primeiro.anterior = null;
-		auxiliar.proximo = null;
-		return auxiliar;
-	}
-	´´´
+```java
+public No<T> removerInicio() {
+	 
+	No<T> auxiliar = primeiro;
+	primeiro = primeiro.próximo;
+	primeiro.anterior = null;
+	auxiliar.proximo = null;
+	return auxiliar;
+}
+```
 
 #### 5.3.2 - Removendo no final
 
 O mesmo vale para esse novo código.
 	
-	´´´java
-	public No<T> removerFinal() {
-		 
-		No<T> auxiliar = primeiro;
-		No<T> auxiliar2 = null;
-	
-		while((auxiliar.proximo != null))
-		{
-			auxiliar2 = auxiliar;
-			auxiliar = auxiliar.proximo;
-		}
-	
-		auxiliar.anterior = null;
-		auxiliar2.proximo = null;
-	
-		return auxiliar;
+```java
+public No<T> removerFinal() {
+	 
+	No<T> auxiliar = primeiro;
+	No<T> auxiliar2 = null;
+
+	while((auxiliar.proximo != null))
+	{
+		auxiliar2 = auxiliar;
+		auxiliar = auxiliar.proximo;
 	}
-	´´´
+
+	auxiliar.anterior = null;
+	auxiliar2.proximo = null;
+
+	return auxiliar;
+}
+```
 
 Uma observação é importante aqui, podemos reduzir esse código utilizado o métodos de busca no final. 
 
-	´´´java
-	public No<T> removerFinal() {
-		 
-		No<T> auxiliar = buscarNoFinal();
-		
-		if(auxiliar != null){
-			auxiliar.anterior = null;
-			auxiliar.anterior.proximo = null;
-		}
+```java
+public No<T> removerFinal() {
+	 
+	No<T> auxiliar = buscarNoFinal();
 	
-		return auxiliar;
+	if(auxiliar != null){
+		auxiliar.anterior = null;
+		auxiliar.anterior.proximo = null;
 	}
-	´´´
+
+	return auxiliar;
+}
+```
 
 #### 5.3.3 - Removendo por valor
 
 Vamos usar a mesma abordagem do código anterior e utilizar o método de busca por valor.
 
-	´´´java
-	public No<T> removerPorValor() {
-		 
-		No<T> auxiliar = buscarPorValor();
-		
-		if(auxiliar != null){
-			if(auxiliar.proximo != null)
-				auxiliar.proximo.anterior = auxiliar.anterior;
-				
-			if(auxiliar.anterior != null)
-				auxiliar.anterior.proximo = auxiliar.próximo;
-		}
+```java
+public No<T> removerPorValor() {
+	 
+	No<T> auxiliar = buscarPorValor();
 	
-		return auxiliar;
+	if(auxiliar != null){
+		if(auxiliar.proximo != null)
+			auxiliar.proximo.anterior = auxiliar.anterior;
+			
+		if(auxiliar.anterior != null)
+			auxiliar.anterior.proximo = auxiliar.próximo;
 	}
-	´´´
+
+	return auxiliar;
+}
+```
 
 #### 5.3.4 - Removendo por índice
 
 Mas usam vez vamos reutilizar código, afinal para que serve utilizar Orientação a Objeto, se não fazemos uso das suas potencialidades?
 
-	´´´java
-	public No<T> removerPorValor() {
-		 
-		No<T> auxiliar = buscarPorÍndice();
-		
-		if(auxiliar != null){
-			if(auxiliar.proximo != null)
-				auxiliar.proximo.anterior = auxiliar.anterior;
-				
-			if(auxiliar.anterior != null)
-				auxiliar.anterior.proximo = auxiliar.próximo;
-		}
+```java
+public No<T> removerPorValor() {
+	 
+	No<T> auxiliar = buscarPorÍndice();
 	
-		return auxiliar;
+	if(auxiliar != null){
+		if(auxiliar.proximo != null)
+			auxiliar.proximo.anterior = auxiliar.anterior;
+			
+		if(auxiliar.anterior != null)
+			auxiliar.anterior.proximo = auxiliar.próximo;
 	}
-	´´´
+
+	return auxiliar;
+}
+```
 
 
 ## 6 - Lista Circular
@@ -1714,50 +1715,53 @@ A lista circular não possui início ou fim, nenhum nó tem links com valor nulo
 
 veja o trecho do código a seguir, isso gera um nó com link para ele mesmo. Que louco em?
 
-		´´´java
-			this.primeiro =novo_no;
-			noAtual = this.primeiro;
-			this.primeiro.inserirProximo(novo_no);
-			this.primeiro.inserirAnterior(novo_no);
-		´´´
-
+```java
+this.primeiro =novo_no;
+noAtual = this.primeiro;
+this.primeiro.inserirProximo(novo_no);
+this.primeiro.inserirAnterior(novo_no);
+```
 
 #### 6.1.3 - Inserindo em uma lista com apenas um nó
-	´´´java
-			No<T> temp = this.primeiro;
-		    if(temp.obterProximo() == temp) {
-	    		temp.inserirProximo(novo_no);
-	    		temp.inserirAnterior(novo_no);
-	    		novo_no.inserirAnterior(temp);
-	    		novo_no.inserirProximo(temp);
-	´´´
+```java
+No<T> temp = this.primeiro;
+if(temp.obterProximo() == temp) {
+	temp.inserirProximo(novo_no);
+	temp.inserirAnterior(novo_no);
+	novo_no.inserirAnterior(temp);
+	novo_no.inserirProximo(temp);
+```
+
 #### 6.1.4 - Inserindo de, forma ordenada, um nó menor que o nó inicial
-	´´´java
-		novo_no.inserirProximo(this.primeiro);
-		novo_no.inserirAnterior(this.primeiro.obterAnterior());
-		this.primeiro.obterAnterior().inserirProximo(novo_no);
-		this.primeiro.inserirAnterior(novo_no);
-		
-		this.primeiro = novo_no;
-		noAtual = this.primeiro.obterAnterior();
-	´´´
+
+```java
+novo_no.inserirProximo(this.primeiro);
+novo_no.inserirAnterior(this.primeiro.obterAnterior());
+this.primeiro.obterAnterior().inserirProximo(novo_no);
+this.primeiro.inserirAnterior(novo_no);
+
+this.primeiro = novo_no;
+noAtual = this.primeiro.obterAnterior();
+```
+
 #### 6.1.5 - Todas os outros casos
 
-	´´´java
-		while( (novo_no.obterValor().compareTo(temp.obterValor() ) == 1)) { 
-		 	temp = temp.obterProximo();
-		
-			//fechou um ciclo
-			if(temp == this.primeiro)
-				break;
-		}
-		
-		
-		novo_no.inserirProximo(temp);
-		temp.obterAnterior().inserirProximo(novo_no);
-		novo_no.inserirAnterior(temp.obterAnterior());
-		temp.inserirAnterior(novo_no);
-	´´´
+```java
+while( (novo_no.obterValor().compareTo(temp.obterValor() ) == 1)) { 
+ 	temp = temp.obterProximo();
+
+	//fechou um ciclo
+	if(temp == this.primeiro)
+		break;
+}
+
+
+novo_no.inserirProximo(temp);
+temp.obterAnterior().inserirProximo(novo_no);
+novo_no.inserirAnterior(temp.obterAnterior());
+temp.inserirAnterior(novo_no);
+```
+
 #### 6.2 - Buscando na Lista Circular
 
 Como os métodos de buscar são similares, vamos fazer outra abordagem aqui que serve para a circular. Vamos criar um atributo chamado último nó que guardará não o último nó da lista, mas o último nó buscado e vamos fazer a busca a partir dele. Similar como fizemos na busca duplamente. Mas aqui, temos a vantagem do portal que nos permitirá sair de uma extremidade até outra.
@@ -1772,42 +1776,42 @@ Caso não tenha entendido, pense um pouco olhando essa imagem com a comparação
 
 Inicialmente vamos criar flags para saber se devemos andar para frente ou para trás:
 
-	´´´java
+```java
 
-		if( (prior) || (!next))
-			this.obterNoAnterior();
-		else if( (next) || (!prior)) 
-			this.obterNoProximo();
+if( (prior) || (!next))
+	this.obterNoAnterior();
+else if( (next) || (!prior)) 
+	this.obterNoProximo();
 
-	´´´
+```
 
 Quem decidirá a direção são dois fatores: o valor que eu busco em comparação com o nó atual e a posição que estamos na lista, nessa abordagem temos mais um atributo chamado *qtdNo* que guarda a quantidade de nós que teremos na lista. Logicamente que os métodos de inserção e remoção precisam ser atualizados para esse controle. 
 
 
-	´´´java
-		boolean prior = true;
-		boolean next = true;
-		
-		//valor buscado é menor que o currenteNode?
-		if(valor.compareTo(noAtual.obterValor())  == -1 )  {
-						
-			//estou em 90% do final da lista
-			if(indiceNoAtual < qtdNo*0.9) {
-				prior = false;
-			}
+```java
+boolean prior = true;
+boolean next = true;
+
+//valor buscado é menor que o currenteNode?
+if(valor.compareTo(noAtual.obterValor())  == -1 )  {
 			
-		}else if(valor.compareTo( noAtual.obterValor())  == 1 )  {
-			
-			//estou em 10% do final da lista
-			if(indiceNoAtual < qtdNo*0.1) {
-				next = false;
-			}
-			
-		}else {
-			return noAtual;
-		}
-			
-	´´´
+//estou em 90% do final da lista
+if(indiceNoAtual < qtdNo*0.9) {
+	prior = false;
+}
+
+}else if(valor.compareTo( noAtual.obterValor())  == 1 )  {
+
+//estou em 10% do final da lista
+if(indiceNoAtual < qtdNo*0.1) {
+	next = false;
+}
+
+}else {
+return noAtual;
+}
+
+```
 
 O código completo é a junção dos dois trechos apresentados, com a adição de alguns elementos que visam verificar a parada *stop* e caminhar na lista. 
 
@@ -1821,60 +1825,62 @@ Para remover, precisamos considerar o novo link entre o primeiro e o último nó
 
 Observe que estamos utilizando a versão como o contador do qtdNo, você pode fazer isso em outros métodos. 
 
-	´´´java
+```java
 
-	public void remover(T valor) {
-		
-		No n= buscarOtim(valor);
-		
-		if(n != null) {
-			qtdNo--;
-			if(n == this.primeiro) {
-				
-				this.primeiro.obterAnterior().inserirProximo(this.primeiro.obterProximo());
-				this.primeiro.obterProximo().inserirAnterior(this.primeiro.obterAnterior());
-				this.primeiro = this.primeiro.obterProximo();
-				
-			}else {
-				
-				n.obterAnterior().inserirProximo(n.obterProximo());
-				n.obterProximo().inserirAnterior(n.obterAnterior());
-				
-			}
+public void remover(T valor) {
+	
+	No n= buscarOtim(valor);
+	
+	if(n != null) {
+		qtdNo--;
+		if(n == this.primeiro) {
+			
+			this.primeiro.obterAnterior().inserirProximo(this.primeiro.obterProximo());
+			this.primeiro.obterProximo().inserirAnterior(this.primeiro.obterAnterior());
+			this.primeiro = this.primeiro.obterProximo();
+			
+		}else {
+			
+			n.obterAnterior().inserirProximo(n.obterProximo());
+			n.obterProximo().inserirAnterior(n.obterAnterior());
 			
 		}
 		
 	}
+	
+}
 
-	´´´
+```
+
+
 #### 6.3.4 - Removendo por índice
 
 Aqui podemos utilizar a mesma busca por índice que a lista duplamente.
 
-	´´´java
+```java
 
-	public void remover(T valor) {
-		
-		No n= buscarPorIndice(valor);
-		
-		if(n != null) {
-			qtdNo--;
-			if(n == this.primeiro) {
-				
-				this.primeiro.obterAnterior().inserirProximo(this.primeiro.obterProximo());
-				this.primeiro.obterProximo().inserirAnterior(this.primeiro.obterAnterior());
-				this.primeiro = this.primeiro.obterProximo();
-				
-			}else {
-				
-				n.obterAnterior().inserirProximo(n.obterProximo());
-				n.obterProximo().inserirAnterior(n.obterAnterior());
-				
-			}	
-		}	
-	}
+public void remover(T valor) {
 
-	´´´
+No n= buscarPorIndice(valor);
+
+if(n != null) {
+	qtdNo--;
+	if(n == this.primeiro) {
+		
+		this.primeiro.obterAnterior().inserirProximo(this.primeiro.obterProximo());
+		this.primeiro.obterProximo().inserirAnterior(this.primeiro.obterAnterior());
+		this.primeiro = this.primeiro.obterProximo();
+		
+	}else {
+		
+		n.obterAnterior().inserirProximo(n.obterProximo());
+		n.obterProximo().inserirAnterior(n.obterAnterior());
+		
+	}	
+}	
+}
+
+```
 
 ### 7 - Árvores
 
