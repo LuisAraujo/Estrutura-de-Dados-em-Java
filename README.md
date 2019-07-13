@@ -1490,30 +1490,33 @@ A busca por valor não tem nada de diferente da busca por valor na lista simples
 Com base nisso, podemos abordar o problema de uma outra forma: imagine que você tenha criado um novo atributo que fica na posição da último nó buscado e com base nele você irá fazer as operações.
 
 ```java
+
 	public class Lista<T> {
 		private No<T> primeiro;
 		private No<T> noatual;
 	}
-	```
+
+```
  
 A cada busca, nós atualizamos esse ultimobuscado. 
 
 
-	´´´java
-	public No<T> buscar(T valor) {
-		 
-		No<T> auxiliar = primeiro;
-		 
-		while( auxiliar.proximo != null )
-		{
-			auxiliar = auxiliar.proximo;
-		}
-		if(auxiliar != null)
-			ultimobuscado = auxiliar;
+```java
 
-		return auxiliar;
+	public No<T> buscar(T valor) {
+	 
+	No<T> auxiliar = primeiro;
+	 
+	while( auxiliar.proximo != null )
+	{
+		auxiliar = auxiliar.proximo;
 	}
-	´´´
+	if(auxiliar != null)
+		ultimobuscado = auxiliar;
+
+	return auxiliar;
+}
+```
 
 Ok, mas isso não melhorou em nada a nossa busca, pelo contrário, eu tenho agora uma operação de comparação e outra de atribuição. Bem, para isso precisamos fazer a seguinte abordagem: dado o último nó buscado, verificamos se o valor é maior ou menor que ele, se for maior, vamos para o próximo, se for menor vamos para o anterior. 
 
