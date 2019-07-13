@@ -1404,7 +1404,132 @@ Formalizando:
 
 **Overview**
 
-[código completo aqui]
+```java
+public class No<T extends Comparable<T>> {
+	
+	private T valor;
+	private No proximo;
+	
+	public No(T valor) {
+		this.valor = valor;
+		proximo = null;
+	}
+	
+	/**obtém o próximo nó */
+	public No<T> obterProximo() {
+		return this.proximo;
+	}
+	/**inserir o próximo nó */
+	public void inserirProximo(No proximo) {
+		this.proximo = proximo;
+	}
+	/**inserir o valor no nó */
+	public void inserirValor(T valor) {
+		this.valor= valor;
+	}
+	/**obter o valor do nó */
+	public T obterValor() {
+		return this.valor;
+	}
+	
+	//métod toString para exibir o nó
+	public String toString() {
+		return this.valor.toString();
+	}
+	
+}
+
+
+
+public class Lista<T extends Comparable<T>> {
+	
+	public void inserir(T  valor) {
+		No<T> novo_no = new No<T>(valor);
+		
+		No<T> auxiliar = primeiro;
+		No<T> auxiliar2 = null;
+		
+		while((auxiliar != null) && ( auxiliar.obterValor().compareTo( novo_no.obterValor() )) == -1  )
+		{
+			auxiliar2 = auxiliar;
+			auxiliar = auxiliar.obterProximo();
+		}
+		
+		if(this.primeiro == null) { 
+			this.primeiro = novo_no;
+		
+		}else if(auxiliar == this.primeiro) {
+			
+			novo_no.inserirProximo(this.primeiro);
+			this.primeiro = novo_no;
+			
+		}else {
+			novo_no.inserirProximo(auxiliar);
+			auxiliar2.inserirProximo(novo_no);	
+		}
+	
+	}
+
+	public No<T> remover(T valor) {
+		
+		No<T> auxiliar = primeiro;
+		No<T> auxiliar2 = null;
+
+		while((auxiliar != null) && (auxiliar.obterValor().compareTo( valor )) != 0  )
+		{
+		
+			auxiliar2 = auxiliar;
+			auxiliar = auxiliar.obterProximo();
+		}
+		
+		
+		if(auxiliar == this.primeiro) {
+			
+			No retorno = this.primeiro;
+			this.primeiro = this.primeiro.obterProximo();
+			return retorno;
+		
+		}else if(auxiliar != null)
+			auxiliar2.inserirProximo(auxiliar.obterProximo());
+		
+		return auxiliar;
+		
+	}
+
+	public No<T> buscar(T valor) {
+		 
+		No<T> auxiliar = primeiro;
+		 
+		while((auxiliar != null) && (auxiliar.obterValor().compareTo( valor )) != 0  )
+		{
+			 
+			auxiliar = auxiliar.obterProximo();
+		}
+		
+	
+		 
+		return auxiliar;
+	}
+	 
+	public String toString() {
+		String s = "";
+		No<T> auxiliar = primeiro;
+		
+		while(auxiliar != null)
+		{
+			//incrementa o valor
+			s+= auxiliar.obterValor().toString() + " - ";
+			//pula para o próximo
+			auxiliar = auxiliar.obterProximo();
+		}
+		
+		return s;
+	} 
+	
+}
+
+
+```
 
 
 
@@ -1766,7 +1891,200 @@ public No<T> removerPorValor() {
 ```
 **Overview**
 
-[código completo aqui]
+```java
+public class No<T extends Comparable<T>> {
+	
+	private T valor;
+	private No proximo;
+        private No anterior;
+	
+	public No(T valor) {
+		this.valor = valor;
+		proximo = null;
+                
+	}
+	
+	/**obtém o próximo nó */
+	public No<T> obterProximo() {
+		return this.proximo;
+	}
+        
+        public No<T> obterAnterior() {
+		return this.anterior;
+	}
+	/**inserir o próximo nó */
+	public void inserirProximo(No proximo) {
+		this.proximo = proximo;
+	}
+        
+        public void inserirAnterior(No anterior) {
+		this.anterior = anterior;
+	}
+	/**inserir o valor no nó */
+	public void inserirValor(T valor) {
+		this.valor= valor;
+	}
+	/**obter o valor do nó */
+	public T obterValor() {
+		return this.valor;
+	}
+	
+	//métod toString para exibir o nó
+	public String toString() {
+		return this.valor.toString();
+	}
+	
+}
+
+public class ListaDuplamente< T extends Comparable<T>> {
+    
+    
+	No<T> primeiro;
+    No<T> no_atual = primeiro;
+	
+	
+	public void inserir(T  valor) {
+		No<T> novo_no = new No<T>(valor);
+		No<T> auxiliar = primeiro;
+		
+		if(this.primeiro == null) { 
+			this.primeiro = novo_no;
+		
+		}else{
+		
+			while((auxiliar.obterProximo() != null) && 
+			( auxiliar.obterValor().compareTo( novo_no.obterValor() ) == -1 ) )
+			{
+				auxiliar = auxiliar.obterProximo();
+			}
+			
+			if(auxiliar == this.primeiro) {
+				
+				if(this.primeiro.obterValor().compareTo( novo_no.obterValor() ) == -1 ) {
+					
+					this.primeiro.inserirProximo(novo_no);
+					novo_no.inserirAnterior(this.primeiro);
+
+				}else {
+					
+					novo_no.inserirProximo(this.primeiro);
+					this.primeiro.inserirAnterior(novo_no);
+					this.primeiro = novo_no;
+				}
+				
+			}else {
+				
+				if(auxiliar.obterProximo() == null) {
+					novo_no.inserirAnterior(auxiliar);
+					auxiliar.inserirProximo(novo_no);
+				}else {
+				novo_no.inserirProximo(auxiliar);
+				novo_no.inserirAnterior(auxiliar.obterAnterior());
+	            auxiliar.obterAnterior().inserirProximo(novo_no);
+	            auxiliar.inserirAnterior(novo_no);
+				}
+			}
+			
+		}
+	
+	}
+        
+       
+	public No<T> remover(T valor) {//arrumada 
+		
+		No<T> auxiliar = primeiro;
+		
+                No<T> retorno =null;
+
+		while((auxiliar != null) && (auxiliar.obterValor().compareTo( valor ) != 0)  )
+		{
+			auxiliar = auxiliar.obterProximo();
+		}
+		
+		
+		if(auxiliar == this.primeiro) {
+			
+			retorno = this.primeiro;
+                        retorno.inserirProximo(null);
+			this.primeiro = this.primeiro.obterProximo();
+                        this.primeiro.inserirAnterior(null);
+			
+		
+		}else if(auxiliar != null)
+			auxiliar.obterAnterior().inserirProximo(auxiliar.obterProximo());
+                auxiliar.obterProximo().inserirAnterior(auxiliar.obterAnterior());
+                auxiliar.inserirProximo(null);
+                auxiliar.inserirAnterior(null);
+	
+		
+		return retorno;
+		
+	}
+	
+	
+	public No<T> buscar(T valor) {
+		
+			
+		if(no_atual== null)
+			no_atual = primeiro;
+		
+		while((no_atual != null) && (no_atual.obterValor().compareTo( valor )) != 0  )
+		{
+			if (no_atual.obterValor().compareTo(valor)==-1){
+                no_atual = no_atual.obterProximo();
+            }
+            else 
+                no_atual=no_atual.obterAnterior();
+	
+			
+		}
+		
+	
+		
+		return no_atual;
+	}
+	
+	
+	public String buscarCount(T valor) {
+		
+		int count = 0;
+		
+		if(no_atual== null)
+			no_atual = primeiro;
+		
+		while((no_atual != null) && (no_atual.obterValor().compareTo( valor )) != 0  )
+		{
+			count++;
+            if (no_atual.obterValor().compareTo(valor)==-1){
+                no_atual = no_atual.obterProximo();
+            }
+            else 
+                no_atual=no_atual.obterAnterior();
+		}
+		
+		
+		return "Achou "+no_atual.obterValor()+" com "+count + " passos";
+	}
+	
+
+	public String toString() {
+		String s = "";
+		No<T> auxiliar = primeiro;
+		
+		while(auxiliar != null)
+		{
+			
+			s+= auxiliar.obterValor().toString() + " - ";
+
+			auxiliar = auxiliar.obterProximo();
+		}
+		
+		return s;
+	} 
+	
+}
+
+```
 
 
 ## 6 - Lista Circular
@@ -1957,7 +2275,238 @@ if(n != null) {
 ```
 **Overview**
 
-[código completo aqui]
+
+```java
+
+public class No <T extends Comparable<T>>{
+
+	No prior;
+	No next;
+	T data;	
+	
+	public No(T data) {
+		this.data = data;
+	}
+	public No(T data, No prior, No next) {
+		this.data = data;
+		this.prior = prior;
+		this.next = next;
+	}
+	
+	public No<T> obterAnterior() {
+		return prior;
+	}
+	public void inserirAnterior(No prior) {
+		this.prior = prior;
+	}
+	public No<T> obterProximo() {
+		return next;
+	}
+	public void inserirProximo(No next) {
+		this.next = next;
+	}
+	public T obterValor() {
+		return data;
+	}
+	public void inseriValor(T data) {
+		this.data = data;
+	}
+	public String toString() {
+		return this.data.toString();
+	}
+}
+
+
+public class ListaCircular<T extends Comparable<T>> {
+
+	public No<T> primeiro;
+	public No<T> noAtual;
+	public int qtdNo = 0;
+	public int indiceNoAtual = 0;
+	
+	public ListaCircular() {
+		this.primeiro = null;
+	}
+  	
+	public void inserir(T valor) {
+		qtdNo++;
+		No<T> novo_no = new No<T>(  valor);
+		
+		if(this.primeiro== null) {
+			this.primeiro =novo_no;
+			noAtual = this.primeiro;
+			this.primeiro.inserirProximo(novo_no);
+			this.primeiro.inserirAnterior(novo_no);
+		}else {
+		    No<T> temp = this.primeiro;
+		    //apenas 1 nó
+		    if(temp.obterProximo() == temp) {
+	    		temp.inserirProximo(novo_no);
+	    		temp.inserirAnterior(novo_no);
+	    		novo_no.inserirAnterior(temp);
+	    		novo_no.inserirProximo(temp);
+	    		 
+	    	//o nó inserido é menor que o primeiro nó
+		    }else if(novo_no.obterValor().compareTo(this.primeiro.obterValor() ) == -1) {
+	    	        	
+		    	novo_no.inserirProximo(this.primeiro);
+		    	novo_no.inserirAnterior(this.primeiro.obterAnterior());
+		    	this.primeiro.obterAnterior().inserirProximo(novo_no);
+		    	this.primeiro.inserirAnterior(novo_no);
+		    	
+		    	this.primeiro = novo_no;
+		    	noAtual = this.primeiro.obterAnterior();
+		    	
+		    	    	
+		    }else{
+		    	
+	    		//enquanto o novo nó for maior que o temp (até encontrar alguém maior
+		    	//que ele
+			    while( (novo_no.obterValor().compareTo(temp.obterValor() ) == 1)) { 
+			     	temp = temp.obterProximo();
+			
+			    	//fechou um ciclo
+			    	if(temp == this.primeiro)
+			    		break;
+			    }
+			
+			  
+	    		novo_no.inserirProximo(temp);
+	    		temp.obterAnterior().inserirProximo(novo_no);
+				novo_no.inserirAnterior(temp.obterAnterior());
+				temp.inserirAnterior(novo_no);
+				
+	    	}			
+		}
+	}
+
+	public void remover(T valor) {
+		
+		No n= buscarOtim(valor);
+		
+		if(n != null) {
+			qtdNo--;
+			if(n == this.primeiro) {
+				
+				this.primeiro.obterAnterior().inserirProximo(this.primeiro.obterProximo());
+				this.primeiro.obterProximo().inserirAnterior(this.primeiro.obterAnterior());
+				this.primeiro = this.primeiro.obterProximo();
+				
+			}else {
+				
+				n.obterAnterior().inserirProximo(n.obterProximo());
+				n.obterProximo().inserirAnterior(n.obterAnterior());
+				
+			}
+			
+		}
+		
+		
+	}
+	
+	
+	public No<T> buscar(Comparable valor) {
+		No temp = this.primeiro;
+		
+		while(valor.compareTo( temp.obterValor() ) == 1) { 
+			temp = temp.obterProximo();
+	
+	    	//fechou um ciclo ou passou do valor
+	    	if((temp == this.primeiro) || (valor.compareTo( temp.obterValor() ) == -1))
+	    		return null;
+	    }
+		
+		return temp;
+		 
+		
+	}
+	
+	
+	public No<T> buscarOtim(Comparable valor) {
+		
+		boolean prior = true;
+		boolean next = true;
+		
+		//valor buscado é menor que o currenteNode?
+		if(valor.compareTo(noAtual.obterValor())  == -1 )  {
+						
+			//estou em 90% do final da lista
+			if(indiceNoAtual < qtdNo*0.9) {
+				prior = false;
+			}
+			
+		}else if(valor.compareTo( noAtual.obterValor())  == 1 )  {
+			
+			//estou em 10% do final da lista
+			if(indiceNoAtual < qtdNo*0.1) {
+				next = false;
+			}
+			
+		}else {
+			return noAtual;
+		}
+			
+		No stop = noAtual;
+		
+		if( (prior) || (!next))
+			this.obterNoAnterior();
+		else if( (next) || (!prior)) 
+			this.obterNoProximo();
+		
+		
+		while(valor.compareTo(noAtual.obterValor() ) != 0) { 
+			if( (prior) || (!next))
+				this.obterNoAnterior();
+			else if( (next) || (!prior)) 
+				this.obterNoProximo();
+		
+			//fechou um ciclo
+			if(noAtual == stop)
+				return null;
+		}
+
+		
+		return noAtual;
+		 
+		
+	}
+	
+	
+	public No<T> obterNoProximo() {
+		indiceNoAtual++;
+		noAtual = noAtual.obterProximo();
+		return noAtual;
+	}
+	
+	public No<T>  obterNoAnterior() {
+		indiceNoAtual--;
+		noAtual = noAtual.obterAnterior();
+		return noAtual;
+	}
+
+	public void resetCurrentNode() {
+		this.noAtual = this.primeiro.obterAnterior();
+	}
+	
+	public String toString() {
+		String s = "";
+		resetCurrentNode();
+		No stop = noAtual;
+		
+		do {
+			obterNoProximo();
+			s+= noAtual .obterValor().toString() + " - ";
+		}while(noAtual !=  stop);
+		
+		return s;
+	} 
+	
+	
+	
+}
+```
+
+
 
 ### 7 - Árvores
 
@@ -2126,12 +2675,12 @@ Será no primeiro if que implementaremos os casos. O nó a ser removido é:
 4. tem dois filhos	(direita e esquerda) ?
 
 Dentro do caso 4 precisamos verificar ainda:
-1. não é o nó à direita do nó a ser excluído
-2. é um nó raiz
-3. é um nó à esquerda do seu pai?
-4. é um nó à direita do seu pai?
+1. não é o nó à direita do nó a ser excluído?
+2. é o nó à direita do nó a ser excluído?
 
 **Caso 1: é um nó folha?** 
+
+Em caso dele ser um nó folha e for o nó raiz, ou seja, a árvore só possui esse elemento, podemo apenas dizer que o nó raiz é nulo, esvaziando por completo a árvore. Caso o nó folha seja um filho à direita do seu pai, limpamos a referência do filho à direita do pai. O mesmo ocorre para caso ele seja um filho à esquerda.
 
 ```java
 if((currentno.obterNoDireito()== null) && (currentno.obterNoEsquerdo() == null)) {
@@ -2150,23 +2699,9 @@ if((currentno.obterNoDireito()== null) && (currentno.obterNoEsquerdo() == null))
 
 **Caso 2: tem apenas um filho à direita?** 
 
-```java
-else if (currentno.obterNoDireito() == null){
-	
-	if(currentno == this.raiz)
-		this.raiz = this.raiz.obterNoEsquerdo();
-	
-	else if(currentno == currentno.pai.obterNoDireito() )
-		currentno.pai.inserirDireito( currentno.obterNoEsquerdo() );
-	
-	else 
-		currentno.pai.inserirEsquerdo( currentno.obterNoEsquerdo() );
 
-//tem apena sum filho à esquerda?
-}
-```
+O segundo caso verifica se ele tem apenas um filho à direita, ou seja, o o filho à esquerda é nulo. Caso o nó seja o raiz, dizemos que a nova raiz será o único filho existente (é como se ele herdasse tudo!). Caso ele seja um filho á direita do pai dele, nós passamos o filho dele para o pai (como se o pai assumisse a guarda do neto). No caso dele ser um filho à esquerda, fazemos o mesmo. 
 
-**Caso 3: tem apena um filho à esquerda?** 
 
 ```java
 else if (currentno.obterNoEsquerdo()== null){
@@ -2182,14 +2717,33 @@ else if (currentno.obterNoEsquerdo()== null){
 }
 ```
 
+**Caso 3: tem apena um filho à esquerda?** 
+
+O terceiro caso verifica se ele tem apenas um filho à esquerda, ou seja, o filho à direita é nulo. Caso o nó seja o raiz, dizemos que a nova raiz será o único filho existente. Caso ele seja um filho á direita do pai dele, nós passamos o filho esquerdo dele para o pai, assumindo o seu lugar de filho direito. Caso ele seja um filho à esquerda, o seu filho assume o seu lugar de filho esquerdo. 
+
+```java
+else if (currentno.obterNoDireito() == null){
+	
+	if(currentno == this.raiz)
+		this.raiz = this.raiz.obterNoEsquerdo();
+	
+	else if(currentno == currentno.pai.obterNoDireito() )
+		currentno.pai.inserirDireito( currentno.obterNoEsquerdo() );
+	
+	else 
+		currentno.pai.inserirEsquerdo( currentno.obterNoEsquerdo() );
+}
+```
+
 **Caso 4: tem dois filhos** 
 
-Vamos aos subcasos:
+O caso quatro é mais complexo, pois precisamos analisar os subcasos. Vamos lá:
 
 **Caso 4.1: não é o nó à direita do nó a ser excluído**
-```java
-No sucessor = this.getSucessor(currentno, true);
 
+Caso o sucessor não seja o filho direito do nó que queremos excluir, podemos apneas fazer uma truca. Inserimos o filho direito do sucessor no lugar do filho esquerdo do pai e inseridos o filho direito do nó a ser excluido como filho direito do sucessor. Ou seja, o sucessor assume a guarda do filho que ficará sem pai, pois antes passou o seu filho direito para o pai dele. Sabemos que o pai tem essa disponibilidade pelo próprio algoritmo de obter o sucessor. 
+
+```java
 if(sucessor != currentno.obterNoDireito()) {
 	
 	sucessor.pai.inserirEsquerdo( sucessor.obterNoDireito() );
@@ -2198,18 +2752,14 @@ if(sucessor != currentno.obterNoDireito()) {
 ```
 
 **Caso 4.2:  é um nó raiz?**
+
+Bem, feito isso vamos fazer o que já fizemos antes, mas agora passando o próprio sucesso como filho à esquerda ou direita, se for o caso:
+
 ```java
 if(currentno == this.raiz )
    raiz = sucessor;
-```				
-**Caso 4.3:  é um nó à esquerda do seu pai?**
-```java
 else if(currentno == currentno.pai.obterNoDireito()) 
 	currentno.pai.inserirDireito(sucessor);
-```	
-
-**Caso 4.4:  é um nó à direita do seu pai?**
-```java
 else 
     currentno.pai.inserirEsquerdo(sucessor);
 			
@@ -2217,14 +2767,258 @@ else
 
 #### 7.1.5 - Percurso
 
+Percurso em Árvores é uma forma de percorrer todos os nós em uma determinada ordem. Temos alguns percurso padrões que são: Em Ordem, Pré-Ordem e Pós-Ordem. Para todas as abordagens, podemos utilizar algoritmos recursivos.
 
+**Pré-Ordem**
+Os passo para esse percurso é: 1. Vistar a raiz. 2. Percorrer a sua subárvore esquerda em pré-ordem. 3. Percorrer a sua subárvore direita em pré-ordem. 
 
+```java
 
+public void preOrdem(No no) {
+	if (no != null) {
+		System.out.println(no.valor);
+		emOrdem(no.filhoEsquerdo);
+		emOrdem(no.filhoDireito);
+	}
+}
 
+```
+**In-Ordem**
+
+Os passo para esse percurso é: 1. Percorrer a sua subárvore esquerda em in-ordem. 2. Vistar a raiz. 3. Percorrer a sua subárvore direita em in-ordem.
+
+```java
+
+public void emOrdem(No no) {
+	if (no != null) {
+		emOrdem(no.filhoEsquerdo);
+		System.out.println(no.valor);
+		emOrdem(no.filhoDireito);
+	}
+}
+
+```
+**Pós-Ordem**
+
+Os passo para esse percurso é: 1. Percorrer a sua subárvore esquerda em pós-ordem. 2. Percorrer a sua subárvore direita em pós-ordem. 3. Vistar a raiz.
+
+```java
+
+public void posOrdem(No no) {
+	if (no != null) {
+		posOrdem(no.filhoEsquerdo);
+		posOrdem(no.filhoDireito);
+		System.out.println(no.valor);
+	}
+}
+
+```
 
 **Overview**
 
-[código completo aqui]
+```java
+public class Arvore<T extends Comparable<T>> {
+	No raiz;
+	
+	public Arvore() {
+		this.raiz = null;
+	}
+	
+	public No inserirNo(T valor) {
+		No<T> n = new No<T>(valor);
+		return inserirNo(n, null);
+		
+	}
+	public No inserirNo(No novo, No pai) {
+		
+		if(pai == null)
+			pai = raiz;
+		
+		if(raiz == null) {
+			raiz = novo;
+		}else {
+			//menor
+			if( novo.obterValor().compareTo(pai.obterValor()) == -1) {
+				
+				if(pai.obterNoEsquerdo() == null)
+					pai.inserirEsquerdo(novo);
+				else
+					inserirNo(novo, pai.obterNoEsquerdo());
+				
+			}else {
+				
+				if(pai.obterNoDireito() == null)
+					pai.inserirDireito(novo);
+				else
+					inserirNo(novo, pai.obterNoDireito());
+			}
+		}
+		
+		return novo;
+		
+	}
+	
+	
+	public No buscarNo(No novo, No pai) {
+		
+		if(pai == null)
+			pai = raiz;
+		
+		if(novo == null){
+			return null;
+		}else if(novo.obterValor().compareTo(pai.obterValor()) == 0) {
+			return novo;
+		}if( novo.obterValor().compareTo(pai.obterValor()) == -1) {
+			
+			buscarNo(novo, pai.obterNoEsquerdo());
+				
+		}else {
+			
+			buscarNo(novo, pai.obterNoDireito());
+		}
+		
+		return novo;
+		
+	}
+	
+
+	public No removerNo(T valor) {
+		return removerNo(valor, null);
+	}
+	
+	public No removerNo(T valor, No currentno) {
+		
+		No noret = null;
+		
+		if(currentno == null) 
+			currentno = raiz;
+		
+		//igual
+		if(currentno.obterValor().compareTo(valor) == 0) {
+			//System.out.println(currentno.obterValor() + "é igual");
+			//é um nó folha?
+			if((currentno.obterNoDireito()== null) && (currentno.obterNoEsquerdo() == null)) {
+				
+				if(currentno == this.raiz)
+					this.raiz = null;
+				
+				else if(currentno == currentno.pai.obterNoDireito() )
+					currentno.pai.inserirDireito(null);
+				else 
+					currentno.pai.inserirEsquerdo(null);
+			
+			//tem apena sum filho à direita?
+			}else if (currentno.obterNoDireito() == null){
+				
+				if(currentno == this.raiz)
+					this.raiz = this.raiz.obterNoEsquerdo();
+				
+				else if(currentno == currentno.pai.obterNoDireito() )
+					currentno.pai.inserirDireito( currentno.obterNoEsquerdo() );
+				
+				else 
+					currentno.pai.inserirEsquerdo( currentno.obterNoEsquerdo() );
+			
+			//tem apena sum filho à esquerda?
+			}else if (currentno.obterNoEsquerdo()== null){
+				
+				if(currentno == this.raiz)
+					this.raiz = this.raiz.obterNoDireito();
+				
+				else if(currentno == currentno.pai.obterNoDireito() )
+					currentno.pai.inserirDireito( currentno.obterNoDireito() );
+				
+				else 
+					currentno.pai.inserirEsquerdo( currentno.obterNoDireito() );
+			
+			//tem dois filhos	
+			}else {
+				
+				No sucessor = this.getSucessor(currentno, true);
+				System.out.println("O sucessor é:" + sucessor+"\n");
+				
+				if(sucessor != currentno.obterNoDireito()) {
+					
+					sucessor.pai.inserirEsquerdo( sucessor.obterNoDireito() );
+					sucessor.inserirDireito( currentno.obterNoDireito() );
+				}
+				
+				
+				//é a raiz
+				if(currentno == this.raiz )
+				   raiz = sucessor;
+				
+				//é o filho a esquerda
+				else if(currentno == currentno.pai.obterNoDireito()) 
+						currentno.pai.inserirDireito(sucessor);
+				else 
+						currentno.pai.inserirEsquerdo(sucessor);
+			
+				sucessor.inserirEsquerdo( currentno.obterNoEsquerdo() );
+				
+			}
+			
+			
+			
+		}else if( currentno.obterValor().compareTo(valor) == -1) {
+			//System.out.println(currentno.obterValor() + "é menor que "+valor);
+			removerNo(valor, currentno.obterNoDireito());
+		}else {
+			//System.out.println(currentno.obterValor() + "é mairo que "+valor);
+			removerNo(valor, currentno.obterNoEsquerdo());
+			
+		}
+	
+		
+		return null;
+	}
+	
+	
+	public No getSucessor(No atual, Boolean primeiraVez) {
+		
+		No sucessor  = null;
+		
+		if(primeiraVez)
+			sucessor = atual.obterNoDireito();
+		else
+			sucessor = atual;
+		
+		if(sucessor.obterNoEsquerdo()!=null) {
+			return getSucessor(sucessor.obterNoEsquerdo(), false);
+		}
+		    
+		return sucessor; 
+	}
+	
+	
+	public void emOrdem(No no) {
+		if (no != null) {
+			emOrdem(no.filhoEsquerdo);
+			System.out.println(no.valor);
+			emOrdem(no.filhoDireito);
+		}
+	}
+	
+	public void preOrdem(No no) {
+		if (no != null) {
+			System.out.println(no.valor);
+			emOrdem(no.filhoEsquerdo);
+			emOrdem(no.filhoDireito);
+		}
+	}
+	
+	
+	public void posOrdem(No no) {
+		if (no != null) {
+			posOrdem(no.filhoEsquerdo);
+			posOrdem(no.filhoDireito);
+			System.out.println(no.valor);
+		}
+	}
+	
+}
+```
+
 
 
 

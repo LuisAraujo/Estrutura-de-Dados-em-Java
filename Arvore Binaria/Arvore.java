@@ -58,7 +58,6 @@ public class Arvore<T extends Comparable<T>> {
 			
 			buscarNo(novo, pai.obterNoDireito());
 		}
-		}
 		
 		return novo;
 		
@@ -173,4 +172,31 @@ public class Arvore<T extends Comparable<T>> {
 		return sucessor; 
 	}
 	
+	
+	public void emOrdem(No no) {
+		if (no != null) {
+			emOrdem(no.filhoEsquerdo);
+			System.out.println(no.valor);
+			emOrdem(no.filhoDireito);
+		}
+	}
+	
+	public void preOrdem(No no) {
+		if (no != null) {
+			System.out.println(no.valor);
+			emOrdem(no.filhoEsquerdo);
+			emOrdem(no.filhoDireito);
+		}
+	}
+	
+	
+	public void posOrdem(No no) {
+		if (no != null) {
+			posOrdem(no.filhoEsquerdo);
+			posOrdem(no.filhoDireito);
+			System.out.println(no.valor);
+		}
+	}
+	
 }
+
