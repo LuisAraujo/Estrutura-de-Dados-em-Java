@@ -1,7 +1,7 @@
-# Estrutura de Dados I
+# Estrutura de Dados em Java
 
 
-Esse texto tem por objetivo apoiar o processo de ensino-aprendizagem de Estrutura de Dados. O texto tem como base os códigos no repositório. Não há restrições para a ordem da leitura, mas - se você for um estudante que ainda não conhece os tópicos apresentados - recomenda-se ler um capítulo por vez e partir para a implementação na seção *overview*. 
+Esse texto tem por objetivo apoiar o processo de ensino-aprendizagem do componente curricular Estrutura de Dados. O texto tem como base os códigos no repositório. Não há restrições para a ordem da leitura, mas - se você for um estudante que ainda não conhece os tópicos apresentados - recomenda-se ler um capítulo por vez e partir para a implementação na seção *overview*. 
 
 **Licença**: O material está disponível sob licença: **Creative Commons BY**
 
@@ -1401,6 +1401,13 @@ Formalizando:
 
 **1 - Implemente o métodos de removerPorValor e removerPorIndice usando o método de buscarPorValor e buscarPorIndice.**
 
+
+**Overview**
+
+[código completo aqui]
+
+
+
 ## 5 - Lista Duplamente Encadeada
 
 A Lista duplamente encadeada, diferentemente da simplesmente, possui dois links para Nós, um para o próximo nó e outro para o nó anterior. Mas para quê? Com a Lista Simplesmente Encadeada já resolvemos os problemas do vetor, mas ainda assim queremos melhorar nosso algoritmo de busca. 
@@ -1757,6 +1764,9 @@ public No<T> removerPorValor() {
 	return auxiliar;
 }
 ```
+**Overview**
+
+[código completo aqui]
 
 
 ## 6 - Lista Circular
@@ -1861,20 +1871,20 @@ boolean next = true;
 //valor buscado é menor que o currenteNode?
 if(valor.compareTo(noAtual.obterValor())  == -1 )  {
 			
-//estou em 90% do final da lista
-if(indiceNoAtual < qtdNo*0.9) {
-	prior = false;
-}
+	//estou em 90% do final da lista
+	if(indiceNoAtual < qtdNo*0.9) {
+		prior = false;
+	}
 
 }else if(valor.compareTo( noAtual.obterValor())  == 1 )  {
 
-//estou em 10% do final da lista
-if(indiceNoAtual < qtdNo*0.1) {
-	next = false;
-}
+	//estou em 10% do final da lista
+	if(indiceNoAtual < qtdNo*0.1) {
+		next = false;
+	}
 
 }else {
-return noAtual;
+	return noAtual;
 }
 
 ```
@@ -1885,9 +1895,7 @@ O código completo é a junção dos dois trechos apresentados, com a adição d
 
 Para remover, precisamos considerar o novo link entre o primeiro e o último nó. Vejamos os códigos.
 
-#### 6.3.1 - Removendo no início
-#### 6.3.2 - Removendo no final
-#### 6.3.3 - Removendo por valor
+#### 6.3.1 - Removendo por valor
 
 Observe que estamos utilizando a versão como o contador do qtdNo, você pode fazer isso em outros métodos. 
 
@@ -1919,7 +1927,7 @@ public void remover(T valor) {
 ```
 
 
-#### 6.3.4 - Removendo por índice
+#### 6.3.2 - Removendo por índice
 
 Aqui podemos utilizar a mesma busca por índice que a lista duplamente.
 
@@ -1947,30 +1955,278 @@ if(n != null) {
 }
 
 ```
+**Overview**
+
+[código completo aqui]
 
 ### 7 - Árvores
 
 Árvores! Nessa **altura** você deve ter si perguntado: o que árvores tem haver com programação? **Folhas**? **Raiz**? **Ganhos**? Sim, tudo isso tem relação. A ideia da estrutura da dados Árvore é similar a estrutura de uma árvore, presente na natureza. Embora a representação seja de cabeça para baixo (e embora árvores não tenha cabeça), elas possuem uma raiz (primeiro nó), folhas (nós sem filhos), altura e muito mais.
 
-Cada nó em uma árvore possui nós vinculados a eles que chamados de filho (São como os links próximo e anterior, mas aqui são substituídos por outas nomenclaturas).
+Cada nó em uma árvore possui nós vinculados a eles que chamados de filho (São como os links próximo e anterior, mas aqui são substituídos por outas nomenclaturas)
 
-### 7.1 - Árvore Binária
+### 7.1 - Árvore Binária de Busca (ABB)
 
-Aqui temos os mesmos Nós que a lista, muito similar à da duplamente encadeada modificando apenas o próximo para direito e o anterior para o esquerdo. Essas duas referências dos nós são, na verdade, filhos do nó que as contém. Por exemplo: Um nó B pode ter dois filhos: A e C, um à esquerda e outro à direta. Esse é o principal conceito de Árvore Binária: **cada nó possui no máximo dois nós**. Mas um Nó pode ter apenas 1 ou nenhum nó (não passando de dois).
+Aqui temos os mesmos Nós que a lista, muito similar à da duplamente encadeada modificando apenas o atributo próximo para direito e o anterior para o esquerdo. Essas duas referências dos nós são, na verdade, filhos do nó que as contém. Por exemplo: Um nó B pode ter dois filhos: A e C, um à esquerda e outro à direta. Esse é o principal conceito de Árvore Binária: **cada nó possui no máximo dois nós**. Mas um Nó pode ter apenas 1 ou nenhum nó (não passando de dois).
 
-Outro elemento importante da árvore binária é que, **ao inserir filhos, deve-se verificar se ele é maior ou menor que o pai. Se for menor, deverá ser um filho à esquerda e se for maior deverá ser um filho à direita**. Caso o nó já possua dois filhos, devemos andar pelos nós até encontrar um nó sem filhos, onde possamos alocá-lo.  
+#### Uma pausa para mais conceitos
+
+Além dos nós e filhos, alguns outros conceitos são importantes quando falamos em Árvores. Por exemplo, uma árvores pode ter *altura* () e um nó pode está em um *nível* (). Um nó sem filhos é chamado de *nó folha*. Um *caminho ou percurso* é o conjunto de nós que nos fazem sair de um nó A e ir até um nó Z. O *nó raiz* é o nó cujo não possui antecedentes, ou seja, não tem pai. O nó raiz é o nó que fica no topo da árvore. 
+
+Um elemento importante da árvore binária de busca é que, **ao inserir filhos, deve-se verificar se ele é maior ou menor que o pai. Se for menor, deverá ser um filho à esquerda e se for maior deverá ser um filho à direita**. Caso o nó já possua dois filhos, devemos andar pelos nós até encontrar um nó sem filhos, onde possamos alocá-lo.  
 
 Árvore Binária é muito utilizada me buscas, pois reduz bastante a busca, em alguns casos. Um lista simplesmente encadeada, no pior caso realiza n operações para a busca, uma árvore, no pior caso realiza *log2 n* interações.
 
 #### 7.1.1 - Nó
 
+Como já mencionado, o Nó da árvore é similar ao nó da lista. Outro elemento importante que podemos adicionar o o atributo do nó pai. 
+
+```java
+public class No<T extends Comparable<T>> {
+
+	No esquerdo;
+	No direito;
+	T valor;
+	No pai;
+
+	public No(T valor) {
+		this.valor = valor;
+	}
+```	
+
+
 #### 7.1.2 - Inserção
+
+O princípio de inserção em uma ABB é que não há elementos repetidos. Assim, ao inserir um elemento, nós devemos buscar um local vazio cujo o seu pai seja menor que ele, se ele foi um filho à direita ou maior se ele for um filho à esquerda. Para isso, precisamos fazer a verificação do valor e andar para o próximo nó. 
+
+Devemos considerar alguns aspectos, por exemplo se a árvores está vazia. Neste caso, o nó inserido será a raiz da árvore.
+
+
+```java
+public No inserirNo(No novo, No pai) {
+		
+		if(raiz == null) {
+			raiz = novo;
+```
+
+Nós vamos criar um método anterior ao método inseritNo que só receberá um valor e criará o novo nó e passará a referência para o inserirNo. O usuário deverá usar apenas o inserir. Veja:
+
+```java
+public No inserirNo(T valor) {
+		No<T> n = new No<T>(valor);
+		return inserirNo(n, null);
+		
+	}
+```
+
+> Mas porque isso? Bem, estamos prevendo algumas coisas. Apenas aceite que assim tudo ficará mais fácil lá na frente, em especial porque utilizaremos recursividade para o inserirNo.
+
+Ok, sabendo agora disso, a primeira chamada ao método inserirNo será com o parâmetro pai como *null*, lá dentro isso será convertido para raiz. Outro passo é verificar se o valor do nosso nó é maior ou menor, para os dois caso, precisamos verificar se o filho à esquerda ou direita é null (ou seja, há uma vaga disponível). Caso isso não seja verdade, precisamos chamar o métodos inseriNo recursivamente, mas agora atualizando o No pai. Nesse caso estamos pulando o nó (esse é um dos princípio da árvores, nela existem subárvores). 
+
+
+```java
+public No inserirNo(No novo, No pai) {
+		
+		if(pai == null)
+			pai = raiz;
+		
+		if(raiz == null) {
+			raiz = novo;
+		}else {
+			//menor
+			if( novo.obterValor().compareTo(pai.obterValor()) == -1) {
+				
+				if(pai.obterNoEsquerdo() == null)
+					pai.inserirEsquerdo(novo);
+				else
+					inserirNo(novo, pai.obterNoEsquerdo());
+				
+			}else {
+				
+				if(pai.obterNoDireito() == null)
+					pai.inserirDireito(novo);
+				else
+					inserirNo(novo, pai.obterNoDireito());
+			}
+		}
+		
+		return novo;
+		
+	}
+```
 
 #### 7.1.3 - Busca
 
+A busca na árvores é similar à insersão, pois estamos querendo percorrer um caminho até chegar o nosso nó. Caso encontremos um nó null pelo caminho significa que não há esse valor na árvore. Ao encontrar um elemento com valor igual ao buscado, retornamos esse valor. Em caso do elemento buscado ser maior, vamos para a subárove à direita. Em caso do elemento buscado ser menor, vamos para a subárvores à esquerda. 
+
+```java
+public No buscarNo(No novo, No pai) {
+		
+	if(pai == null)
+		pai = raiz;
+	
+	if(novo == null){
+		return null;
+	}else if(novo.obterValor().compareTo(pai.obterValor()) == 0) {
+		return novo;
+	}if( novo.obterValor().compareTo(pai.obterValor()) == -1) {
+		
+		return buscarNo(novo, pai.obterNoEsquerdo());
+			
+	}else {
+		
+		return buscarNo(novo, pai.obterNoDireito());
+	}
+	
+	
+}
+```
+
 #### 7.1.4 - Remoção
 
+A opreação de remoção em uma árvores é a mais complexa. Antes do métodos de remover precisamos identificar um possível substituto para o nó removido. Para isso vamos criar o método getSucessor que é responsável por retornar o sucessor de um nó dado.
+
+```java
+public No getSucessor(No atual, Boolean primeiraVez) {
+		
+		No sucessor  = null;
+		
+		if(primeiraVez)
+			sucessor = atual.obterNoDireito();
+		else
+			sucessor = atual;
+		
+		if(sucessor.obterNoEsquerdo()!=null) {
+			return getSucessor(sucessor.obterNoEsquerdo(), false);
+		}
+		    
+		return sucessor; 
+	}
+```
+
+Esse método retorna um nó que é o sucessor. Como pode ser observado ele é recursivo, no caso da primeira chamada, atualizamos o sucessor para ser o filho á direita. Após isso, estamos interessados em pegar o nó à direita que tenha um espaço vago à sua esquerda. Se isso não for o caso do nó imediatamente à direita, andamos na arvore agora sempre à esquerda em busca desse nó. 
+
+Feito isso, podemos criar o nosso método de remoção. Existem vários caso, e vamos analisá-los um a um. Antes disso temos que ter em mente que queremos buscar o nó, então vamos utilizar as mesas técnicas de antes:
+
+```java
+if(currentno.obterValor().compareTo(valor) == 0) {
+	//substituiremos o nó aqui
+}else if( currentno.obterValor().compareTo(valor) == -1) {
+	removerNo(valor, currentno.obterNoDireito());
+}else {
+	removerNo(valor, currentno.obterNoEsquerdo());
+}
+```
+
+Será no primeiro if que implementaremos os casos. O nó a ser removido é:
+
+1. é um nó folha? 
+2. tem apenas um filho à direita?
+3. tem apena um filho à esquerda?
+4. tem dois filhos	(direita e esquerda) ?
+
+Dentro do caso 4 precisamos verificar ainda:
+1. não é o nó à direita do nó a ser excluído
+2. é um nó raiz
+3. é um nó à esquerda do seu pai?
+4. é um nó à direita do seu pai?
+
+**Caso 1: é um nó folha?** 
+
+```java
+if((currentno.obterNoDireito()== null) && (currentno.obterNoEsquerdo() == null)) {
+				
+	if(currentno == this.raiz)
+		this.raiz = null;
+	
+	else if(currentno == currentno.pai.obterNoDireito() )
+		currentno.pai.inserirDireito(null);
+	else 
+		currentno.pai.inserirEsquerdo(null);
+
+}
+```
+
+
+**Caso 2: tem apenas um filho à direita?** 
+
+```java
+else if (currentno.obterNoDireito() == null){
+	
+	if(currentno == this.raiz)
+		this.raiz = this.raiz.obterNoEsquerdo();
+	
+	else if(currentno == currentno.pai.obterNoDireito() )
+		currentno.pai.inserirDireito( currentno.obterNoEsquerdo() );
+	
+	else 
+		currentno.pai.inserirEsquerdo( currentno.obterNoEsquerdo() );
+
+//tem apena sum filho à esquerda?
+}
+```
+
+**Caso 3: tem apena um filho à esquerda?** 
+
+```java
+else if (currentno.obterNoEsquerdo()== null){
+	
+	if(currentno == this.raiz)
+		this.raiz = this.raiz.obterNoDireito();
+	
+	else if(currentno == currentno.pai.obterNoDireito() )
+		currentno.pai.inserirDireito( currentno.obterNoDireito() );
+	
+	else 
+		currentno.pai.inserirEsquerdo( currentno.obterNoDireito() );	
+}
+```
+
+**Caso 4: tem dois filhos** 
+
+Vamos aos subcasos:
+
+**Caso 4.1: não é o nó à direita do nó a ser excluído**
+```java
+No sucessor = this.getSucessor(currentno, true);
+
+if(sucessor != currentno.obterNoDireito()) {
+	
+	sucessor.pai.inserirEsquerdo( sucessor.obterNoDireito() );
+	sucessor.inserirDireito( currentno.obterNoDireito() );
+}
+```
+
+**Caso 4.2:  é um nó raiz?**
+```java
+if(currentno == this.raiz )
+   raiz = sucessor;
+```				
+**Caso 4.3:  é um nó à esquerda do seu pai?**
+```java
+else if(currentno == currentno.pai.obterNoDireito()) 
+	currentno.pai.inserirDireito(sucessor);
+```	
+
+**Caso 4.4:  é um nó à direita do seu pai?**
+```java
+else 
+    currentno.pai.inserirEsquerdo(sucessor);
+			
+```	
+
 #### 7.1.5 - Percurso
+
+
+
+
+
+
+**Overview**
+
+[código completo aqui]
+
+
 
 ### 7.2 - Árvore AVL
 

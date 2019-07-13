@@ -40,6 +40,30 @@ public class Arvore<T extends Comparable<T>> {
 		
 	}
 	
+	
+	public No buscarNo(No novo, No pai) {
+		
+		if(pai == null)
+			pai = raiz;
+		
+		if(novo == null){
+			return null;
+		}else if(novo.obterValor().compareTo(pai.obterValor()) == 0) {
+			return novo;
+		}if( novo.obterValor().compareTo(pai.obterValor()) == -1) {
+			
+			buscarNo(novo, pai.obterNoEsquerdo());
+				
+		}else {
+			
+			buscarNo(novo, pai.obterNoDireito());
+		}
+		}
+		
+		return novo;
+		
+	}
+	
 
 	public No removerNo(T valor) {
 		return removerNo(valor, null);
