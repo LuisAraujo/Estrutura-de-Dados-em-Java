@@ -1074,7 +1074,7 @@ Mas calma! E se a lista estiver vazia? O while não executará e ocorrerá um er
 Ok, revolvemos isso. Agora pense que o nó a ser inserido é maior que todos os nós, teríamos que inserir no final. Neste caso, ocorreria em erro, pelo mesmo motivo anterior. Então, que tal ter outro auxiliar (auxiliar2), que vem um nó antes do auxiliar? Assim poderíamos dizer que o próximo do auxiliar2 seria o nosso novo nó e isso não traria nenhum erro.
 
 	´´´java
- 	public void inserirNoMeio(T  valor) {
+ 		public void inserirNoMeio(T  valor) {
 		No<T> novo_no = new No<T>(valor);
 	
 		No<T> auxiliar = primeiro;
@@ -1449,50 +1449,421 @@ Ok! Olhando bem esse código é perceptível que não precisamos mais desse auxi
 	}
 
 #### 5.2 - Buscando na Lista Duplamente
+
+Assim como na Lista Simples, podemos buscar um nó tanto pelo seu valor como pelo seu índice. Vamos ver buscar.
+
 #### 5.2.1 - Buscando no início
+
+A busca no início é similar à uma operação de pilha ou de fila, pois estamos interessados em remover de apenas uma das extremidade. Como queremos busca no início e já temos uma atributo que guarda esse valor, basta retorná-lo.
+
+	´´´java
+	public No<T> buscarInicio(T valor) {
+			
+		return primeiro;
+	}
+	´´´
+
 #### 5.2.2 - Buscando no final
-#### 5.2.3 - Buscando por valor
+
+A busca no final é simples: vamos andando na lista até chegar ao final e então retornando o objeto. Para saber se um nó da lista é o último, basta verificar se o próximo dele é nulo. 
+
+	´´´java
+	public No<T> buscarNoFinal(T valor) {
+		 
+		No<T> auxiliar = primeiro;
+		 
+		while( auxiliar.proximo != null )
+		{
+			auxiliar = auxiliar.proximo;
+		}
+		
+		return auxiliar;
+	}
+	´´´
+
+Tanto essa busca como a busca no início pode ser aplicado na lista simples e na lista circular que veremos mais a frente. 
+
+#### 5.2.3 - Buscando por valor em uma lista ordenada
+
+A busca por valor não tem nada de diferente da busca por valor na lista simples. No entanto, caso a sua lista esteja ordenada, nós podemos otimizar essa busca. Imagine que a sua lista possui 10 elementos de valores inteiros e vocês quer buscar o elemento de valor 6, é muito provável que ela esteja no meio da lista. Mas não temos uma variável que guarda o meio da lista. Bem, poderíamos criá-la? Sim! Mas imagine que você quer buscar o elemento de valor 9 ou o de valor 2, seria muito custoso e nada generalista ter um atributos para cada setor da lista. 
+
+Com base nisso, podemos abordar o problema de uma outra forma: imagine que você tenha criado um novo atributo que fica na posição da último nó buscado e com base nele você irá fazer as operações.
+
+```java
+	public class Lista<T> {
+		private No<T> primeiro;
+		private No<T> noatual;
+	}
+	```
+ 
+A cada busca, nós atualizamos esse ultimobuscado. 
+
+
+	´´´java
+	public No<T> buscar(T valor) {
+		 
+		No<T> auxiliar = primeiro;
+		 
+		while( auxiliar.proximo != null )
+		{
+			auxiliar = auxiliar.proximo;
+		}
+		if(auxiliar != null)
+			ultimobuscado = auxiliar;
+
+		return auxiliar;
+	}
+	´´´
+
+Ok, mas isso não melhorou em nada a nossa busca, pelo contrário, eu tenho agora uma operação de comparação e outra de atribuição. Bem, para isso precisamos fazer a seguinte abordagem: dado o último nó buscado, verificamos se o valor é maior ou menor que ele, se for maior, vamos para o próximo, se for menor vamos para o anterior. 
+
+	´´´java
+	public No<T> buscarPorValor(T valor) {
+		
+			
+		if(no_atual== null)
+			no_atual = primeiro;
+		
+		while((no_atual != null) && (no_atual.obterValor().compareTo( valor )) != 0  )
+		{
+			if (no_atual.obterValor().compareTo(valor)==-1)
+                no_atual = no_atual.obterProximo();
+            else 
+                no_atual=no_atual.obterAnterior();	
+		}
+		
+		return no_atual;
+	}
+	´´´
+
+Que bacana, não é? Teste a quantidade de comparações necessárias para se buscar um valor, em uma sequência aleatória e logo verá que esse método é muito melhor que o da lista simples que inicia no inicio e varria toda a lista. Você pode usar o método *buscarCount* na Lista Duplamente. O pior caso dessa busca é igual à busca simples percorreremos n nós. Mas, na média, vamos percorrer apenas n/2. 
+
 #### 5.2.4 - Buscando por índice
 
+A busca pelo índice é similar. Mudamos apenas o valor pelo índice. 
+
+
+	```java
+	public class Lista<T> {
+		private No<T> primeiro;
+		private No<T> noatual;
+		private Int index;
+	}
+	```
+
+
+Agora estamos comparando um valor inteiro. Caso o índice seja menor fazemos um loop com incremento, caso contrário como decremento. 
+
+	´´´java
+	public No<T> buscarPorIndice(int indexbusca) {
+		int i;
+		
+		if(no_atual == null){
+			no_atual = primeiro;
+			index = 0;
+		}
+		
+		if (no_atual.obterValor().compareTo(valor)==-1){
+                
+				for(i = index; i < indexbusca; i++){
+					if(no_atual == null)
+						return null;
+
+					no_atual = no_atual.obterProximo();
+				}	
+				
+
+        } else {
+                for(i = index; i > indexbusca; i--){
+					if(no_atual == null)
+						return null;
+
+					no_atual = no_atual.obterProximo();
+				}		
+		}
+
+		index = i;
+		return no_atual;
+	}
+	´´´
+É importante ainda sempre verificar se o nó é nulo, pois o índice pode ser maior que o tamanho da lista ou em caso do índice ser negativo.
 
 #### 5.3 - Removendo na Lista Duplamente
+
+A remoção na lista duplamente é como a lista simples, no entanto temos que ter uma atenção para o novo parâmetro do nó: o anterior. 
+
 #### 5.3.1 - Removendo no início
+
+Nós já conhecemos esse método, precisamos apenas adicionar o primeiro.anterior = null, por dois motivos: o primeiro nó não possui anterior a ele e eliminar a referência do nó removido da nossa lista;
+
+	´´´java
+	public No<T> removerInicio() {
+		 
+		No<T> auxiliar = primeiro;
+		primeiro = primeiro.próximo;
+		primeiro.anterior = null;
+		auxiliar.proximo = null;
+		return auxiliar;
+	}
+	´´´
+
 #### 5.3.2 - Removendo no final
+
+O mesmo vale para esse novo código.
+	
+	´´´java
+	public No<T> removerFinal() {
+		 
+		No<T> auxiliar = primeiro;
+		No<T> auxiliar2 = null;
+	
+		while((auxiliar.proximo != null))
+		{
+			auxiliar2 = auxiliar;
+			auxiliar = auxiliar.proximo;
+		}
+	
+		auxiliar.anterior = null;
+		auxiliar2.proximo = null;
+	
+		return auxiliar;
+	}
+	´´´
+
+Uma observação é importante aqui, podemos reduzir esse código utilizado o métodos de busca no final. 
+
+	´´´java
+	public No<T> removerFinal() {
+		 
+		No<T> auxiliar = buscarNoFinal();
+		
+		if(auxiliar != null){
+			auxiliar.anterior = null;
+			auxiliar.anterior.proximo = null;
+		}
+	
+		return auxiliar;
+	}
+	´´´
+
 #### 5.3.3 - Removendo por valor
+
+Vamos usar a mesma abordagem do código anterior e utilizar o método de busca por valor.
+
+	´´´java
+	public No<T> removerPorValor() {
+		 
+		No<T> auxiliar = buscarPorValor();
+		
+		if(auxiliar != null){
+			if(auxiliar.proximo != null)
+				auxiliar.proximo.anterior = auxiliar.anterior;
+				
+			if(auxiliar.anterior != null)
+				auxiliar.anterior.proximo = auxiliar.próximo;
+		}
+	
+		return auxiliar;
+	}
+	´´´
+
 #### 5.3.4 - Removendo por índice
+
+Mas usam vez vamos reutilizar código, afinal para que serve utilizar Orientação a Objeto, se não fazemos uso das suas potencialidades?
+
+	´´´java
+	public No<T> removerPorValor() {
+		 
+		No<T> auxiliar = buscarPorÍndice();
+		
+		if(auxiliar != null){
+			if(auxiliar.proximo != null)
+				auxiliar.proximo.anterior = auxiliar.anterior;
+				
+			if(auxiliar.anterior != null)
+				auxiliar.anterior.proximo = auxiliar.próximo;
+		}
+	
+		return auxiliar;
+	}
+	´´´
 
 
 ## 6 - Lista Circular
 
 A Listas Duplamente Encadeada supera o problema de voltar ao início, reduzindo o número de interações para achar nós próximos. Lembra do caso de busca o nó de valor 30 e depois o 29? Estendendo esse problema, imagine que queremos buscar o nó de valor 999, inicialmente faremos 999 interações. Agora queremos busca o nó de valor 10, teríamos que fazer 989 interações para voltar. Não seria interessante seguir até o final e ter um "portal" que nos leve ao início? Assim faríamos 11 interações apenas (1000, 1, 2, 3 ... 10). 
 
-Tenho uma coisa importante para dizer: A Lista Circular possui esse portal. Ela é similar à Duplamente Encadeada. Elas possui o mesmo tipo de nó e apenas algumas modificações nas operações. O princípio básico aqui é que o primeiro nó é ligado ao último e o último é ligado ao primeiro. Assim, poderíamos andar até o final e chegar o início novamente.
+Tenho uma coisa importante para dizer: A Lista Circular possui esse portal. A sua estrutura é similar à Duplamente Encadeada, por isso não repetiremos o código aqui. Ela possui o mesmo tipo de nó e apenas algumas modificações nas operações. 
 
-#### 6.1 - Inserindo na Lista Duplamente
+
+> O princípio básico aqui é que o primeiro nó é ligado ao último e o último é ligado ao primeiro. Assim, poderíamos andar até o final e chegar o início novamente.
+
+
+#### 6.1 - Inserindo na Lista Circular
 
 Vamos ver os métodos de inserção, neta seção.
 
-#### 6.1.1 - Inserindo no início
-#### 6.1.2 - Inserindo no final
-#### 6.1.3 - Inserindo de forma ordenada
+#### 6.1.1 - Inserindo no início e final
 
-#### 6.2 - Buscando na Lista Duplamente
+A lista circular não possui início ou fim, nenhum nó tem links com valor nulo.  Temos o atributo primeiro apenas para nos ajudar nas operações, afinal precisamos sair de algum lugar. Até o primeiro nó possui um link para ele mesmo. Assim, toda inserção na lista é igual, mas antes disso vamos aos caso específicos.
 
-Como os métodos de buscar são similares, vamos fazer outra abordagem aqui que serve para a circular. Vamos criar um atributo chamado último nó que guardará não o último nó da lista, mas o último nó buscado e vamos fazer a busca a partir dele.
+#### 6.1.2 - Inserindo em uma lista vazia
+
+veja o trecho do código a seguir, isso gera um nó com link para ele mesmo. Que louco em?
+
+		´´´java
+			this.primeiro =novo_no;
+			noAtual = this.primeiro;
+			this.primeiro.inserirProximo(novo_no);
+			this.primeiro.inserirAnterior(novo_no);
+		´´´
+
+
+#### 6.1.3 - Inserindo em uma lista com apenas um nó
+	´´´java
+			No<T> temp = this.primeiro;
+		    if(temp.obterProximo() == temp) {
+	    		temp.inserirProximo(novo_no);
+	    		temp.inserirAnterior(novo_no);
+	    		novo_no.inserirAnterior(temp);
+	    		novo_no.inserirProximo(temp);
+	´´´
+#### 6.1.4 - Inserindo de, forma ordenada, um nó menor que o nó inicial
+	´´´java
+		novo_no.inserirProximo(this.primeiro);
+		novo_no.inserirAnterior(this.primeiro.obterAnterior());
+		this.primeiro.obterAnterior().inserirProximo(novo_no);
+		this.primeiro.inserirAnterior(novo_no);
+		
+		this.primeiro = novo_no;
+		noAtual = this.primeiro.obterAnterior();
+	´´´
+#### 6.1.5 - Todas os outros casos
+
+	´´´java
+		while( (novo_no.obterValor().compareTo(temp.obterValor() ) == 1)) { 
+		 	temp = temp.obterProximo();
+		
+			//fechou um ciclo
+			if(temp == this.primeiro)
+				break;
+		}
+		
+		
+		novo_no.inserirProximo(temp);
+		temp.obterAnterior().inserirProximo(novo_no);
+		novo_no.inserirAnterior(temp.obterAnterior());
+		temp.inserirAnterior(novo_no);
+	´´´
+#### 6.2 - Buscando na Lista Circular
+
+Como os métodos de buscar são similares, vamos fazer outra abordagem aqui que serve para a circular. Vamos criar um atributo chamado último nó que guardará não o último nó da lista, mas o último nó buscado e vamos fazer a busca a partir dele. Similar como fizemos na busca duplamente. Mas aqui, temos a vantagem do portal que nos permitirá sair de uma extremidade até outra.
+
+Nessa abordagem nós consideramos que dada uma busca de um valor maior que o nó atual (último buscado) e considerando que a busca esteja uma uma posição bem inicia da lista (por exemplo 10% da lista) ou, no caso oposto, uma busca de um elemento de valor menor e a busca esteja em uma posição final da lista (por exemplo 90%). 
+
+Nessas duas situações pensamos se é melhor seguir para frente ou para trás. Imagine uma busca em uma lista de 100 elementos ordenados, o último elemento é 90 e a o primeiro 0. A última busca está no quinto elemento de valor 5. É obvio que é melhor eu retornar até chegar ao outro lado da lista, do que seguir até o final da mesma. O mesmo ocorre se a última busca tenha sido 90 e queremos encontrar o elemento de valor 5, é melhor seguir até o outro lado da lista. 
+
+Caso não tenha entendido, pense um pouco olhando essa imagem com a comparação do primeiro caso:
 
 #### 6.2.1 - Buscando Nós sem andar muito
 
+Inicialmente vamos criar flags para saber se devemos andar para frente ou para trás:
+	´´´java
+		if( (prior) || (!next))
+			this.obterNoAnterior();
+		else if( (next) || (!prior)) 
+			this.obterNoProximo();
+	´´´
 
+Quem decidirá a direção são dois fatores: o valor que eu busco em comparação com o nó atual e a posição que estamos na lista, nessa abordagem temos mais um atributo chamado *qtdNo* que guarda a quantidade de nós que teremos na lista. Logicamente que os métodos de inserção e remoção precisam ser atualizados para esse controle. 
 
-#### 6.3 - Removendo na Lista Duplamente
+	´´´java
+		boolean prior = true;
+		boolean next = true;
+		
+		//valor buscado é menor que o currenteNode?
+		if(valor.compareTo(noAtual.obterValor())  == -1 )  {
+						
+			//estou em 90% do final da lista
+			if(indiceNoAtual < qtdNo*0.9) {
+				prior = false;
+			}
+			
+		}else if(valor.compareTo( noAtual.obterValor())  == 1 )  {
+			
+			//estou em 10% do final da lista
+			if(indiceNoAtual < qtdNo*0.1) {
+				next = false;
+			}
+			
+		}else {
+			return noAtual;
+		}
+			
+		´´´
 
-Para remover, precisamos considerar o novo link. Vejamos os códigos.
+O código completo é a junção dos dois trechos apresentados, com a adição de alguns elementos que visam verificar a parada *stop* e caminhar na lista. 
+
+#### 6.3 - Removendo na Lista Circular
+
+Para remover, precisamos considerar o novo link entre o primeiro e o último nó. Vejamos os códigos.
 
 #### 6.3.1 - Removendo no início
 #### 6.3.2 - Removendo no final
 #### 6.3.3 - Removendo por valor
+
+Observe que estamos utilizando a versão como o contador do qtdNo, você pode fazer isso em outros métodos. 
+
+	´´´java
+	public void remover(T valor) {
+		
+		No n= buscarOtim(valor);
+		
+		if(n != null) {
+			qtdNo--;
+			if(n == this.primeiro) {
+				
+				this.primeiro.obterAnterior().inserirProximo(this.primeiro.obterProximo());
+				this.primeiro.obterProximo().inserirAnterior(this.primeiro.obterAnterior());
+				this.primeiro = this.primeiro.obterProximo();
+				
+			}else {
+				
+				n.obterAnterior().inserirProximo(n.obterProximo());
+				n.obterProximo().inserirAnterior(n.obterAnterior());
+				
+			}
+			
+		}
+		
+	}
+	´´´
 #### 6.3.4 - Removendo por índice
 
+Aqui podemos utilizar a mesma busca por índice que a lista duplamente.
+
+	´´´java
+	public void remover(T valor) {
+		
+		No n= buscarPorIndice(valor);
+		
+		if(n != null) {
+			qtdNo--;
+			if(n == this.primeiro) {
+				
+				this.primeiro.obterAnterior().inserirProximo(this.primeiro.obterProximo());
+				this.primeiro.obterProximo().inserirAnterior(this.primeiro.obterAnterior());
+				this.primeiro = this.primeiro.obterProximo();
+				
+			}else {
+				
+				n.obterAnterior().inserirProximo(n.obterProximo());
+				n.obterProximo().inserirAnterior(n.obterAnterior());
+				
+			}	
+		}	
+	}
+	´´´
 
 ### 7 - Árvores
 
