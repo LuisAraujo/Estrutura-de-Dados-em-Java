@@ -603,6 +603,34 @@ public class PilhaV<T> {
 
 Link aqui: [PilhaV.java](https://github.com/LuisAraujo/Disciplina-Estrutura-de-Dados/blob/master/Pilha/PilhaV.java)
 
+### 2.5 - Breve nota sobre complexidade de uma Pilha
+
+### 2.6 - Exercício
+
+1. Desenhe um pilha para os seguintes estados, considere além do vetor de 10 posições o topo:
+	
+	-	Inserir elemento 1
+	- 	Inserir elemento 3
+	- 	Inserir elemento 4
+	- 	Inserir elemento 5
+	- 	Remover elemento
+	- 	Inserir elemento 6
+	- 	Remover elemento
+	- 	Remover elemento
+	- 	Remover elemento
+	- 	Remover elemento
+	- 	Inserir elemento 4
+1. Modifique a sequencia de comandos acima para que haja um *overflow* de inserção. Ou seja, inserir até que o máximo seja alcançado. 
+1. Escreva um código que insira os seguintes elementos na pilha: 1,3,4,5,6 e 10
+2. Escreva um código de removar todos os elementos adicionados em uma pilha. O código deve funcionar para qualquer estado da pilha.
+2. Escreva um código de insira elementos em uma pilha até que a mesma chegue ao estado de cheia. O código deve funcionar para pilhas de qualquer tamanho.
+3. Dada a seguinte inserção em uma pilha:  1,3,4,5,6 e 10, remova os 3 últimos elementos inseridos.
+4.  Dada a seguinte inserção em uma pilha:  1,3,4,5,6 e 10, remova o terceiro elemento inserido (4) e recoloque os dois anteriores.
+5.  Crie um código que dado um número n qualquer entre 1 e o tamanho da pilha remova todos os elementos até o elemento n (incluindo o n). 
+6.  Crie um código que dado um número n qualquer entre 1 e o tamanho da pilha remova o elemento n e recoloque todos os elementos anteriores.  O código deve funcionar para qualquer estado da pilha.
+7. [Média] Implemente um algoritmo do jogo torre de hannoi usando três pilhas. No jogo o jogador indicará a pilha de remoção do disco e a pilha de inserção do disco. O jogo deve garantir a regra da torre de hannoi: não é possível inserir um disco maior sobre um disco menor. 
+8.  [Média] Implemente um algoritmo que simule um estacionamento. Neste estacionamento entram e saem carros pela mesma extremidade. Para remover um carro x é preciso remover todos os inseridos após ele. Cada manobra deve ser contabiliza e quando um carro sair, deve-se indicar a placa do carro e quantas vezes ele foi manobrado para fora (dando passagem para outro carro).
+9.  [Difícil] Implemente um algoritmo que controle duas pilhas conjugadas, aproveitando todo os espaço do vetor e não permitindo que nenhum pilha entre em *overflow*. Assim, é preciso ter quatro métodos: dois de inserção (insereP1 e inserep2) e dois de remoção (removeP1 e removeP2). 
 
 
 # 3 - Fila
@@ -890,6 +918,33 @@ public class FilaV<T>{
 
 Link aqui: [FilaV.java](https://github.com/LuisAraujo/Disciplina-Estrutura-de-Dados/blob/master/Fila/FilaV.java)
 
+### 3.3 - Breve nota sobre complexidade de uma Fila
+
+### 3.4 - Exercício
+
+1. Desenhe um fila para os seguintes estados, considere além do vetor de 10 posições o topo:
+	
+	-	Inserir elemento 1
+	- 	Inserir elemento 3
+	- 	Inserir elemento 4
+	- 	Inserir elemento 5
+	- 	Remover elemento
+	- 	Inserir elemento 6
+	- 	Remover elemento
+	- 	Remover elemento
+	- 	Remover elemento
+	- 	Remover elemento
+	- 	Inserir elemento 4
+1. Modifique a sequência de comandos acima para que haja um *overflow* de inserção. Ou seja, inserir até que o máximo seja alcançado. 
+1. Escreva um código que insira os seguintes elementos na fila: 1,3,4,5,6 e 10
+2. Escreva um código de remova todos os elementos adicionados em uma fila. O código deve funcionar para qualquer estado da pilha.
+2. Escreva um código de insira elementos em uma fila até que a mesma chegue ao estado de cheia. O código deve funcionar para filas de qualquer tamanho.
+3. Dada a seguinte inserção em uma fila:  1,3,4,5,6 e 10, remova os 3 últimos elementos inseridos.
+4.  Dada a seguinte inserção em uma fila:  1,3,4,5,6 e 10, remova o terceiro elemento inserido (4) e recoloque os dois anteriores.
+5.  Crie um código que dado um número n qualquer entre 1 e o tamanho da fila remova todos os elementos até o elemento n (incluindo o n). 
+6.  Crie um código que dado um número n qualquer entre 1 e o tamanho da fila remova o elemento n e recoloque todos os elementos anteriores.  O código deve funcionar para qualquer estado da fila.
+7. [Média] Implemente um algoritmo de fila de banco. Você deve considerar duas filas: normal e prioridade. Para cada 2 atendimentos normais é realizado 1 de prioridade. Ao realizar um atendimento é preciso dizer o horário. Quando uma pessoa é atendida deve-se exibir o horário de entrada, o horário de atendimento além dos minutos decorridos entre a entrada e a saída. 
+8.  [Média] Implemente um algoritmo que simule um estacionamento. Neste estacionamento entram e saem carros pela mesma extremidade. Para remover um carro x é preciso remover todos os inseridos antes dele. Cada manobra deve ser contabiliza e quando um carro sair, deve-se indicar a placa do carro e quantas vezes ele foi manobrado para fora (dando passagem para outro carro).
 
 # 4 - Listas Simplesmente Encadeada
 
