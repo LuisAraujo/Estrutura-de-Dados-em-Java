@@ -1,17 +1,42 @@
 
-public class Arvore<T extends Comparable<T>> {
+public class ArvoreABB {
 	No raiz;
 	
-	public Arvore() {
+	public ArvoreABB() {
 		this.raiz = null;
 	}
 	
-	public No inserirNo(T valor) {
-		No<T> n = new No<T>(valor);
-		return inserirNo(n, null);
+	public No buscar(int valor) {
+		No n = new No(valor);
+		return buscar(n, raiz);
 		
 	}
-	public No inserirNo(No novo, No pai) {
+	
+	public No buscar(No no, No pai) {
+		
+		if(pai == null) {
+			return null;
+		}else {
+			//menor
+			if( no.valor == pai.valor) {
+				return no;
+			}else if(no.valor < pai.valor) {
+				return buscar(no, pai.esquerdo);
+			}else {
+				return  buscar(no, pai.direito);
+			}
+		}
+	
+	}
+	
+	
+	public No inserir(int valor) {
+		No n = new No(valor);
+		return inserir(n, null);
+		
+	}
+	
+	public No inserir(No novo, No pai) {
 		
 		if(pai == null)
 			pai = raiz;
@@ -20,19 +45,19 @@ public class Arvore<T extends Comparable<T>> {
 			raiz = novo;
 		}else {
 			//menor
-			if( novo.obterValor().compareTo(pai.obterValor()) == -1) {
+			if( novo.valor < pai.valor) {
 				
 				if(pai.obterNoEsquerdo() == null)
 					pai.inserirEsquerdo(novo);
 				else
-					inserirNo(novo, pai.obterNoEsquerdo());
+					inserir(novo, pai.obterNoEsquerdo());
 				
 			}else {
 				
 				if(pai.obterNoDireito() == null)
 					pai.inserirDireito(novo);
 				else
-					inserirNo(novo, pai.obterNoDireito());
+					inserir(novo, pai.obterNoDireito());
 			}
 		}
 		
@@ -40,35 +65,12 @@ public class Arvore<T extends Comparable<T>> {
 		
 	}
 	
-	
-	public No buscarNo(No novo, No pai) {
-		
-		if(pai == null)
-			pai = raiz;
-		
-		if(novo == null){
-			return null;
-		}else if(novo.obterValor().compareTo(pai.obterValor()) == 0) {
-			return novo;
-		}if( novo.obterValor().compareTo(pai.obterValor()) == -1) {
-			
-			buscarNo(novo, pai.obterNoEsquerdo());
-				
-		}else {
-			
-			buscarNo(novo, pai.obterNoDireito());
-		}
-		
-		return novo;
-		
-	}
-	
 
-	public No removerNo(T valor) {
+	public No removerNo(int valor) {
 		return removerNo(valor, null);
 	}
 	
-	public No removerNo(T valor, No currentno) {
+	public No removerNo(int valor, No currentno) {
 		
 		No noret = null;
 		
@@ -76,7 +78,7 @@ public class Arvore<T extends Comparable<T>> {
 			currentno = raiz;
 		
 		//igual
-		if(currentno.obterValor().compareTo(valor) == 0) {
+		if(currentno.valor == valor) {
 			//System.out.println(currentno.obterValor() + "é igual");
 			//é um nó folha?
 			if((currentno.obterNoDireito()== null) && (currentno.obterNoEsquerdo() == null)) {
@@ -142,7 +144,7 @@ public class Arvore<T extends Comparable<T>> {
 			
 			
 			
-		}else if( currentno.obterValor().compareTo(valor) == -1) {
+		}else if( currentno.valor < valor) {
 			//System.out.println(currentno.obterValor() + "é menor que "+valor);
 			removerNo(valor, currentno.obterNoDireito());
 		}else {
@@ -173,30 +175,14 @@ public class Arvore<T extends Comparable<T>> {
 	}
 	
 	
-	public void emOrdem(No no) {
-		if (no != null) {
-			emOrdem(no.filhoEsquerdo);
-			System.out.println(no.valor);
-			emOrdem(no.filhoDireito);
-		}
-	}
-	
-	public void preOrdem(No no) {
-		if (no != null) {
-			System.out.println(no.valor);
-			emOrdem(no.filhoEsquerdo);
-			emOrdem(no.filhoDireito);
-		}
-	}
-	
-	
-	public void posOrdem(No no) {
-		if (no != null) {
-			posOrdem(no.filhoEsquerdo);
-			posOrdem(no.filhoDireito);
-			System.out.println(no.valor);
-		}
-	}
+	  public void preorder(No no) {
+		  	if (no == null) {
+	            return;
+	        }
+		  	
+	        System.out.println("Valor: "+no.valor);
+	        preorder(no.esquerdo);
+	        preorder(no.direito);
+	    }
 	
 }
-

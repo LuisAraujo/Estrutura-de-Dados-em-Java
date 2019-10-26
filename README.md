@@ -3024,14 +3024,15 @@ public class Arvore<T extends Comparable<T>> {
 
 ### 7.2 - Árvore AVL
 
-Existe um grande problema em árvores binárias. Dado o método de inserção, se inseríamos elementos em ordem: 1, 2, 3, 4 ... n. Isso se tornaria uma lista, pois os nós seriam sempre inseridos à direta do nó mais à direita.
+Existe um grande problema em árvores binárias. Dado o método de inserção, se inseríamos elementos em ordem: 1, 2, 3, 4 ... n. Isso se tornaria uma lista, pois os nós seriam sempre inseridos à direta do nó mais à direita. Com a finalidade de remover esse problema é que foi criada a estrutura de dados Árvore AVL. Como princípio básico, a cada inserção e remoção é verificado o nível de balanceamento e caso esse nível passe do limite são feitas operações, que chamamado de rotação, para que essa estrutura permança balanceada. 
 
 #### 7.2.2 - Questões sobre Balanceamento
 
 #### 7.2.2 - Nó
 
+
+
 #### 7.2.3 - Inserção
 
 #### 7.2.4 - Remoção
 
-#### 7.2.5 - Percurso

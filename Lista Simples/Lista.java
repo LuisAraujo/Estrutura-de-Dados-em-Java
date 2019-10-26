@@ -9,7 +9,38 @@ public class Lista<T extends Comparable<T>> {
 	 * os nós, sempre pulando para o próximo. */
 	private No<T> primeiro;
 	
-	/**Inserindo um nó, passando o valor*/
+	public void inserirInicio(T  valor) {
+		
+		//Cria um novo nó com o valor passado
+		No<T> novo_no = new No<T>(valor);
+		novo_no.inserirProximo(primeiro);
+		primeiro = novo_no;
+	
+	}
+	
+	public void inserirFinal(T  valor) {
+		
+		//Cria um novo nó com o valor passado
+		No<T> novo_no = new No<T>(valor);
+		//No auxiliar fica no inicio
+		No<T> aux = primeiro;
+		//se a lista estiver vazia
+		if(aux == null){
+			primeiro = novo_no;
+	    //senão
+		}else{
+			//vou até o final da lista
+			while(aux.obterProximo() != null){	
+				aux = aux.obterProximo();
+			}
+			
+			aux.inserirProximo(novo_no);
+		}
+	
+	}
+	
+	
+	/**Inserindo um nó em ordem, passando o valor*/
 	public void inserir(T  valor) {
 		//Cria um novo nó com o valor passado
 		No<T> novo_no = new No<T>(valor);
@@ -50,6 +81,35 @@ public class Lista<T extends Comparable<T>> {
 		}
 	
 	}
+	
+	/**Remove um nó no inicio*/
+	public No<T> removerInicio() {
+		No<T> aux = primeiro;
+		primeiro = primeiro.obterProximo();
+		return aux;
+	}
+	
+	/**Remove um nó no final*/
+	public No<T> removerFinal() {
+		No<T> aux = primeiro;
+		if(aux == null){
+			System.out.println("Lista vazia");
+			return null;
+	    //senão
+		}else{
+			//vou até o final da lista
+			while(aux.obterProximo().obterProximo() != null){	
+				aux = aux.obterProximo();
+			}
+			No<T> aux2 = aux.obterProximo();
+			aux.inserirProximo(null);
+			
+			return aux2;
+		}
+	}
+	
+	
+	
 	/**Remove um nó, passando o valor*/
 	public No<T> remover(T valor) {
 		

@@ -1,26 +1,26 @@
 
-public class No<T extends Comparable<T>> {
+public class No{
 	
 	No esquerdo;
 	No direito;
-	T valor;
+	int valor;
 	No pai;
 	
-	public No(T valor) {
+	public No(int valor) {
 		this.valor = valor;
 	}
 	
-	public No(T valor, No pai) {
+	public No(int valor, No pai) {
 		this.valor = valor;
 		this.pai = pai;
 	}
 	
 	
-	public void inserirValor(T valor) {
+	public void inserirValor(int valor) {
 		this.valor = valor;
 	}
 	
-	public T obterValor() {
+	public int obterValor() {
 		return this.valor;
 	}
 	
@@ -46,7 +46,7 @@ public class No<T extends Comparable<T>> {
 	}
 	
 	public String toString() {
-		return this.valor.toString();
+		return Integer.toString(this.valor);
 	}
 	
 	public void inseriPai(No pai) {

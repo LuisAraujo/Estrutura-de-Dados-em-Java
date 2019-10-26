@@ -4,7 +4,32 @@ public class ListaDuplamente< T extends Comparable<T>> {
 	No<T> primeiro;
     No<T> no_atual = primeiro;
 	
+	public void inserirFrente(T valor){
+		No<T> novo_no = new No<T>(valor);
+		if(this.primeiro == null) { 
+			this.primeiro = novo_no;
+		}else{
+			novo.proximo = inicio;
+			this.primeiro.anterior = novo_no;
+			this.primeiro = novo_no;
+		}
+	}
 	
+	public void inserirFinal(T valor){
+		No<T> novo_no = new No<T>(valor);
+		
+		if(this.primeiro == null) { 
+			this.primeiro = novo_no;
+		}else{
+			No aux = inicio;
+			while( aux.proximo != null)
+				aux = aux.proximo;
+			
+			novo.anterior = aux;
+			aux.proximo = novo_no;
+		}
+	}
+
 	public void inserir(T  valor) {
 		No<T> novo_no = new No<T>(valor);
 		No<T> auxiliar = primeiro;
@@ -50,7 +75,32 @@ public class ListaDuplamente< T extends Comparable<T>> {
 		}
 	
 	}
-        
+       
+	public No removerFrente(){
+		No<T> aux = this.primeiro;
+		this.primeiro = this.primeiro.proximo;
+		aux.proximo = null;
+		return aux.
+	}
+	
+	public No removerFinal(){
+	
+		if(this.primeiro == null) { 
+			return null;
+		}else{
+			No aux = inicio;
+			while( aux.proximo != null)
+				aux = aux.proximo;
+			
+			aux.anterior.proximo = null;
+			aux.anterior = null;
+			
+			return aux;
+		
+		}
+	
+	
+	}
        
 	public No<T> remover(T valor) {//arrumada 
 		

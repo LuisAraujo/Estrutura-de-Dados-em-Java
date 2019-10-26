@@ -1,46 +1,27 @@
+import java.util.Random;
 
 public class Main {
 
 	public static void main(String[] args) {
-		
-		Arvore arvore = new Arvore();
+		Random gerador = new Random();
+		ArvoreABB arabb = new ArvoreABB();
 
-		arvore.inserirNo(25);
-		No atual =  arvore.inserirNo(15);
-		arvore.inserirNo(5);
-		arvore.inserirNo(35);
-		arvore.inserirNo(30);
-		arvore.inserirNo(40);
-		arvore.inserirNo(20);
+		for(int i = 0; i < 50; i++) {
+        	int n = gerador.nextInt(100);
+        	arabb.inserir( n );
+        }
 		
-		System.out.println("       "+arvore.raiz);
-		System.out.println("  "+arvore.raiz.esquerdo+ "        "+arvore.raiz.direito);
 		
-		System.out.print(arvore.raiz.esquerdo.esquerdo+ "  "+arvore.raiz.esquerdo.direito);
-		System.out.println("     "+arvore.raiz.direito.esquerdo+"  "+arvore.raiz.direito.direito);
+		arabb.inserir( 1 );
+		arabb.inserir( 2 );
+		arabb.inserir( 3 );
+		arabb.inserir( 4 );
 		
-		int valorDel = 15;
-		
-		System.out.println("------------");
-		System.out.println("Removendo "+valorDel);
-		arvore.removerNo(valorDel);
-	    
 	
-		System.out.println("       "+arvore.raiz);
-		System.out.println("  "+arvore.raiz.esquerdo+ "        "+arvore.raiz.direito);
-		
-		System.out.print(arvore.raiz.esquerdo.esquerdo+ "  "+arvore.raiz.esquerdo.direito);
-		System.out.println("     "+arvore.raiz.direito.esquerdo+"  "+arvore.raiz.direito.direito);
-		
-		
-		/*
-		arvore.inserirNo(2);
-		arvore.inserirNo(3);
-		
-		System.out.println(arvore.raiz);
-		System.out.println(arvore.raiz.obterNoDireito());
-		System.out.println(arvore.raiz.obterNoEsquerdo());*/
-
+        No a = arabb.buscar(99);
+        System.out.println(a);
+        
+        arabb.preorder(arabb.raiz);
 	}
 
 }
