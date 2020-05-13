@@ -1,7 +1,7 @@
 
 /**
  * @author luis araujo
- * Implementação de uma fila baseada em vetor genérico
+ * ImplementaÃ§Ã£o de uma fila baseada em vetor genÃ©rico
  * @param <T> Tipo do array
  */
 public class FilaV<T>{
@@ -24,6 +24,9 @@ public class FilaV<T>{
 	}
 	
 	public T remover(){
+		if(inicio == fila.length)
+             		inicio = 0;
+		
 		if(!estaVazia()){
 			T e = arrayFila[inicio];
 			inicio++;
