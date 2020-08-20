@@ -845,6 +845,11 @@ Por esse motivo que, quando vamos inserir e verificamos que o fim chegou no seu 
 	if(fim ==tamanho_fila)
 			fim = 0;
 
+O mesmo faremos para o inicio, dada as remoções:
+
+	if(inicio == fila.length)
+             		inicio = 0;
+
 Como exercício desenhe uma fila de 10 posições, insira elementos e remova-os. Deixando a fila cheia no primeiro momento e depois vazia. Faça isso ao menos 3 vezes na mesma pilha e verá como essa transição funciona.  
 
 **Observações**
@@ -877,6 +882,10 @@ public class FilaV<T>{
 	
 	public T remover(){
 		if(!estaVazia()){
+
+			if(inicio == fila.length)
+             			inicio = 0;
+	     
 			T e = arrayFila[inicio];
 			inicio++;
 			return e;
