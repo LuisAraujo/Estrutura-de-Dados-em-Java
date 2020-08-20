@@ -1,3 +1,10 @@
+### INTERESSE EM CURSO DE ESTRUTURA DE DADOS? DEIXE A SUA OPINIÃO E CONTATO:
+
+[Para preencher o formulário leva apenas 1 minutos!](https://forms.gle/LnkVgrXfwmg6Wj9s8)
+
+---
+
+
 # Estrutura de Dados em Java
 
 
