@@ -2,6 +2,8 @@
 
 [Para preencher o formulário leva apenas 1 minutos!](https://forms.gle/LnkVgrXfwmg6Wj9s8)
 
+
+#### ESTOU REMODELANDO ESSE REPOSITÓRIO PARA CRIAR UMA PÁGINA WEB COM CÓDIGOS E ANIMAÇÕES. Todos os códigos foram movidos para a pasta Códigos. 
 ---
 
 
