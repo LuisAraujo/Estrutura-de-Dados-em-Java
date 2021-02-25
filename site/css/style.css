@@ -113,8 +113,13 @@ a{
 }
 
 .hightlight{
-	font-weight: bold;
-	font-size: 22px;
+
+	background-color: #ddd;
+	border-radius: 5px;
+	padding: 20px;
+	width: 80%;
+	margin-left: 10%;
+	
 }
 
 
