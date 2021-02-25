@@ -6,6 +6,12 @@ document, body{
 	font-family: Helvetica;
 }
 
+a{
+	
+	text-decoration: none;
+	color: inherit;
+}
+
 .navbar{ 
 	position: fixed;
 	top: 0px;
@@ -23,6 +29,14 @@ document, body{
 .title{
 	
 	font-size: 30px;
+	font-weight: bold;
+	margin-bottom: 20px;
+	
+}
+
+.subtitle{
+	
+	font-size: 25px;
 	font-weight: bold;
 	margin-bottom: 20px;
 	
@@ -98,6 +112,12 @@ document, body{
 	text-align: justify;
 }
 
+.hightlight{
+	font-weight: bold;
+	font-size: 22px;
+}
+
+
 .cite{
 	margin-bottom: 20px;
 	text-align: justify;
@@ -134,5 +154,56 @@ ul li::before {
 
 #title{
 	margin: 10px;
-	
 }
+
+
+.icon{
+	width:25px;
+	height: 35px;
+	
+	background-size: 100%;
+	background-repeat:no-repeat;
+	
+	display: in-line;
+	float: left;
+	margin-right: 10px;
+
+}
+
+
+#stack .icon{
+	background-image: url(../../site/stack.png);
+}
+
+#queue .icon{
+	background-image: url(../../site/queue.png);
+}
+
+
+#list .icon{
+	background-image: url(../../site/list.png);
+}
+#clist .icon{
+	background-image: url(../../site/clist.png);
+}
+
+#dlist .icon{
+	background-image: url(../../site/dlist.png);
+}
+
+#tree .icon{
+	background-image: url(../../site/tree.png);
+}
+
+#treeabb .icon{
+	background-image: url(../../site/tree.png);
+}
+
+#treeavl .icon{
+	background-image: url(../../site/tree.png);
+}
+
+#treerb .icon{
+	background-image: url(../../site/tree.png);
+}
+

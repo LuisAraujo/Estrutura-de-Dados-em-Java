@@ -18,96 +18,153 @@
 </head>
 <body>
 
-	<div class="navbar"> <div id="logo" ></div><div id="title"> Estrutura de Dados em Java</div></div>
+	<div class="navbar"><a href="/Estrutura-de-Dados-em-Java"> <div id="logo" ></div></a><div id="title"> Estrutura de Dados em Java</div></div>
 	<div class="container">
 		<div class="left-container">
-			<div class="structure">Pilha</div>
-			<div class="attributes">
-				<div class="a"><span class="type">int</span> top</div>
-				<div class="a"><span class="type">int[ ]</span>array &lt;T&gt; </div>
-			</div>
-			<div class="methods">
-				<div class="m"><span class="type">T</span> pop()</div>
-				<div class="m"><span class="type">void</span> push(T)</div>
-				<div class="m"><span class="type">boolean</span> isEmpty()</div>
-			</div>
-		
+			<div id="stack" class="structure"><div class="icon"></div><a href="Pilha/index.html">Pilha</a></div>
+			
+			<div id="queue" class="structure"><div class="icon"></div><a href="Fila/index.html">Fila</a></div>
+			
+			<div id="list" class="structure"><div class="icon"></div><a href="ListaEncadeada/index.html">Lista Encadeada</a></div>
+			
+			<div id="dlist" class="structure"><a href="ListaDuplamenteEncadeada/index.html"><div class="icon"></div>Lista Duplamente Encadeada</a></div>
+			
+			<div id="clist" class="structure"><div class="icon"></div><a href="ListaCircular/index.html">Lista Circular</a></div>
+			
+			<div id="tree" class="structure"><div class="icon"></div><a href="Arvores/index.html">Árvores</a></div>
+			
+			<div id="treeabb" class="structure"><div class="icon"></div><a href="ArvoresABB/index.html">Árvore ABB</a></div>
+			
+			<div id="treeavl" class="structure"><div class="icon"></div><a href="ArvoresAVL/index.html">Árvore AVL</a></div>
+			
+			<div id="treerb" class="structure"><div class="icon"></div><a href="ArvoresRB/index.html">Árvore RB</a></div>
 		</div>
 		<div class="main-container">
 		
-			<div class="title">
-			
-			Pilha
-			
-			</div>
+			<div class="title">Estrutura de Dados</div>
 			
 			<div class="parag">
 			
-			A primeira estrutura de dados que vamos ver é a Pilha. A pilha é uma estrutura bastante simples que tem a seguinte característica:
-			
+			O que é uma estrutura de dados? Como o próprio nome diz, é uma forma de organizar informações. Ou seja, passamos de um patamar que usávamos tipos primitivos como Inteiro, Caractere e outros para tipos mais complexos, como Pilha, Fila e Árvore. Sim, esses tipos complexos utilizam tipos primários, mas estamos interessados agora em entender essa composição maior, como esses tipos se relacionam, qual a sua semântica dentro da estrutura, seu comportamento e os efeitos que eles causam no estado da estrutura.
+
 			</div>
 			
-			<div class = "cite">
-				Um elemento entra sempre pelo topo. Ao remover um elemento, só podemos removê-lo pelo topo.
-			</div>
-			
-			<div class="parag">
-				Essa característica significa dizer que não podemos remover imediatamente qualquer elementos desejado, é necessário obedecer esta ordem. Pense em uma pilha de pratos de louça que a nossa mãe tanto ama. Já pensou em remover um prato que está no meio da pilha e, por essa decisão, deixar cair os pratos de cima? Não queremos nem imaginar o problemão, em?
-			
+			<div class="parag hightlight">
+				Como disciplina, Estrutura de Dados tem como objetivo apresentar estruturas já consolidadas da área de Computação. Essas estruturas buscam resolver diversos problemas recorrentes na área de desenvolvimento. 
 			</div >
 			
 			<div class="parag">
+				É importante ressaltar que uma Estrutura de Dados é formada por Dados (organizados segundo alguma lógica). Além disso possuem operações permitidas, vinculadas a essas dados. A palavra permite merece destaque, já que diversas operações podem ser realizadas sobre os dados, mas nem todas são "legais" dentro das regras de cada estrutura. Quando isso ocorre, dizemos que um programador "burlou" ou "violou" as regras. Mas qual o impacto disso? Logicamente isso afetará a forma de organização e possivelmente as próximas interações com esta estrutura. 
+			</div >
 			
-			Logicamente que o mais pudente é retirar os pratos de cima um a um e colocar em algum outo lugar, até que possamos - com segurança - pegar o prato desejado. Então, vamos criar um algoritmo simples para modelar isso:
+			<div class="parag">
+				Formalizando:
+			</div >
+			
+			<div class = "cite">
+				Estrutura de Dados envolve dados organizados de alguma forma e operações vinculadas aos dados que garantem a manutenção da organização após inserções e deleções.
+			</div>
+				
+			<div class="parag">
+			
+			Assim, algumas estruturas são utilizadas como forma de facilitar o armazenamento de informações, permitindo a recuperação de modo mais rápido. Logicamente, tudo depende do contexto do nosso problema. Por exemplo, não é recomendável utilizar uma Pilha para um problema que envolve o conceito de Fila, como uma fila de Banco por exemplo. Com o uso correto de uma estrutura é possível diminuir custos computacionais e esta disciplina oferece também este aspecto analítico. 
 			
 			</div>
 			
 			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- TesteEd -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7637623840866453"
-     data-ad-slot="8572003247"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-			
-			<div class="parag">
-					<ul>
-						<li>Uma classe Item;</li>
-						<li>Uma classe Item;</li>
-					</ul>
-			</div>
-		<div class="parag">	
-<div style="background: #f0f3f3; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em; "><table><tr><td>
-<pre style="font-size: 20px;margin: 0; line-height: 125%">1
-2
-3
-4</pre></td><td>
-
-<div style="position: absolute; left: 90%">A</div>
-
-<div class="parag">
-<pre style="font-size: 20px; margin: 0; line-height: 125%"><span style="color: #006699; font-weight: bold">public</span> <span style="color: #006699; font-weight: bold">class</span> <span style="color: #00AA88; font-weight: bold">AlgumaClasse</span><span style="color: #555555">{</span>
-  <span style="color: #007788; font-weight: bold">int</span> numero<span style="color: #555555">;</span>
-  String nome<span style="color: #555555">;</span>
-<span style="color: #555555">}</span>
-</pre></td></tr></table></div>
-</div>
-		
-		
+			<!-- TesteEd -->
+			<ins class="adsbygoogle"
+			style="display:block"
+			data-ad-client="ca-pub-7637623840866453"
+			data-ad-slot="8572003247"
+			data-ad-format="auto"
+			data-full-width-responsive="true"></ins>
+			<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+			</script>
+					
 			<div class="parag">
 			
 			Logicamente que o mais pudente é retirar os pratos de cima um a um e colocar em algum outo lugar, até que possamos - com segurança - pegar o prato desejado. Então, vamos criar um algoritmo simples para modelar isso:
 			
 			</div>
 		
+			<div class="title">Modelagem</div>
+			
+			<div class="parag">
+			
+			Modelagem Computacional é um área da Computação que visa modelar computacionalmente alguns cenários ou problemas. Basicamente, buscamos transpor elementos do mundo real para o computador e para isso precisamos usar a "abstração". Logicamente que não iremos modelar algo da natureza em sua perfeição, e muitas vezes não precisamos. Modelamos apenas os elementos essenciais, arte proveniente da abstração: 
+			
+			</div>
+			<div class="cite">
+			
+			focar em elementos principais, ignorando elementos eventuais ou menos importantes (para um contexto específico).
+			
+			</div>
+			<div class="parag">
+				Desse modo, podemos criar classes - já que usaremos Java - com seus métodos que simulem um determinado elemento a ser modelado. Por exemplo: Carro possui uma marca, placa, modelo, ano de fabricação, motor e pode acelerar, frear, virar à esquerda, entre outros.
+			</div>
+			
+			<div class="parag">
+			
+				Em Estrutura de Dados, faremos constantemente esse exercício, modelaremos elementos do mundo real, eliminando suas características eventuais, focando apenas nos elementos principais. Isso ocorre com Pilhas, Filas, Árvores entre outras estruturas.
+			
+			</div>
+			
+			<div class="title">Revisão POO</div>
+			<div class="parag">Uma condição essencial para criar estruturas de dados, no modelo que vamos apresentar, é saber os conceitos de POO e Java. Caso esse não seja o seu caso, recomendo parar a leitura e fazer um curso ou ler materiais específicos sobre POO. Aqui forneço uma breve introdução!</div>
+			<div class="parag">	</div>
+			
+			<div class="parag">	Então, assumindo que você já conhece POO, vamos relembrar.</div>
+			
+			<div class="subtitle">Classes</div>
+			<div class="parag">Classes são elementos no qual podemos implementar modelos, tal como uma forma de bolo que usaremos para fazer vários bolos: chocolate, cenoura e outros. Não importa os ingredientes utilizados, a forma sempre será a mesma.	</div>
+			
+			<div class="parag">Com classes podemos definir como serão os nossos objetos. Fazendo outra analogia, classes são como gabaritos. Através das classes podemos definir os atributos e métodos dos objetos.	</div>
+			
+			<div class="parag">Vamos ver um exemplo em Java. A seguir temos uma classe de nome AlgumaClasse, com dois atributos: um do tipo inteiro, chamado número, e outro do tipo string, chamado nome:	</div>
+			
+			[codigo aqui]
+			
+			<div class="subtitle">Objetos</div>
+			
+			<div class="parag">Objetos são copias das Classes, dizemos ainda que quando instanciamos um objeto, estamos consolidando a classe. Ou seja, estamos de fato utilizando a classe como modelo para criar um objeto. Esse objeto terá os atributos e métodos estipulados na Classe. Mas é importante saber que: dois objetos da mesma classe podem ter comportamentos diferentes, dado o seu estado (os valores nos atributos). Como o exemplo do bolo, chocolate e cenoura foram implementados com ingredientes diferentes, mas ainda são bolos.	</div>
+			
+			<div class="parag">Em Java, um objeto é criado da seguintes forma, declara-se um local para armazená-lo (como uma variável) estipulando o seu tipo (AlgumaClasse) e depois o seu nome. Do lado direto da igualdade, temos o operador new acompanhado do nome da Classe e de parênteses:	</div>
+			[codigo aqui]
+			
+			<div class="parag">Como disse antes, elas podem ter valores diferentes (estado). Vejamos:</div>
+			
+			[codigo aqui]
+			
+			<div class="parag">Assim, ac e ac2 são objetos diferentes que possuem seus próprios valores. Mas, ainda assim, são objetos de AlgumaClasse.</div>
 		
-</div></div>
+		
+			<div class="subtitle">Construtor</div>
+			
+			<div class="parag">	Mas o que faz o new? Bem, ele 'chama' o construtor da classe para que seja instanciado o objeto (o objeto é colocado dentro da variável ac). Esse construtor é um método diferenciado, pois ele não possui retorno. Isso não quer dizer que ele é um void, ele literalmente não possui retorno. O Java saberá que ele é um construtor, pois não colocamos o tipo de retorno (void, Integer, String ...). Vejamos a diferença entre os métodos setNumero, getNumero e o Construtor.</div>
+			
+			[codigo aqui]
+			
+			<div class="subtitle">Atributos</div>
+			<div class="parag">Atributos são variáveis (primitivas ou objetos) que são inerentes ao Objeto instanciado. Ou seja, os atributos são estipulados no modelo (a Classe). No exemplo anterior, já vimos o uso de atributos (nome e número). Os valores nos atributos definem o estado do objeto, que podem influenciar as suas ações (os métodos).	</div>
+			
+			<div class="subtitle">Métodos</div>
+			<div class="parag">Como vimos, os métodos são as ações dos objetos. O que isso significa? Significa que são eles os responsáveis por executar as operações, como obter um valor ou inserir um valor. Vimos um exemplos do Método (getNúmeros).</div>
+			<div class="parag">Métodos podem retornar um tipo ou não (void). Vejamos dois exemplos:	</div>
+			
+			[codigo aqui]
+			
+			<div class="subtitle">Herança</div>
+			<div class="parag">Herança é uma forma de compartilhar atributos e métodos, de modo a eliminar a duplicidade de código. Assim, o processo de Herança consiste em agrupar atributos e métodos gerais em uma classe, que chamamos de Pai e reaproveitá-los nos Filhos.</div>
+			<div class="parag">Em Java, a Herança é implementada com a palavra-chave extends. Todos os atributos e métodos públicos (public) e protegidos (protected) serão herdados pelos filhos. Vejamos:</div>
+			<div class="parag">A classe Pai:</div>
+			[codigo aqui]
+			<div class="parag">A classe Filha:</div>
+			<div class="parag">Através da Herança podemos utilizar o Polimofirmos para agregar dados de vários tipos e tratá-los como iguais. Por exemplo: Um lista de Funcionários tem objetos do tipo Operador, Gerente e Supervisor. Poderíamos tratá-los como Funcionários e assim utilizar os métodos e atributos em comum.</div>
 
-
+</div>
+</div>
 
 </body>
 </html>
