@@ -39,7 +39,7 @@ createCanvas = function(parent, id, w, h){
 	
 	
 canvasanimations = [];
-elems = $(".teste");
+elems = $(".code-animation-container");
 
 for(let i =0; i < elems.length; i++){
 	createCanvas( elems[i], i, $(elems[i]).attr("wcanvas"), $(elems[i]).attr("hcanvas"));
