@@ -2,13 +2,16 @@
 body{
 	font-family: Arial;
 }
-
+.code-animation-container{
+	width:100%;
+	display: block;
+	
+}
 .canvas{
 	border: solid 1px #aaa;
 	border-radius: 10px;
 	float:left;
 	margin-left: 20px;
-	width: 65% ;
 }
 
 .container-code{
