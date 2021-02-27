@@ -1,0 +1,53 @@
+<project>
+	<name>Trocando Valores de Variáveis (swap)</name>
+	<author>Luis Araujo</author>
+	<code>var a;@a = 10;@var b;@b = 20;@var c;@c = a;@a = b;@b = c;</code>
+	<scenes>
+		<scene1>
+			<code></code>
+			<copyelements>0</copyelements>
+			<elems><rect>70;90;100;100;#000;#fff;2</rect><text>a;20;95;95;#000</text></elems>
+		</scene1>
+		<scene2>
+			<code></code>
+			<copyelements>1</copyelements>
+			<elems><rect>70;90;100;100;#000;#fff;2</rect><text>a;20;95;95;#000</text><text>10;30;125;150;#000</text></elems>
+		</scene2>
+		<scene3>
+			<code></code>
+			<copyelements>2</copyelements>
+			<elems><rect>70;90;100;100;#000;#fff;2</rect><text>a;20;95;95;#000</text><text>10;30;125;150;#000</text><rect>70;90;200;100;#000;#fff</rect><text>b;20;200;95;#000</text></elems>
+		</scene3>
+
+		<scene4>
+			<code></code>
+			<copyelements>3</copyelements>
+			<elems><rect>70;90;100;100;#000;#fff;2</rect><text>a;20;95;95;#000</text><text>10;30;125;150;#000</text><rect>70;90;200;100;#000;#fff</rect><text>b;20;200;95;#000</text><text>20;30;225;150;#000</text></elems>
+		</scene4>
+
+		<scene5>
+			<code></code>
+			<copyelements>4</copyelements>
+			<elems><rect>70;90;100;100;#000;#fff;2</rect><text>a;20;95;95;#000</text><text>10;30;125;150;#000</text><rect>70;90;200;100;#000;#fff</rect><text>b;20;200;95;#000</text><text>20;30;225;150;#000</text><rect>70;90;300;100;#000;#fff</rect><text>c;20; 300;95;#000</text></elems>
+		</scene5>
+
+		<scene6>
+			<code></code>
+			<copyelements>5</copyelements>
+			<elems><rect>70;90;100;100;#000;#fff;2</rect><text>a;20;95;95;#000</text><text>10;30;125;150;#000</text><rect>70;90;200;100;#000;#fff</rect><text>b;20;200;95;#000</text><text>20;30;225;150;#000</text><rect>70;90;300;100;#000;#fff</rect><text>c;20; 300;95;#000</text><text>10;30;325;150;#000</text></elems>
+		</scene6>
+
+		<scene7>
+			<code></code>
+			<copyelements>6</copyelements>
+			<elems><rect>70;90;100;100;#000;#fff;2</rect><text>a;20;95;95;#000</text><rect>70;90;200;100;#000;#fff</rect><text>b;20;200;95;#000</text><text>20;30;225;150;#000</text><rect>70;90;300;100;#000;#fff</rect><text>c;20;300;95;#000</text><text>10;30;325;150;#000</text><rect>70;90;100;100;#000;#fff;2</rect><text>20;30;125;150;#d00;2;</text></elems>
+		</scene7>
+
+
+		<scene8>
+			<code></code>
+			<copyelements>7</copyelements>
+			<elems><rect>70;90;100;100;#000;#fff;2</rect><text>a;20;95;95;#000</text><rect>70;90;200;100;#000;#fff</rect><text>b;20;200;95;#000</text><rect>70;90;300;100;#000;#fff</rect><text>c;20;300;95;#000</text><text>10;30;325;150;#000</text><rect>70;90;100;100;#000;#fff;2</rect><text>20;30;125;150;#d00;2;</text><rect>70;90;200;100;#000;#fff</rect><text>10;30;225;150;#d00;5</text></elems>
+		</scene8>
+	</scenes>
+</project>

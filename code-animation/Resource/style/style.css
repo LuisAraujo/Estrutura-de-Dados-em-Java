@@ -1,0 +1,154 @@
+
+body{
+	font-family: Arial;
+}
+
+.canvas{
+	border: solid 1px #aaa;
+	border-radius: 10px;
+	float:left;
+	margin-left: 20px;
+	width: 65% ;
+}
+
+.container-code{
+	border: solid 1px #aaa;
+	border-radius: 10px;
+	width: 20%;
+	height: 90%;
+	float:left;
+	overflow-y: scroll;
+}
+
+.title input{
+	border:none;
+	text-decoration: none;
+	font-size: 20px;
+}
+
+.n-line{
+	color: #999;
+}
+
+.line{
+   font-family: "Currier";
+   width: 100%;
+   height:25px;
+   text-indent: 10px;
+   font-size: 15px;
+}
+
+.line.i{
+   background-color: #ddd;
+}
+
+.line.h{
+   background-color: #dd0;
+}
+
+.container-menu{
+	width: 100%;
+	height: 10%;
+	padding: 5px;
+}
+
+
+
+.bt{
+	border: solid 1px #aaa;
+	border-radius: 10px;
+	width: 35px;
+	height: 30px;
+	float:left;
+	font-size: 35px;
+	padding:5px;
+	padding-bottom: 10px;
+	margin-left: 5px;
+	text-align: center;
+	color:#555;
+}
+
+
+.container-mini-menu{
+	width: 100%;
+	height: 40px;
+	padding: 5px;
+}
+
+
+.mini-bt{
+	border: solid 1px #aaa;
+	border-radius: 10px;
+	 
+	color: #555;
+	margin:3px;
+	float:left;
+	padding:5px;
+}
+
+
+.bt:hover, .mini-bt:hover{
+	background-color: #aaa;
+	cursor: pointer;
+	color: #fff;
+}
+
+.container-scenes{
+	border: solid 1px #aaa;
+	border-radius: 10px;
+	width: 7%;
+	height: 90%;
+	float:left;
+	margin-left: 10px;
+	overflow-y: scroll;
+	padding: 5px;
+	font-size: 40px;
+	
+}
+
+
+
+.scene{
+	border: solid 1px #aaa;
+	border-radius: 10px;
+	width: 90%;
+	height: 50px;
+	text-align: center;
+	color: #555;
+	margin-bottom: 5px;
+	padding-top: 20%;
+}
+
+.h-scene{
+	
+	width: 90%;
+	height: 20px;
+	text-align: center;
+	color: #222;
+	font-size: 10px;
+}
+
+.scene.active{
+	color: #fff;
+	background-color: #337ab7;
+}
+
+.scene:hover{
+	background-color: #aaa;
+	cursor: pointer;
+	color: #fff;
+}
+
+.scene.active:hover{
+	background-color: #aaa;
+	cursor: pointer;
+	background-color: #286090;
+	
+}
+
+.viwer-animation-code{
+	height: 500px;
+	width:100%;
+	margin-bottom: 100px;
+	
+}
