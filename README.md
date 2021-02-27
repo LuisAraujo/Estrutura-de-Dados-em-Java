@@ -1,10 +1,16 @@
-### INTERESSE EM CURSO DE ESTRUTURA DE DADOS? DEIXE A SUA OPINIÃO E CONTATO:
+#AVISOS:
+
+Estou estou remodeando esse repositório e criando uma página web ([https://luisaraujo.github.io/Estrutura-de-Dados-em-Java/index.html](https://luisaraujo.github.io/Estrutura-de-Dados-em-Java/index.html)) para introduzir figuras e animações. 
+
+Todos os códigos foram movidos para a pasta Códigos. 
+
+---
+
+### INTERESSE EM CURSO DE ESTRUTURA DE DADOS? 
+
+Deixe a sua opinião e contato:
 
 [Para preencher o formulário leva apenas 1 minutos!](https://forms.gle/LnkVgrXfwmg6Wj9s8)
-
-
-#### ESTOU REMODELANDO ESSE REPOSITÓRIO PARA CRIAR UMA PÁGINA WEB COM CÓDIGOS E ANIMAÇÕES. Todos os códigos foram movidos para a pasta Códigos. 
----
 
 
 # Estrutura de Dados em Java
