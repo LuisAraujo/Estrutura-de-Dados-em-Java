@@ -1,19 +1,19 @@
 createCanvas = function(parent, id, w, h){
-		h = h!=undefined?h:300;
-		w = w!=undefined?w:700;
+		h = h!=undefined?parseInt(h):300;
+		w = w!=undefined?parseInt(w):700;
 		
-		var element = '<div class="viwer-animation-code"><div class="title">';
+		var element = '<div class="viwer-animation-code" style="height:'+(h+100)+'"><div class="title">';
 		
 		element += '<input id="titleproject'+id+'" type="text" value="Untitle"></input></div>'
 
-		element += '<div class="container-menu">'
+		element += '<div class="container-menu" >'
 
 		element += '<div title="exportar como img" class="bt"><i class="far fa-image"></i></div>'
 			
 		element += '<div title="exportar codigo" class="bt"><i class="far fa-file-code"></i></div></div>'
 			
 
-		element += '<div class="container-code" id="container-code'+id+'">'
+		element += '<div class="container-code" id="container-code'+id+'" style="height:'+h+'px">'
 		element += '<div class="container-mini-menu">'
 		element += '<div ref="'+id+'" class="mini-bt play-code"><i class="fas fa-play"></i></div>'
 				
