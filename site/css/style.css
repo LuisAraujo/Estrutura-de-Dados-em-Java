@@ -46,7 +46,7 @@ a{
    
 }
 
-.more-left-container{	
+.more-left-topics{	
 	position: relative;
 	top: 60px;
 	width: 10px;
@@ -56,11 +56,27 @@ a{
 	flex-direction: row;
 }
 
-.left-container{	
+.left-topics{	
 	position: relative;
 	top: 60px;
 	float: left;
 	width: 10%;
+	height: 100vh;
+	border-right: 1px #aaa solid;
+	background-color: rgba(255,255,255,0.8);
+	overflow: hidden;
+	z-index:90;	
+	display:block;
+	flex-direction: row;
+}
+
+
+.left-container{	
+	position: relative;
+	top: 60px;
+	float: left;
+	width: 15%;
+	min-width: 150px;
 	height: 100vh;
 	border-right: 1px #aaa solid;
 	background-color: rgba(255,255,255,0.8);
@@ -120,6 +136,7 @@ a{
 .m{
 	margin-bottom: 5px;
 	color: #2859a8;	
+	padding: 5px;
 }
 
 
@@ -149,6 +166,7 @@ a{
 	padding: 20px;
 	width: 80%;
 	margin-left: 10%;
+	margin-bottom: 10px;
 	
 }
 

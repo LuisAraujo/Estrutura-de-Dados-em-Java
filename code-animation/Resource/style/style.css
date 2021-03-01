@@ -9,6 +9,7 @@ body{
 	margin-bottom: 100px;
 }
 
+
 .canvas{
 	border: solid 1px #aaa;
 	border-radius: 10px;
@@ -28,6 +29,7 @@ body{
 	border:none;
 	text-decoration: none;
 	font-size: 20px;
+	width: 100%;
 }
 
 .n-line{

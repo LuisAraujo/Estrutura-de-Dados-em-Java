@@ -35,11 +35,7 @@
 		</div>
 		<div class="main-container">
 		
-			<div class="title">
-			
-			Pilha
-			
-			</div>
+			<div class="title">Pilha</div>
 			
 			<div class="parag">
 			
@@ -62,43 +58,301 @@
 
 			
 			<div class="parag">
-			<ul>
-				<li>Uma classe Item;</li>
-				<li>Uma classe Item;</li>
-			</ul>
+				<ul>
+					<li>Pega a pilha de pratos;</li>
+					<li>Remove o prato que está no topo desta pilha;</li>
+					<li>Coloca o prato do lado;</li>
+				</ul>
 			</div>
 			
-			<div class="subtitle">Um teste do codeanimation:</div>
+			<div class="parag">
+				Bem, isso deve se repetir até que cheguemos ao prato desejado, então...
+			</div>
+			
+			
+			<div class="parag">
+				<ul>
+					<li>Pega a pilha de pratos;</li>
+					<li>Até chegar ao prato desejado:
+						<ul>
+							<li>Remove o prato que está no topo desta pilha;</li>
+							<li>Coloca o prato do lado.</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="parag">
+				Quando chegar ao prato, devemos retirá-lo e usá-lo, além de recolocar os pratos no local (sim, somos organizados)!
+			</div>
+			
+			
+			<div class="parag">
+				<ul>
+					<li>Pega a pilha de pratos;</li>
+					<li>Até chegar ao prato desejado:</li>
+					<ul>
+						<li>Remove o prato que está no topo desta pilha;</li>
+						<li>Coloca o prato do lado.</li>
+					</ul>
+					
+					<li>Pega o prato desejado;</li>
+					<li>Até que a pilha do lado seja esvaziada:</li>
+					<ul>
+						<li>Remover o prato que está no topo desta segunda pilha;</li>
+						<li>Coloca o prato na pilha principal novamente.</li>
+					</ul>
+				</ul>
+			</div>
+			
+			<div class="cite">
+			Ufa! Não quebramos nenhum prato, pois seguimos o protocolo correto para a remoção segura.
+			</div>
+			
+			
+			<div class="parag">
+			Basicamente esta é a ideia de pilha, você já deve ter entendido. Podemos então usar uma modelagem para essa situação. Como já conhecemos bem POO e gostamos de criar objetos, vamos pensar que o prato pode ser uma objeto do tipo Prato, ou de modo mais geral, um Item. Outra coisa que devemos ter em mente é: <i>"devemos usar um vetor para armazenar muitos elementos, pois uma variável não daria conta!"</i>.
+			</div>
+			
+			<div class="parag">
+				Então, temos:
+				<ul>	
+					<li>Uma classe Item;</li>
+					<li>Um vetor.</li>
+				</ul>
+			</div>
+
+			<div class="parag">
+				Mas uma estrutura de dados não é formada apenas por locais onde podemos armazenar coisas ou objetos soltos no ar. Devemos criar operações que garantam uma certa organização, neste caso a organização da pilha: entra no topo, sai do topo. É interessante observar, caso ainda não tenha pensado nisso, que o elemento que entra do último é o primeiro a sair e o primeiro a entrar é o último a sair. Por esse motivo, a pilha é chamada de FILO (<i>First In, Last Out</i>).
+			</div>
+			
+			<div class="subtitle">Inserindo dados em uma Pilha</div>
+			
+			
+			<div class="parag">Vamos entender o funcionamento da inserção na pilha, este operaçõe é porpularmente conhecida como PUSH, mas aqui vamos tratá-la como inserir, para facilitar a assimilação.</div>
+			
+			<div class="parag">
+				Mas como controlar que vou inserir no topo? Bem isso é simples, vamos pensar que temos um vetor de 10 elementos e no início todos são nulos .Eu posso inserir na posição 0, ela será nosso topo. Se desejo inserir novamente, eu coloco todos os elemento para a a próxima posição e insiro na posição 0 novamente.
+			</div>
+			
+
+			<div class="parag">
+			Vejamos:
+			</div>
 			
 			<div class="code-animation-container" hcanvas="500" wcanvas="850" filename="../code-animation/animationsfolder/teste.xml"></div>
 			
-			
-			
-		<div class="parag">	
-<div style="background: #f0f3f3; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em; "><table><tr><td>
-<pre style="font-size: 20px;margin: 0; line-height: 125%">1
-2
-3
-4</pre></td><td>
-
-<div style="position: absolute; left: 90%">A</div>
-
-<div class="parag">
-<pre style="font-size: 20px; margin: 0; line-height: 125%"><span style="color: #006699; font-weight: bold">public</span> <span style="color: #006699; font-weight: bold">class</span> <span style="color: #00AA88; font-weight: bold">AlgumaClasse</span><span style="color: #555555">{</span>
-  <span style="color: #007788; font-weight: bold">int</span> numero<span style="color: #555555">;</span>
-  String nome<span style="color: #555555">;</span>
-<span style="color: #555555">}</span>
-</pre></td></tr></table></div>
-</div>
-		
-		
 			<div class="parag">
+				Você certamente já percebeu que eu precisaria transpor os elementos, posição por posição até disponibilizar um local vazio no início:
+			</div>
 			
-			Logicamente que o mais pudente é retirar os pratos de cima um a um e colocar em algum outo lugar, até que possamos - com segurança - pegar o prato desejado. Então, vamos criar um algoritmo simples para modelar isso:
+			<div class="hightlight">
+				<b>Nossa!!!</b> Mas isso é muito custoso, não acha? Pense em uma Pilha de <b>1 milhão</b> de dados. Quando tivermos ao menos <b>50%</b> da Pilha com dados, teremos <b>500 mil</b> alocações. No final, teremos <b>999.999</b> alocações, apenas para inserir um único elemento. 
+			</div>
+			
+			
+			<div class="parag">
+				Uma solução para esse problema é: criar uma variável que armazenará o valor (índice) do topo e assim, poderemos sempre inserir em uma posição vazia. No primeiro caso que apresentamos, o topo poderia ser -1 (pois a Pilha está vazia). Você deve pensar: "Mas na outra solução, se a inserção for no fundo, teríamos o mesmo resultado!". Não! Ainda seria preciso achar a posição vazia.
+			</div>
+			
+			<div class="parag">
+			Vejamos:
+			</div>
+				
+			<div class="code-animation-container" hcanvas="500" wcanvas="850" filename="../code-animation/animationsfolder/teste.xml"></div>
+			
+			<div class="parag">
+			Mas como ficaria esse algoritmo?
+			</div>
+			
+			<div class="parag">	
+
+<!-- HTML generated using hilite.me --><div style="background: #f0f3f3; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">topo<span style="color: #555555">++;</span>
+pilha<span style="color: #555555">[</span>topo<span style="color: #555555">]</span> <span style="color: #555555">=</span> <span style="color: #CC3300">&quot;Prato C&quot;</span><span style="color: #555555">;</span>
+</pre></div>
+
 			
 			</div>
+			
+			
+			<div class="parag">
+			Só isso? Sim!!! Além de ter menos linhas, há menos necessidade de acesso aos dados. Agora, quando a pilha estiver com 50% de dados, teremos a mesma quantidade de operação que ele como 100% dos dados. Que legal!!!
+			</div>
+			
+		<div class="subtitle">	
+			Removendo dados na Pilha
+		</div>
 		
+		<div class="parag">Vamos entender o funcionamento da remoção na pilha, este operaçõe é porpularmente conhecida como POP, mas aqui vamos tratá-la como remover, para facilitar a assimilação.</div>
 		
+		<div class="parag">
+			Analogicamente, na solução antiga precisaríamos percorrer todo o vetor até encontrar uma posição onde o próximo elemento é nulo, guardar este valor e colocar um valor nulo no local.
+		</div>
+		
+		<div class="parag">
+		Vejamos:
+		</div>
+			
+		<div class="code-animation-container" hcanvas="500" wcanvas="850" filename="../code-animation/animationsfolder/teste.xml"></div>
+		
+		<div class="parag">
+			Sim, podemos usar o loop, mas isso não diminuiria o número de operações necessárias. No pior caso, n interações!
+		</div>
+		
+	
+		<div class="parag">
+		Ok, já percebemos que essa solução não é ideal, por motivos claros e sabemos que o uso de uma variável de controle como o topo é ideal. Mas como ficaria esse código? Vamos ver:
+		</div>
+		
+		<div class="parag">
+		<!-- HTML generated using hilite.me --><div style="background: #f0f3f3; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">String item <span style="color: #555555">=</span> pilha<span style="color: #555555">[</span>topo<span style="color: #555555">]</span>
+topo<span style="color: #555555">--</span>
+<span style="color: #006699; font-weight: bold">return</span> item
+</pre></div>
+</div>
+
+
+	<div class="parag">
+		Pois é, só isso!!! Assim como a inserção, a remoção é muito simples. Logicamente que isso deve ser inserido em uma função, mas isso veremos mais a frente.
+	</div>
+	
+	
+	<div class="parag">
+		<b>Verificações, porque não?</b>
+	</div>
+	
+	<div class="cite">
+		You have a error of type 'StackOverflow' on line 4 - Pilha.java
+	</div>
+	
+	
+	<div class="parag">
+		Sim, ninguém quer ver um erro similar no seu mega projeto que demorou 10 dias para ser implementado, horas antes de vencer o prazo de envio ao professor da disciplina. Certamente o papo de "O cachorro comeu minha atividade" não vai colar. Então, precisamos fazer verificações no nosso projeto, para eliminar de uma vez por todas esses erros.
+	</div>
+	
+	<div class="parag">
+		Um pilha pode ser implementada com vetor ou com lista, neste caso estamos aprendendo como implementá-la em vetor e isso trás algumas limitações como por exemplo um tamanho máximo fixo de elementos que ele aceita. Como foi dito na Seção 2, existem dois motivos para verificarmos uma pilha baseada em vetor: inserir em uma pilha cheia e remover em uma pilha vazia.
+	</div>	
+	
+	<div class="parag">
+	A condição para um pilha está vazia é simples e já vimos aqui, é justamente o estado inicial dela, onde o topo é -1.
+	</div>	
+	<div class="parag">
+	<!-- HTML generated using hilite.me --><div style="background: #f0f3f3; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #006699; font-weight: bold">if</span><span style="color: #555555">(</span>topo <span style="color: #555555">==</span> <span style="color: #555555">-</span><span style="color: #FF6600">1</span><span style="color: #555555">)</span>
+	pilhavazia <span style="color: #555555">=</span> <span style="color: #006699; font-weight: bold">true</span>
+</pre></div>
+
+	</div>	
+	
+	<div class="parag">
+		Já a condição para ela está cheia ainda não vimos e vou dizer agora: basta que o topo seja igual ao tamanho do vetor - 1. Isso porque inserimos no vetor na posição "topo" e se topo é igual ao tamanho do vetor ou maior, não poderíamos inserir, pois é uma posição inválida.
+	</div>	
+	
+	<img title="overflow de uma pilha" alt="overflow de uma pilha">
+	
+	
+	<div class="parag">
+		Podemo inserir no topo? Vejamos:
+		<ul>
+			<li>O topo será incrementado, ou seja, será 4</li>
+			<li>Inserimos no vetor na posição 4 <i>//Erro</i></li>
+		</ul>
+	</div>
+	
+	<div class="parag">
+		Isso certamente ocorrerá em erro, pois em um vetor de 4 posições (tamanho igual a 4), temos a primeira posição válida, a posição 0 e a última a 3. Ou seja, achamos um limite que é justamente quando o topo é igual à 3 (tamanho - 1). Essa ação é chamada de <i>overflow</i> ou transbordamento da pilha, significa que o elemento não pode ser inserido devido a sua capcitade. Você já deve ter visto isso em uma exeção de funções recursivas!
+	</div>
+	
+	<div class="parag">
+	<!-- HTML generated using hilite.me --><div style="background: #f0f3f3; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #006699; font-weight: bold">if</span><span style="color: #555555">(</span>topo <span style="color: #555555">==</span> tamanho_pilha <span style="color: #555555">-</span> <span style="color: #FF6600">1</span><span style="color: #555555">)</span>
+    pilhacheia <span style="color: #555555">=</span> treu
+</pre></div>
+</div>
+
+
+	<div class="subtitle"> Observações </div>
+	<div class="parag">
+	Alguns exemplos aqui são didáticos, no sentido de que você entenda o problema. O código a seguir pode apresentar algumas diferenças, mas isso não impacta na solução do problema. Caso ainda ache que um algoritmo pode ser solucionado de apenas uma única forma, espero que reflita sobre isso. Esse é o momento!
+	</div>
+	
+	<div class="parag">
+		<a target="blank" class="link-extern" href="https://github.com/LuisAraujo/Estrutura-de-Dados-em-Java/blob/master/Codigos/Pilha/PilhaV.java">PilhaV.java</a
+	</div>
+	
+	
+	<div class="parag">
+<!-- HTML generated using hilite.me --><div style="background: #f0f3f3; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #006699; font-weight: bold">public</span> <span style="color: #006699; font-weight: bold">class</span> <span style="color: #00AA88; font-weight: bold">PilhaV</span><span style="color: #555555">&lt;</span>T<span style="color: #555555">&gt;</span> <span style="color: #555555">{</span>
+
+	<span style="color: #0099FF; font-style: italic">/**</span>
+<span style="color: #0099FF; font-style: italic">	* Array da Pilha </span>
+<span style="color: #0099FF; font-style: italic">	*/</span>
+	<span style="color: #006699; font-weight: bold">private</span> T<span style="color: #555555">[]</span> arrayPilha<span style="color: #555555">;</span>
+	<span style="color: #0099FF; font-style: italic">/**</span>
+<span style="color: #0099FF; font-style: italic">	* Atributo para armazenar o indice do topo da pilha</span>
+<span style="color: #0099FF; font-style: italic">	*/</span>
+	<span style="color: #006699; font-weight: bold">private</span> <span style="color: #007788; font-weight: bold">int</span> topo<span style="color: #555555">;</span>
+	
+	<span style="color: #0099FF; font-style: italic">/**</span>
+<span style="color: #0099FF; font-style: italic">	* Contrutor da Pilha</span>
+<span style="color: #0099FF; font-style: italic">	* @param max Tamanho da pilha</span>
+<span style="color: #0099FF; font-style: italic">	*/</span>
+	<span style="color: #006699; font-weight: bold">public</span> <span style="color: #CC00FF">PilhaV</span><span style="color: #555555">(</span><span style="color: #007788; font-weight: bold">int</span> max<span style="color: #555555">){</span>
+		<span style="color: #0099FF; font-style: italic">/*instanciando um vetor genérico (cria um vetor do tipo Objetc </span>
+<span style="color: #0099FF; font-style: italic">                e faz o cast (conversão) para o tipo T*/</span>
+		arrayPilha <span style="color: #555555">=</span> <span style="color: #555555">(</span>T<span style="color: #555555">[])</span> <span style="color: #006699; font-weight: bold">new</span> Object<span style="color: #555555">[</span>max<span style="color: #555555">];</span>
+		topo <span style="color: #555555">=</span> <span style="color: #555555">-</span><span style="color: #FF6600">1</span><span style="color: #555555">;</span>
+	<span style="color: #555555">}</span>
+	
+	<span style="color: #0099FF; font-style: italic">/**</span>
+<span style="color: #0099FF; font-style: italic">	* Insere um elemento se a pilha não estiver cheia</span>
+<span style="color: #0099FF; font-style: italic">	* @param elemento Elemento a ser inserido na pilha</span>
+<span style="color: #0099FF; font-style: italic">	* @return retora true se a operação foi bem sucedida</span>
+<span style="color: #0099FF; font-style: italic">	*/</span>
+	<span style="color: #006699; font-weight: bold">public</span> <span style="color: #007788; font-weight: bold">boolean</span> <span style="color: #CC00FF">inserir</span><span style="color: #555555">(</span>T elemento<span style="color: #555555">)</span> <span style="color: #555555">{</span>		
+		<span style="color: #006699; font-weight: bold">if</span><span style="color: #555555">(!</span><span style="color: #006699; font-weight: bold">this</span><span style="color: #555555">.</span><span style="color: #330099">estaCheia</span><span style="color: #555555">())</span> <span style="color: #555555">{</span>
+		topo<span style="color: #555555">++;</span>
+		arrayPilha<span style="color: #555555">[</span>topo<span style="color: #555555">]</span> <span style="color: #555555">=</span> elemento<span style="color: #555555">;</span>
+		<span style="color: #006699; font-weight: bold">return</span> <span style="color: #006699; font-weight: bold">true</span><span style="color: #555555">;</span>
+	<span style="color: #555555">}</span>
+	
+	<span style="color: #006699; font-weight: bold">return</span> <span style="color: #006699; font-weight: bold">false</span><span style="color: #555555">;</span>
+	<span style="color: #555555">}</span>
+	
+	<span style="color: #0099FF; font-style: italic">/**</span>
+<span style="color: #0099FF; font-style: italic">	* Remove um elemento da pilha, se ela não esiver vazia</span>
+<span style="color: #0099FF; font-style: italic">	* @return retorna o elemento se a operação foi bem sucedida</span>
+<span style="color: #0099FF; font-style: italic">	*/</span>
+	<span style="color: #006699; font-weight: bold">public</span> T <span style="color: #CC00FF">remover</span><span style="color: #555555">()</span> <span style="color: #555555">{</span>		
+	
+	
+	    <span style="color: #006699; font-weight: bold">if</span><span style="color: #555555">(!</span><span style="color: #006699; font-weight: bold">this</span><span style="color: #555555">.</span><span style="color: #330099">estaVazia</span><span style="color: #555555">())</span> <span style="color: #555555">{</span>			
+		<span style="color: #006699; font-weight: bold">return</span> arrayPilha<span style="color: #555555">[</span>topo<span style="color: #555555">--];</span>
+	    <span style="color: #555555">}</span>
+	
+	    <span style="color: #006699; font-weight: bold">return</span> <span style="color: #006699; font-weight: bold">null</span><span style="color: #555555">;</span>
+	
+	<span style="color: #555555">}</span>
+	
+	<span style="color: #0099FF; font-style: italic">/**</span>
+<span style="color: #0099FF; font-style: italic">	* Verifica se a pilha está vazia</span>
+<span style="color: #0099FF; font-style: italic">	* @return retorna true se a pilha estiver vazia</span>
+<span style="color: #0099FF; font-style: italic">	*/</span>
+	<span style="color: #006699; font-weight: bold">public</span> <span style="color: #007788; font-weight: bold">boolean</span> <span style="color: #CC00FF">estaVazia</span><span style="color: #555555">()</span> <span style="color: #555555">{</span>		
+		<span style="color: #006699; font-weight: bold">return</span> topo <span style="color: #555555">==</span> <span style="color: #555555">-</span><span style="color: #FF6600">1</span><span style="color: #555555">;</span>
+	<span style="color: #555555">}</span>
+	
+	<span style="color: #0099FF; font-style: italic">/**</span>
+<span style="color: #0099FF; font-style: italic">	* Verifica se a pilha está cheia</span>
+<span style="color: #0099FF; font-style: italic">	* @return retorna true se a pilha estiver cheia</span>
+<span style="color: #0099FF; font-style: italic">	*/</span>
+	<span style="color: #006699; font-weight: bold">public</span> <span style="color: #007788; font-weight: bold">boolean</span> <span style="color: #CC00FF">estaCheia</span><span style="color: #555555">()</span> <span style="color: #555555">{</span>		
+		<span style="color: #006699; font-weight: bold">return</span> topo <span style="color: #555555">==</span> arrayPilha<span style="color: #555555">.</span><span style="color: #330099">length</span><span style="color: #555555">-</span><span style="color: #FF6600">1</span><span style="color: #555555">;</span>
+	<span style="color: #555555">}</span>
+<span style="color: #555555">}</span>
+</pre></div>
+</div>
+
+	
 </div></div>
 
 
