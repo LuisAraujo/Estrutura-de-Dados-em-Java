@@ -120,12 +120,7 @@ a{
 .a{
 	color: #2859a8;
 }
-.m:hover{
-	cursor: pointer;
-	color:#f;
-	background-color: #ededed;
-	background-color: #f5a142;
-}
+
 .methods{
 	padding: 5px;
 	margin: 5px;
@@ -139,6 +134,12 @@ a{
 	padding: 5px;
 }
 
+.m:hover, .m:hover .type{
+	cursor: pointer;
+	color:#fff !important;
+	background-color: #ededed;
+	background-color: #f5a142;
+}
 
 .main-container{
 	width: calc(90% - 1px);

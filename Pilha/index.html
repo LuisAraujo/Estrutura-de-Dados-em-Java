@@ -30,6 +30,7 @@
 				<div class="m"><span class="type">T</span> pop()</div>
 				<div class="m"><span class="type">void</span> push(T)</div>
 				<div class="m"><span class="type">boolean</span> isEmpty()</div>
+				<div class="m"><span class="type">boolean</span> isFull()</div>
 			</div>
 		
 		</div>
@@ -217,8 +218,8 @@ topo<span style="color: #555555">--</span>
 	</div>
 	
 	
-	<div class="parag">
-		<b>Verificações, porque não?</b>
+	<div class="subtitle">
+		 Verificações, porquê não?
 	</div>
 	
 	<div class="cite">
@@ -234,6 +235,8 @@ topo<span style="color: #555555">--</span>
 		Um pilha pode ser implementada com vetor ou com lista, neste caso estamos aprendendo como implementá-la em vetor e isso trás algumas limitações como por exemplo um tamanho máximo fixo de elementos que ele aceita. Como foi dito na Seção 2, existem dois motivos para verificarmos uma pilha baseada em vetor: inserir em uma pilha cheia e remover em uma pilha vazia.
 	</div>	
 	
+	<div class="subtitle">Pilha está vazia? </div>
+	
 	<div class="parag">
 	A condição para um pilha está vazia é simples e já vimos aqui, é justamente o estado inicial dela, onde o topo é -1.
 	</div>	
@@ -243,6 +246,8 @@ topo<span style="color: #555555">--</span>
 </pre></div>
 
 	</div>	
+	
+	<div class="subtitle">Pilha está cheia? </div>
 	
 	<div class="parag">
 		Já a condição para ela está cheia ainda não vimos e vou dizer agora: basta que o topo seja igual ao tamanho do vetor - 1. Isso porque inserimos no vetor na posição "topo" e se topo é igual ao tamanho do vetor ou maior, não poderíamos inserir, pois é uma posição inválida.
