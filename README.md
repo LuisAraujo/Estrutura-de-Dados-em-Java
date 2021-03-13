@@ -5,6 +5,9 @@ Estou estou remodeando esse repositório e criando uma página web ([https://lui
 Todos os códigos foram movidos para a pasta Códigos. 
 
 ---
+### AULAS COMIGO?
+
+Acesso o superprof: [superprof/luisaraujo](https://www.superprof.com.br/aulas-estrutura-dados-java-com-doutorando-computacao-aulas-teorica-praticas-vetor-pilha-fila-lista.html)
 
 ### INTERESSE EM CURSO DE ESTRUTURA DE DADOS? 
 
