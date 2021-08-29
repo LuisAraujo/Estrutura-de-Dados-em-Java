@@ -232,7 +232,7 @@ public class EstruturaQualquer (){
 		vetor[i] = valor;
 	}
 	public Object getItem(int i){
-		retunr vetor[i];
+		return vetor[i];
 	}
 
 }
@@ -320,7 +320,7 @@ public class EstruturaQualquer<T>(){
 		vetor[i] = valor;
 	}
 	public T getItem(int i){
-		retunr vetor[i];
+		return vetor[i];
 	}
 
 }
